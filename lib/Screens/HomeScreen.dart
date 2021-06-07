@@ -1,3 +1,4 @@
+import 'package:bookify/Widgets/Scaffold/drawer.dart';
 import 'package:flutter/material.dart';
 
 import '../Widgets/Scaffold/appbar.dart';
@@ -28,7 +29,7 @@ class _HomeScreenState extends State<HomeScreen> {
     return SafeArea(
       child: Scaffold(
         appBar: KAppBar(_switchTabs, _currentTab),
-        drawer: Drawer(),
+        drawer: MainDrawer(),
         body: Center(
           child: _currentTab == TABS.BOOKS
               ? Text(
