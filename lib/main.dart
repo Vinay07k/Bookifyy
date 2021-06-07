@@ -12,6 +12,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Bookify',
       theme: ThemeData(
+        scaffoldBackgroundColor: Colors.black,
         primaryColor: Colors.black,
       ),
       home: HomeScreen(),
