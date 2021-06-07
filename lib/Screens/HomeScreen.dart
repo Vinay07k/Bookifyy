@@ -1,3 +1,4 @@
+import 'package:Bookify/Widgets/Scaffold/appbar.dart';
 import 'package:flutter/material.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -12,6 +13,8 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
+        appBar: KAppBar(),
+        drawer: Drawer(),
         body: Center(
           child: Text('Some'),
         ),
