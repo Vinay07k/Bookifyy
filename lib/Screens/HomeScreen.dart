@@ -1,7 +1,7 @@
-import 'package:bookify/Widgets/Scaffold/drawer.dart';
 import 'package:flutter/material.dart';
 
-import '../Widgets/Scaffold/appbar.dart';
+import 'package:bookify/Widgets/Scaffold/appbar.dart';
+import 'package:bookify/Widgets/Scaffold/drawer.dart';
 
 enum TABS {
   FEEDS,
@@ -32,7 +32,7 @@ class _HomeScreenState extends State<HomeScreen> {
         drawer: MainDrawer(),
         body: Center(
           child: _currentTab == TABS.BOOKS
-              ? Text(
+              ? const Text(
                   'Books',
                   style: TextStyle(color: Colors.white),
                 )
@@ -42,21 +42,21 @@ class _HomeScreenState extends State<HomeScreen> {
                     child: Column(
                       mainAxisSize: MainAxisSize.min,
                       children: [
-                        Text(
+                        const Text(
                           'Welcome to Bookify family! \n Your friends didn’t post their any Blurb yet, be the first one and add more friends.',
-                          style: TextStyle(color: Colors.white),
+                          style: const TextStyle(color: Colors.white),
                           textAlign: TextAlign.center,
                         ),
                         SizedBox(height: 4),
                         OutlinedButton.icon(
                           onPressed: () {},
-                          icon: Icon(
+                          icon: const Icon(
                             Icons.add,
                             color: Colors.white,
                           ),
-                          label: Text(
+                          label: const Text(
                             'Add Firends',
-                            style: TextStyle(
+                            style: const TextStyle(
                               color: Colors.white,
                               letterSpacing: 1,
                             ),
@@ -67,7 +67,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                     borderRadius: BorderRadius.circular(10))),
                             side: MaterialStateProperty.all(
                               BorderSide(
-                                color: Colors.white,
+                                color: Theme.of(context).accentColor,
                                 width: 2,
                               ),
                             ),

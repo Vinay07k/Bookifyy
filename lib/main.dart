@@ -17,6 +17,8 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         scaffoldBackgroundColor: Colors.black,
         primaryColor: Colors.black,
+        accentColor: Colors.white,
+        focusColor: Colors.yellow,
       ),
       home: Builder(
         builder: (BuildContext context) {
@@ -26,7 +28,7 @@ class MyApp extends StatelessWidget {
             splash: 'assets/splashscreenicon.png',
             nextScreen: HomeScreen(),
             duration: 500,
-            backgroundColor: Colors.black,
+            backgroundColor: Theme.of(context).primaryColor,
             splashTransition: SplashTransition.fadeTransition,
           );
         },

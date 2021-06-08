@@ -1,3 +1,5 @@
+import 'package:bookify/constants.dart';
+
 import '/Screens/HomeScreen.dart' show TABS;
 import 'package:flutter/material.dart';
 
@@ -17,23 +19,20 @@ class KAppBar extends StatelessWidget implements PreferredSizeWidget {
   @override
   Widget build(BuildContext context) {
     return AppBar(
-      title: Text(
-        'Bookify',
-        style: TextStyle(
-          fontSize: 32,
-          fontWeight: FontWeight.w800,
-        ),
-      ),
       centerTitle: true,
       backgroundColor: Colors.transparent,
       leading: IconButton(
         icon: Image.asset('assets/drawericon.png'),
         onPressed: () => Scaffold.of(context).openDrawer(),
       ),
+      title: Text(
+        'Bookify',
+        style: Constants().kAppBarTitle,
+      ),
       actions: [
         IconButton(
           onPressed: () {},
-          icon: Icon(Icons.search),
+          icon: const Icon(Icons.search),
         ),
       ],
       bottom: PreferredSize(
@@ -41,64 +40,50 @@ class KAppBar extends StatelessWidget implements PreferredSizeWidget {
           height: 40,
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(12),
-            color: Color.fromRGBO(46, 45, 45, 1),
+            color: const Color.fromRGBO(46, 45, 45, 1),
           ),
           child: Row(
             mainAxisSize: MainAxisSize.min,
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              GestureDetector(
-                onTap: () => switchTab(TABS.FEEDS),
-                child: Container(
-                  padding: EdgeInsets.symmetric(
-                    horizontal: 20,
-                  ),
-                  height: double.infinity,
-                  decoration: BoxDecoration(
-                    color: currentTab == TABS.FEEDS
-                        ? Color.fromRGBO(196, 196, 196, 1)
-                        : null,
-                    borderRadius: BorderRadius.circular(12),
-                  ),
-                  child: Center(
-                    child: Text(
-                      'Feeds',
-                      style: TextStyle(
-                        color: Colors.white,
-                      ),
-                    ),
-                  ),
-                ),
-              ),
-              GestureDetector(
-                onTap: () => switchTab(TABS.BOOKS),
-                child: Container(
-                  padding: EdgeInsets.symmetric(
-                    horizontal: 20,
-                  ),
-                  height: double.infinity,
-                  decoration: BoxDecoration(
-                    color: currentTab == TABS.BOOKS
-                        ? Color.fromRGBO(196, 196, 196, 1)
-                        : null,
-                    borderRadius: BorderRadius.circular(12),
-                  ),
-                  child: Center(
-                    child: Text(
-                      'Books',
-                      style: TextStyle(
-                        color: Colors.white,
-                      ),
-                    ),
-                  ),
-                ),
-              ),
+              tabButtons(
+                  () => switchTab(TABS.FEEDS), TABS.FEEDS, currentTab, 'Feeds'),
+              tabButtons(
+                  () => switchTab(TABS.BOOKS), TABS.BOOKS, currentTab, 'Books'),
             ],
           ),
         ),
-        preferredSize: Size(double.infinity, 30),
+        preferredSize: const Size(double.infinity, 30),
       ),
     );
   }
 }
+
+Widget tabButtons(
+  void Function() onPressedFunc,
+  TABS tab,
+  TABS currentTab,
+  String label,
+) =>
+    GestureDetector(
+      onTap: onPressedFunc,
+      child: Container(
+        padding: const EdgeInsets.symmetric(
+          horizontal: 20,
+        ),
+        height: double.infinity,
+        decoration: BoxDecoration(
+          color: currentTab == tab ? Color.fromRGBO(196, 196, 196, 1) : null,
+          borderRadius: BorderRadius.circular(12),
+        ),
+        child: Center(
+          child: Text(
+            label,
+            style: const TextStyle(
+              color: Colors.white,
+            ),
+          ),
+        ),
+      ),
+    );

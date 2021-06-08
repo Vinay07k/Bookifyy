@@ -1,13 +1,14 @@
-import 'package:bookify/sizeconfig.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+
+import 'package:bookify/sizeconfig.dart';
 
 class MainDrawer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Drawer(
       child: Container(
-        color: Color(0xFF111111),
+        color: const Color(0xFF111111),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
@@ -16,7 +17,7 @@ class MainDrawer extends StatelessWidget {
               child: Center(
                 child: const Text(
                   "Bookify",
-                  style: TextStyle(
+                  style: const TextStyle(
                     fontSize: 40,
                     fontWeight: FontWeight.w900,
                     color: Colors.white,
@@ -28,16 +29,16 @@ class MainDrawer extends StatelessWidget {
               color: Colors.white,
               thickness: 0.5,
             ),
-            _listItems(Icons.person, 'View Profile'),
-            _listItems(Icons.book, 'About Us'),
-            _listItems(Icons.bookmark, 'Want to Reads'),
-            _listItems(Icons.favorite, 'Rate on Play Store'),
-            _listItems(Icons.adb, 'Report Bugs'),
-            _listItems(Icons.group, 'Invite Friends'),
+            _listItems(Icons.person, 'View Profile', context),
+            _listItems(Icons.book, 'About Us', context),
+            _listItems(Icons.bookmark, 'Want to Reads', context),
+            _listItems(Icons.favorite, 'Rate on Play Store', context),
+            _listItems(Icons.adb, 'Report Bugs', context),
+            _listItems(Icons.group, 'Invite Friends', context),
             SizedBox(height: getRelativeHeight(0.13)),
             const Text(
               "Connect with us",
-              style: TextStyle(
+              style: const TextStyle(
                 fontSize: 15,
                 fontWeight: FontWeight.w700,
                 color: Color(0xFFFFFFFF),
@@ -59,17 +60,26 @@ class MainDrawer extends StatelessWidget {
   }
 }
 
-Widget _iconButton(Widget icon, BuildContext context) => Padding(
+Widget _iconButton(
+  Widget icon,
+  BuildContext context,
+) =>
+    Padding(
       padding: const EdgeInsets.all(4),
       child: IconButton(
         iconSize: 30,
         icon: icon,
-        color: Color(0xffffff00),
+        color: Theme.of(context).focusColor,
         onPressed: () {},
       ),
     );
 
-Widget _listItems(IconData icon, String title) => ListTile(
+Widget _listItems(
+  IconData icon,
+  String title,
+  BuildContext context,
+) =>
+    ListTile(
       contentPadding: const EdgeInsets.only(left: 30),
       leading: Icon(
         icon,
@@ -80,7 +90,7 @@ Widget _listItems(IconData icon, String title) => ListTile(
         style: TextStyle(
           fontSize: 15,
           fontWeight: FontWeight.w500,
-          color: Colors.white,
+          color: Theme.of(context).accentColor,
         ),
       ),
       onTap: () {},
