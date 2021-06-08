@@ -55,7 +55,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             color: Colors.white,
                           ),
                           label: const Text(
-                            'Add Firends',
+                            'Add Friends',
                             style: const TextStyle(
                               color: Colors.white,
                               letterSpacing: 1,
