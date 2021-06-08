@@ -1,4 +1,5 @@
 import 'package:animated_splash_screen/animated_splash_screen.dart';
+import 'package:bookify/sizeconfig.dart';
 import 'package:flutter/material.dart';
 
 import './Screens/HomeScreen.dart';
@@ -19,6 +20,7 @@ class MyApp extends StatelessWidget {
       ),
       home: Builder(
         builder: (BuildContext context) {
+          ScreenSize.intialize(context);
           return AnimatedSplashScreen(
             splashIconSize: double.infinity,
             splash: 'assets/splashscreenicon.png',

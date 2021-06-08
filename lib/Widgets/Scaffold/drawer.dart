@@ -1,74 +1,58 @@
+import 'package:bookify/sizeconfig.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class MainDrawer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Drawer(
-        child: Container(
-          color: Color(0xFF111111),
-          child: Column(
-            mainAxisSize: MainAxisSize.max,
-            children: <Widget>[
-              Container(
-                height: 180,
-                child: Center(
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text(
-                        "Bookify",
-                        style: TextStyle(
-                          fontSize: 40,
-                          fontWeight: FontWeight.w900,
-                          color: Colors.white,
-                        ),
-                      ),
-                    ],
+    return Drawer(
+      child: Container(
+        color: Color(0xFF111111),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: <Widget>[
+            Container(
+              height: getRelativeHeight(0.26),
+              child: Center(
+                child: const Text(
+                  "Bookify",
+                  style: TextStyle(
+                    fontSize: 40,
+                    fontWeight: FontWeight.w900,
+                    color: Colors.white,
                   ),
                 ),
               ),
-              Divider(
-                color: Colors.white,
-                thickness: 0.5,
+            ),
+            const Divider(
+              color: Colors.white,
+              thickness: 0.5,
+            ),
+            _listItems(Icons.person, 'View Profile'),
+            _listItems(Icons.book, 'About Us'),
+            _listItems(Icons.bookmark, 'Want to Reads'),
+            _listItems(Icons.favorite, 'Rate on Play Store'),
+            _listItems(Icons.adb, 'Report Bugs'),
+            _listItems(Icons.group, 'Invite Friends'),
+            SizedBox(height: getRelativeHeight(0.13)),
+            const Text(
+              "Connect with us",
+              style: TextStyle(
+                fontSize: 15,
+                fontWeight: FontWeight.w700,
+                color: Color(0xFFFFFFFF),
               ),
-              _listItems(Icons.person, 'View Profile'),
-              _listItems(Icons.book, 'About Us'),
-              _listItems(Icons.bookmark, 'Want to Reads'),
-              _listItems(Icons.favorite, 'Rate on Play Store'),
-              _listItems(Icons.adb, 'Report Bugs'),
-              _listItems(Icons.group, 'Invite Friends'),
-              _listItems(Icons.group, 'Invite Friends'),
-              SizedBox(height: 120),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                mainAxisSize: MainAxisSize.max,
-                children: <Widget>[
-                  Text(
-                    "Connect with us",
-                    style: TextStyle(
-                      fontSize: 15,
-                      fontWeight: FontWeight.w700,
-                      color: Color(0xFFFFFFFF),
-                    ),
-                  ),
-                ],
-              ),
-              SizedBox(
-                height: 0,
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: <Widget>[
-                  _iconButton(FaIcon(FontAwesomeIcons.linkedin), context),
-                  _iconButton(FaIcon(FontAwesomeIcons.instagram), context),
-                  _iconButton(FaIcon(FontAwesomeIcons.twitter), context),
-                  _iconButton(FaIcon(FontAwesomeIcons.globe), context),
-                ],
-              ),
-            ],
-          ),
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: <Widget>[
+                _iconButton(FaIcon(FontAwesomeIcons.linkedin), context),
+                _iconButton(FaIcon(FontAwesomeIcons.instagram), context),
+                _iconButton(FaIcon(FontAwesomeIcons.twitter), context),
+                _iconButton(FaIcon(FontAwesomeIcons.globe), context),
+              ],
+            ),
+          ],
         ),
       ),
     );
@@ -76,9 +60,9 @@ class MainDrawer extends StatelessWidget {
 }
 
 Widget _iconButton(Widget icon, BuildContext context) => Padding(
-      padding: const EdgeInsets.all(6),
+      padding: const EdgeInsets.all(4),
       child: IconButton(
-        iconSize: 25,
+        iconSize: 30,
         icon: icon,
         color: Color(0xffffff00),
         onPressed: () {},
