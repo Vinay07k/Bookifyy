@@ -1,5 +1,6 @@
 import 'package:animated_splash_screen/animated_splash_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 import 'package:bookify/sizeconfig.dart';
 
@@ -20,6 +21,9 @@ class MyApp extends StatelessWidget {
         primaryColor: Colors.black,
         accentColor: Colors.white,
         focusColor: Colors.yellow,
+        textTheme: GoogleFonts.poppinsTextTheme(
+          Theme.of(context).textTheme,
+        ),
       ),
       home: Builder(
         builder: (BuildContext context) {
@@ -34,6 +38,9 @@ class MyApp extends StatelessWidget {
           );
         },
       ),
+      routes: {
+        
+      },
     );
   }
 }

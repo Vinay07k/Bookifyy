@@ -1,4 +1,4 @@
-import 'package:bookify/constants.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 import '/Screens/HomeScreen.dart' show TABS;
 import 'package:flutter/material.dart';
@@ -25,14 +25,16 @@ class KAppBar extends StatelessWidget implements PreferredSizeWidget {
         icon: Image.asset('assets/drawericon.png'),
         onPressed: () => Scaffold.of(context).openDrawer(),
       ),
-      title: Text(
-        'Bookify',
-        style: Constants().kAppBarTitle,
-      ),
+      title: Text('Bookify',
+          style:
+              GoogleFonts.poppins(fontSize: 30, fontWeight: FontWeight.bold)),
       actions: [
         IconButton(
           onPressed: () {},
-          icon: const Icon(Icons.search),
+          icon: const Icon(
+            Icons.search,
+            size: 30,
+          ),
         ),
       ],
       bottom: PreferredSize(

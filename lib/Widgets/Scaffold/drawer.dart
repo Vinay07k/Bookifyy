@@ -35,7 +35,7 @@ class MainDrawer extends StatelessWidget {
             _listItems(Icons.favorite, 'Rate on Play Store', context),
             _listItems(Icons.adb, 'Report Bugs', context),
             _listItems(Icons.group, 'Invite Friends', context),
-            SizedBox(height: getRelativeHeight(0.13)),
+            SizedBox(height: getRelativeHeight(0.16)),
             const Text(
               "Connect with us",
               style: const TextStyle(
@@ -80,7 +80,7 @@ Widget _listItems(
   BuildContext context,
 ) =>
     ListTile(
-      contentPadding: const EdgeInsets.only(left: 30),
+      contentPadding: const EdgeInsets.only(left: 35),
       leading: Icon(
         icon,
         color: Color(0xFFC4C4C4),
