@@ -25,9 +25,11 @@ class KAppBar extends StatelessWidget implements PreferredSizeWidget {
         icon: Image.asset('assets/drawericon.png'),
         onPressed: () => Scaffold.of(context).openDrawer(),
       ),
-      title: Text('Bookify',
-          style:
-              GoogleFonts.poppins(fontSize: 30, fontWeight: FontWeight.bold)),
+      title: Text(
+        'Bookify',
+        style: GoogleFonts.poppins(
+            fontSize: 30, fontWeight: FontWeight.bold, letterSpacing: 0.5),
+      ),
       actions: [
         IconButton(
           onPressed: () {},

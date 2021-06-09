@@ -27,12 +27,12 @@ class BlurbItem extends StatelessWidget {
               style: TextStyle(
                 color: Colors.white,
                 fontWeight: FontWeight.w600,
-                letterSpacing: 0.6,
+                letterSpacing: 0.5,
               ),
             ),
             subtitle: Text(
-              '@theonlyone 11m',
-              style: TextStyle(color: Colors.white),
+              '@theonlyone  .  11m',
+              style: TextStyle(color: Color(0xffc4c4c4), letterSpacing: 0.5),
             ),
           ),
           Padding(
