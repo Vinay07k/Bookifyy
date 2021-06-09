@@ -6,8 +6,6 @@ class BlurbItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      // height: 20,
-      // width: 40,
       margin: const EdgeInsets.symmetric(
         horizontal: 20,
         vertical: 10,
@@ -20,8 +18,11 @@ class BlurbItem extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         children: [
           ListTile(
-            contentPadding: EdgeInsets.only(left: 10),
-            leading: CircleAvatar(),
+            onTap: () {},
+            contentPadding: EdgeInsets.symmetric(horizontal: 10),
+            leading: CircleAvatar(
+              foregroundImage: AssetImage('assets/download.jpeg'),
+            ),
             title: Text(
               'Madara Uchiha',
               style: TextStyle(
@@ -31,7 +32,11 @@ class BlurbItem extends StatelessWidget {
               ),
             ),
             subtitle: Text(
-              '@theonlyone 11m',
+              '@theonlyone',
+              style: TextStyle(color: Colors.white),
+            ),
+            trailing: Text(
+              '11m ago',
               style: TextStyle(color: Colors.white),
             ),
           ),
@@ -57,8 +62,8 @@ class BlurbItem extends StatelessWidget {
                     TextButton.icon(
                       onPressed: () {},
                       style: ButtonStyle(
-                        foregroundColor:
-                            MaterialStateProperty.all(Colors.yellow),
+                        foregroundColor: MaterialStateProperty.all(
+                            Theme.of(context).focusColor),
                       ),
                       icon: Icon(Icons.favorite),
                       label: Text('44'),
@@ -72,11 +77,6 @@ class BlurbItem extends StatelessWidget {
                       icon: Icon(Icons.comment_outlined),
                       label: Text('44'),
                     ),
-                    // IconButton(
-                    //   onPressed: () {},
-                    //   icon: Icon(Icons.comment_outlined),
-                    //   color: Colors.white,
-                    // ),
                     IconButton(
                       onPressed: () {},
                       icon: Icon(Icons.share_outlined),

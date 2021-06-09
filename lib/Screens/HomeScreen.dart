@@ -31,55 +31,23 @@ class _HomeScreenState extends State<HomeScreen> {
       child: Scaffold(
         appBar: KAppBar(_switchTabs, _currentTab),
         drawer: MainDrawer(),
-        body: Center(
-            child: _currentTab == TABS.BOOKS
-                ? const Text(
-                    'Books',
-                    style: TextStyle(color: Colors.white),
-                  )
-                : FeedsScreen()
-            // : Center(
-            //     child: Container(
-            //       width: 280,
-            //       child: Column(
-            //         mainAxisSize: MainAxisSize.min,
-            //         children: [
-            //           const Text(
-            //             'Welcome to Bookify family! \n Your friends didn’t post their any Blurb yet, be the first one and add more friends.',
-            //             style: const TextStyle(color: Colors.white),
-            //             textAlign: TextAlign.center,
-            //           ),
-            //           SizedBox(height: 4),
-            //           OutlinedButton.icon(
-            //             onPressed: () {},
-            //             icon: const Icon(
-            //               Icons.add,
-            //               color: Colors.white,
-            //             ),
-            //             label: const Text(
-            //               'Add Firends',
-            //               style: const TextStyle(
-            //                 color: Colors.white,
-            //                 letterSpacing: 1,
-            //               ),
-            //             ),
-            //             style: ButtonStyle(
-            //               shape: MaterialStateProperty.all(
-            //                   RoundedRectangleBorder(
-            //                       borderRadius: BorderRadius.circular(10))),
-            //               side: MaterialStateProperty.all(
-            //                 BorderSide(
-            //                   color: Theme.of(context).accentColor,
-            //                   width: 2,
-            //                 ),
-            //               ),
-            //             ),
-            //           )
-            //         ],
-            //       ),
-            //     ),
-            //   ),
-            ),
+        body: _currentTab == TABS.BOOKS
+            ? const Text(
+                'Books',
+                style: TextStyle(color: Colors.white),
+              )
+            : FeedsScreen(),
+        floatingActionButton: _currentTab == TABS.BOOKS
+            ? null
+            : FloatingActionButton(
+                backgroundColor: Theme.of(context).focusColor,
+                tooltip: 'Add Blurb',
+                child: Icon(
+                  Icons.add_to_home_screen,
+                  color: Colors.black,
+                ),
+                onPressed: () {},
+              ),
       ),
     );
   }
