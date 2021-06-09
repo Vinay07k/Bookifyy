@@ -1,4 +1,5 @@
 import 'package:bookify/Screens/FeedsScreen.dart';
+import 'package:contacts_service/contacts_service.dart';
 import 'package:flutter/material.dart';
 
 import 'package:bookify/Widgets/Scaffold/appbar.dart';
@@ -9,14 +10,15 @@ enum TABS {
   BOOKS,
 }
 
-class HomeScreen extends StatefulWidget {
-  const HomeScreen({Key? key}) : super(key: key);
+class ScreenController extends StatefulWidget {
+  final routeName = '/screen-controller';
+  const ScreenController({Key? key}) : super(key: key);
 
   @override
-  _HomeScreenState createState() => _HomeScreenState();
+  _ScreenControllerState createState() => _ScreenControllerState();
 }
 
-class _HomeScreenState extends State<HomeScreen> {
+class _ScreenControllerState extends State<ScreenController> {
   TABS _currentTab = TABS.FEEDS;
 
   void _switchTabs(TABS tab) {

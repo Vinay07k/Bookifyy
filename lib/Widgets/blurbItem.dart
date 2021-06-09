@@ -2,8 +2,9 @@ import 'package:bookify/Screens/PostScreen.dart';
 import 'package:flutter/material.dart';
 
 class BlurbItem extends StatelessWidget {
-  const BlurbItem({Key? key}) : super(key: key);
+  const BlurbItem(this.index, {Key? key}) : super(key: key);
 
+  final int index;
   @override
   Widget build(BuildContext context) {
     return Container(

@@ -16,7 +16,7 @@ class _FeedsScreenState extends State<FeedsScreen> {
       padding: const EdgeInsets.only(top: 10.0),
       child: ListView.builder(
         itemCount: 10,
-        itemBuilder: (context, index) => BlurbItem(),
+        itemBuilder: (context, index) => BlurbItem(index),
       ),
     );
   }
