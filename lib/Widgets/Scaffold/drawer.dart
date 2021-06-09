@@ -35,7 +35,7 @@ class MainDrawer extends StatelessWidget {
             _listItems(Icons.favorite, 'Rate on Play Store', context),
             _listItems(Icons.adb, 'Report Bugs', context),
             _listItems(Icons.group, 'Invite Friends', context),
-            SizedBox(height: getRelativeHeight(0.16)),
+            SizedBox(height: getRelativeHeight(0.13)),
             const Text(
               "Connect with us",
               style: const TextStyle(

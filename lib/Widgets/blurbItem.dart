@@ -1,3 +1,4 @@
+import 'package:bookify/Screens/PostScreen.dart';
 import 'package:flutter/material.dart';
 
 class BlurbItem extends StatelessWidget {
@@ -19,8 +20,9 @@ class BlurbItem extends StatelessWidget {
         children: [
           ListTile(
             onTap: () {},
-            contentPadding: EdgeInsets.symmetric(horizontal: 10),
+            contentPadding: EdgeInsets.only(left: 10, right: 14),
             leading: CircleAvatar(
+              radius: 24,
               foregroundImage: AssetImage('assets/download.jpeg'),
             ),
             title: Text(
@@ -48,12 +50,16 @@ class BlurbItem extends StatelessWidget {
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: [
-                Text(
-                  'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mi posue fames pulvinar posuere. Eget vel sed ultrices mauris vestibulum, fringilla diam a. Ornare facilisis id turpis aliquam. Neque senectus sed vitae vestibulum et massa enim tempor.',
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontWeight: FontWeight.w400,
-                    letterSpacing: 0.5,
+                GestureDetector(
+                  onTap: () =>
+                      Navigator.of(context).pushNamed(PostScreen().routeName),
+                  child: Text(
+                    'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mi posue fames pulvinar posuere. Eget vel sed ultrices mauris vestibulum, fringilla diam a. Ornare facilisis id turpis aliquam. Neque senectus sed vitae vestibulum et massa enim tempor.',
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontWeight: FontWeight.w400,
+                      letterSpacing: 0.5,
+                    ),
                   ),
                 ),
                 Row(
