@@ -1,10 +1,13 @@
-import 'package:animated_splash_screen/animated_splash_screen.dart';
+import 'package:bookify/Screens/Auth/signup.dart';
 import 'package:flutter/material.dart';
+import 'package:animated_splash_screen/animated_splash_screen.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import 'package:bookify/sizeconfig.dart';
 
-import './Screens/HomeScreen.dart';
+import 'package:bookify/Screens/ScreenController.dart';
+import 'package:bookify/Screens/PostScreen.dart';
+import 'package:bookify/Screens/CarouselScreen.dart';
 
 void main() {
   runApp(MyApp());
@@ -31,14 +34,18 @@ class MyApp extends StatelessWidget {
           return AnimatedSplashScreen(
             splashIconSize: double.infinity,
             splash: 'assets/splashscreenicon.png',
-            nextScreen: HomeScreen(),
+            nextScreen: CarouselScreen(),
             duration: 500,
             backgroundColor: Theme.of(context).primaryColor,
             splashTransition: SplashTransition.fadeTransition,
           );
         },
       ),
-      routes: {},
+      routes: {
+        SignUpScreen().routeName: (context) => SignUpScreen(),
+        ScreenController().routeName: (context) => ScreenController(),
+        PostScreen().routeName: (context) => PostScreen(),
+      },
     );
   }
 }

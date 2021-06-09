@@ -1,16 +1,19 @@
-import 'package:bookify/Screens/PostScreen.dart';
 import 'package:flutter/material.dart';
 
-class BlurbItem extends StatelessWidget {
-  const BlurbItem(this.index, {Key? key}) : super(key: key);
+class PostScreenBlurb extends StatefulWidget {
+  const PostScreenBlurb({Key? key}) : super(key: key);
 
-  final int index;
+  @override
+  _PostScreenBlurbState createState() => _PostScreenBlurbState();
+}
+
+class _PostScreenBlurbState extends State<PostScreenBlurb> {
   @override
   Widget build(BuildContext context) {
     return Container(
       margin: const EdgeInsets.symmetric(
         horizontal: 20,
-        vertical: 10,
+        // vertical: 10,
       ),
       decoration: BoxDecoration(
         color: Color.fromRGBO(23, 23, 23, 1),
@@ -31,7 +34,7 @@ class BlurbItem extends StatelessWidget {
               style: TextStyle(
                 color: Colors.white,
                 fontWeight: FontWeight.w600,
-                letterSpacing: 0.5,
+                letterSpacing: 0.6,
               ),
             ),
             subtitle: Text(
@@ -44,24 +47,23 @@ class BlurbItem extends StatelessWidget {
             ),
           ),
           Padding(
-            padding: EdgeInsets.only(
-              left: 60,
+            padding: const EdgeInsets.only(
+              left: 10,
               right: 10,
             ),
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: [
-                GestureDetector(
-                  onTap: () =>
-                      Navigator.of(context).pushNamed(PostScreen().routeName),
-                  child: Text(
-                    'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mi posue fames pulvinar posuere. Eget vel sed ultrices mauris vestibulum, fringilla diam a. Ornare facilisis id turpis aliquam. Neque senectus sed vitae vestibulum et massa enim tempor.',
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontWeight: FontWeight.w400,
-                      letterSpacing: 0.5,
-                    ),
+                Text(
+                  'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mi posue fames pulvinar posuere. Eget vel sed ultrices mauris vestibulum, fringilla diam a. Ornare facilisis id turpis aliquam. Neque senectus sed vitae vestibulum et massa enim tempor.',
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontWeight: FontWeight.w400,
+                    letterSpacing: 0.5,
                   ),
+                ),
+                Divider(
+                  color: Colors.white,
                 ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,

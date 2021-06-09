@@ -1,6 +1,6 @@
 import 'package:google_fonts/google_fonts.dart';
 
-import '/Screens/HomeScreen.dart' show TABS;
+import '../../Screens/ScreenController.dart' show TABS;
 import 'package:flutter/material.dart';
 
 class KAppBar extends StatelessWidget implements PreferredSizeWidget {
