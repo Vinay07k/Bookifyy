@@ -1,7 +1,5 @@
-// import 'package:bookify/Models/user.dart';
-// import 'package:flutter/foundation.dart';
-
 import 'comment.dart';
+import 'package:intl/intl.dart';
 
 class FeedModal {
   final String userId;
@@ -21,4 +19,6 @@ class FeedModal {
 
   int get commentCount => this.comments.length;
   int get likesCount => this.likes.length;
+  String get createdTime => DateFormat('hh:mm').format(this.dateTime);
+  String get createdDate => DateFormat('dd-MMMM-yyyy').format(this.dateTime);
 }
