@@ -1,7 +1,8 @@
-import 'package:google_fonts/google_fonts.dart';
+import 'package:flutter/material.dart';
 
 import '../../Screens/ScreenController.dart' show TABS;
-import 'package:flutter/material.dart';
+
+import '../../constants.dart';
 
 class KAppBar extends StatelessWidget implements PreferredSizeWidget {
   const KAppBar(
@@ -27,7 +28,7 @@ class KAppBar extends StatelessWidget implements PreferredSizeWidget {
       ),
       title: Text(
         'Bookify',
-        style: GoogleFonts.poppins(fontSize: 30, fontWeight: FontWeight.bold),
+        style: KTextStyles.kAppBarTitle,
       ),
       actions: [
         IconButton(
