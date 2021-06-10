@@ -1,4 +1,5 @@
 import 'package:bookify/Screens/PostScreen.dart';
+import 'package:bookify/constants.dart';
 import 'package:flutter/material.dart';
 
 class BlurbItem extends StatelessWidget {
@@ -13,7 +14,7 @@ class BlurbItem extends StatelessWidget {
         vertical: 10,
       ),
       decoration: BoxDecoration(
-        color: Color.fromRGBO(23, 23, 23, 1),
+        color: Theme.of(context).cardColor,
         borderRadius: BorderRadius.circular(10),
       ),
       child: Column(
@@ -21,30 +22,26 @@ class BlurbItem extends StatelessWidget {
         children: [
           ListTile(
             onTap: () {},
-            contentPadding: EdgeInsets.only(left: 10, right: 14),
+            contentPadding: const EdgeInsets.only(left: 10, right: 14),
             leading: CircleAvatar(
               radius: 24,
               foregroundImage: AssetImage('assets/download.jpeg'),
             ),
             title: Text(
               'Madara Uchiha',
-              style: TextStyle(
-                color: Colors.white,
-                fontWeight: FontWeight.w600,
-                letterSpacing: 0.6,
-              ),
+              style: KTextStyles.kNameText,
             ),
-            subtitle: Text(
+            subtitle: const Text(
               '@theonlyone',
               style: TextStyle(color: Colors.white),
             ),
             trailing: Text(
               '11m ago',
-              style: TextStyle(color: Colors.white),
+              style: KTextStyles.kCreatedTimeText,
             ),
           ),
           Padding(
-            padding: EdgeInsets.only(
+            padding: const EdgeInsets.only(
               left: 60,
               right: 10,
             ),
@@ -56,11 +53,7 @@ class BlurbItem extends StatelessWidget {
                       Navigator.of(context).pushNamed(PostScreen().routeName),
                   child: Text(
                     'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mi posue fames pulvinar posuere. Eget vel sed ultrices mauris vestibulum, fringilla diam a. Ornare facilisis id turpis aliquam. Neque senectus sed vitae vestibulum et massa enim tempor.',
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontWeight: FontWeight.w400,
-                      letterSpacing: 0.5,
-                    ),
+                    style: KTextStyles.kDescriptionText,
                   ),
                 ),
                 Row(
@@ -72,22 +65,22 @@ class BlurbItem extends StatelessWidget {
                         foregroundColor: MaterialStateProperty.all(
                             Theme.of(context).focusColor),
                       ),
-                      icon: Icon(Icons.favorite),
+                      icon: const Icon(Icons.favorite),
                       label: Text('44'),
                     ),
                     TextButton.icon(
                       onPressed: () {},
                       style: ButtonStyle(
-                        foregroundColor:
-                            MaterialStateProperty.all(Colors.white),
+                        foregroundColor: MaterialStateProperty.all(
+                            Theme.of(context).accentColor),
                       ),
-                      icon: Icon(Icons.comment_outlined),
+                      icon: const Icon(Icons.comment_outlined),
                       label: Text('44'),
                     ),
                     IconButton(
                       onPressed: () {},
-                      icon: Icon(Icons.share_outlined),
-                      color: Colors.white,
+                      icon: const Icon(Icons.share_outlined),
+                      color: Theme.of(context).accentColor,
                     ),
                   ],
                 ),

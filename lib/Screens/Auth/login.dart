@@ -1,6 +1,7 @@
+import 'package:bookify/Screens/Auth/signup.dart';
+import 'package:bookify/constants.dart';
 import 'package:flutter/material.dart';
 
-// import 'package:bookify/Screens/Home/homescreen.dart';
 import 'package:bookify/Screens/ScreenController.dart';
 
 import 'package:bookify/sizeconfig.dart';
@@ -17,97 +18,47 @@ class LoginScreen extends StatelessWidget {
       child: GestureDetector(
         onTap: () => FocusScope.of(context).unfocus(),
         child: Scaffold(
-          appBar: AppBar(
-            backgroundColor: Colors.black,
-            leading: IconButton(
-              icon: const Icon(
-                Icons.arrow_back_sharp,
-                size: 30,
-                color: Colors.white,
-              ),
-              onPressed: () {
-                Navigator.pop(context);
-              },
-            ),
-          ),
           body: SingleChildScrollView(
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 20.0),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const Text(
+                  const SizedBox(height: 40),
+                  Text(
                     'Log In',
-                    style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 30,
-                        fontWeight: FontWeight.w900),
+                    style: KTextStyles.kScreenTitle,
                   ),
-                  SizedBox(height: getRelativeHeight(0.03)),
+                  SizedBox(height: getRelativeHeight(0.035)),
                   textField('Email', TextInputType.emailAddress),
-                  SizedBox(height: getRelativeHeight(0.02)),
+                  SizedBox(height: getRelativeHeight(0.025)),
                   textField('Password', TextInputType.visiblePassword,
                       hiddenText: true),
-                  SizedBox(height: getRelativeHeight(0.03)),
+                  SizedBox(height: getRelativeHeight(0.035)),
                   CustomElevatedButton(
                     onPressedFunction: () {
                       Navigator.of(context)
-                          .pushNamed(ScreenController().routeName);
+                          .pushNamed(ScreenController.routeName);
                     },
-                    child: const Text(
+                    child: Text(
                       'Log in',
-                      style: TextStyle(
-                        fontWeight: FontWeight.w900,
-                        fontSize: 17,
-                      ),
+                      style: KTextStyles.kButtonText,
                     ),
                   ),
                   const SizedBox(height: 8),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      const Text(
-                        'Forgot your password?',
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                    ],
-                  ),
-                  SizedBox(height: getRelativeHeight(0.3)),
-                  // googleButton(
-                  //   icon: Image.network(
-                  //     'https://cdn.changelog.com/uploads/icons/news_sources/Rr/icon_small.png?v=63685082660',
-                  //     fit: BoxFit.cover,
-                  //     height: 30,
-                  //     width: 30,
-                  //   ),
-                  //   label: const Text(
-                  //     'Log in with Google',
-                  //     style:
-                  //         TextStyle(fontWeight: FontWeight.w900, fontSize: 17),
-                  //   ),
-                  //   onPressedFunction: () {},
-                  // ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      const Text(
+                      Text(
                         'Don\'t have an account?',
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontWeight: FontWeight.bold,
-                        ),
+                        style: KTextStyles.kSimpleText,
                       ),
                       TextButton(
-                        onPressed: () {},
-                        child: const Text(
+                        onPressed: () => Navigator.of(context)
+                            .pushReplacementNamed(SignUpScreen().routeName),
+                        child: Text(
                           'Register!',
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontWeight: FontWeight.bold,
-                          ),
+                          style: KTextStyles.kSimpleText,
                         ),
                       ),
                     ],

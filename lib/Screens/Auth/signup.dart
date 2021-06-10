@@ -1,3 +1,4 @@
+import 'package:bookify/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -22,50 +23,39 @@ class SignUpScreen extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  SizedBox(height: 40),
-                  const Text(
+                  const SizedBox(height: 40),
+                  Text(
                     'Create Account',
-                    style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 30,
-                        fontWeight: FontWeight.w900),
+                    style: KTextStyles.kScreenTitle,
                   ),
                   SizedBox(height: getRelativeHeight(0.03)),
                   textField('First Name', TextInputType.name),
-                  SizedBox(height: getRelativeHeight(0.02)),
+                  SizedBox(height: getRelativeHeight(0.025)),
                   textField('Email', TextInputType.emailAddress),
-                  SizedBox(height: getRelativeHeight(0.02)),
+                  SizedBox(height: getRelativeHeight(0.025)),
                   textField('Password', TextInputType.visiblePassword,
                       hiddenText: true),
                   SizedBox(height: getRelativeHeight(0.03)),
                   CustomElevatedButton(
-                    child: const Text(
+                    child: Text(
                       'Create Account',
-                      style:
-                          TextStyle(fontWeight: FontWeight.w900, fontSize: 17),
+                      style: KTextStyles.kButtonText,
                     ),
-                    onPressedFunction: () {
-                      Navigator.of(context).pushNamed(LoginScreen().routeName);
-                    },
+                    onPressedFunction: () {},
                   ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      const Text(
+                      Text(
                         'Already have an account?',
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontWeight: FontWeight.bold,
-                        ),
+                        style: KTextStyles.kSimpleText,
                       ),
                       TextButton(
-                        onPressed: () {},
-                        child: const Text(
+                        onPressed: () => Navigator.of(context)
+                            .pushReplacementNamed(LoginScreen().routeName),
+                        child: Text(
                           'Login!',
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontWeight: FontWeight.bold,
-                          ),
+                          style: KTextStyles.kSimpleText,
                         ),
                       )
                     ],

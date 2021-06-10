@@ -1,6 +1,8 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 
+import 'package:bookify/constants.dart';
+
 import 'package:bookify/Models/slide.dart';
 
 import 'package:bookify/Screens/Auth/signup.dart';
@@ -91,7 +93,7 @@ class CarouselScreenState extends State<CarouselScreen> {
                   ],
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 20,
               ),
               Column(
@@ -100,11 +102,7 @@ class CarouselScreenState extends State<CarouselScreen> {
                   CustomElevatedButton(
                     child: Text(
                       'Get Started!',
-                      style: const TextStyle(
-                        letterSpacing: 1,
-                        fontSize: 18,
-                        fontWeight: FontWeight.w700,
-                      ),
+                      style: KTextStyles.kButtonText,
                     ),
                     onPressedFunction: () {
                       Navigator.of(context)

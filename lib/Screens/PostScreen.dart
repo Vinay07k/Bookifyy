@@ -1,4 +1,5 @@
 import 'package:bookify/Widgets/postScreenBlurb.dart';
+import 'package:bookify/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 
@@ -17,7 +18,7 @@ class _PostScreenState extends State<PostScreen> {
   late ScrollController _scrollController;
   @override
   void initState() {
-    // TODO: implement initState
+    super.initState();
     _scrollController = ScrollController();
     _scrollController.addListener(() {
       setState(() {
@@ -25,27 +26,31 @@ class _PostScreenState extends State<PostScreen> {
             ScrollDirection.forward;
       });
     });
-    super.initState();
   }
 
   @override
   void dispose() {
-    // TODO: implement dispose
-    _scrollController.dispose();
     super.dispose();
+    _scrollController.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        appBar: AppBar(),
+        appBar: AppBar(
+          centerTitle: true,
+          title: Text(
+            'Blurb',
+            style: KTextStyles.kAppBarTitle,
+          ),
+        ),
         body: Column(
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            PostScreenBlurb(),
-            Divider(color: Colors.white),
+            const PostScreenBlurb(),
+            Divider(color: Theme.of(context).accentColor),
             Expanded(
               child: ListView.builder(
                 controller: _scrollController,
@@ -58,7 +63,7 @@ class _PostScreenState extends State<PostScreen> {
         floatingActionButton: _shouldBeVisible
             ? FloatingActionButton(
                 onPressed: () {},
-                child: Icon(Icons.add_comment_outlined),
+                child: const Icon(Icons.add_comment_outlined),
                 backgroundColor: Theme.of(context).focusColor,
               )
             : null,

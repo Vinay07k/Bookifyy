@@ -1,3 +1,4 @@
+import 'package:bookify/constants.dart';
 import 'package:flutter/material.dart';
 
 class CommentItem extends StatelessWidget {
@@ -11,7 +12,7 @@ class CommentItem extends StatelessWidget {
         vertical: 10,
       ),
       decoration: BoxDecoration(
-        color: Color.fromRGBO(23, 23, 23, 1),
+        color: Theme.of(context).cardColor,
         borderRadius: BorderRadius.circular(10),
       ),
       child: Column(
@@ -19,27 +20,30 @@ class CommentItem extends StatelessWidget {
         children: [
           ListTile(
             onTap: () {},
-            contentPadding: EdgeInsets.only(left: 10, right: 12),
+            contentPadding: const EdgeInsets.only(left: 10, right: 12),
             leading: CircleAvatar(
               radius: 20,
               foregroundImage: AssetImage('assets/download.jpeg'),
             ),
             title: Text(
               'Madara Uchiha',
-              style: TextStyle(
+              style: const TextStyle(
                 color: Colors.white,
                 fontSize: 14,
                 fontWeight: FontWeight.w600,
                 letterSpacing: 0.6,
               ),
             ),
-            subtitle: Text(
+            subtitle: const Text(
               'Replying to @theonlyone',
-              style: TextStyle(fontSize: 10, color: Colors.yellow),
+              style: TextStyle(
+                fontSize: 10,
+                color: Colors.yellow,
+              ),
             ),
             trailing: Text(
               '11m ago',
-              style: TextStyle(color: Colors.white),
+              style: KTextStyles.kCreatedTimeText,
             ),
           ),
           Padding(
@@ -50,11 +54,7 @@ class CommentItem extends StatelessWidget {
             ),
             child: Text(
               'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mi posue fames pulvinar posuere. Eget vel sed ultrices mauris vestibulum, fringilla diam a. Ornare facilisis id turpis aliquam. Neque senectus sed vitae vestibulum et massa enim tempor.',
-              style: TextStyle(
-                color: Colors.white,
-                fontWeight: FontWeight.w400,
-                letterSpacing: 0.5,
-              ),
+              style: KTextStyles.kDescriptionText,
             ),
           ),
         ],

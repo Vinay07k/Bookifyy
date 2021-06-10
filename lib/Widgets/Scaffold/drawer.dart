@@ -1,3 +1,4 @@
+import 'package:bookify/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
@@ -8,7 +9,7 @@ class MainDrawer extends StatelessWidget {
   Widget build(BuildContext context) {
     return Drawer(
       child: Container(
-        color: const Color(0xFF111111),
+        color: Theme.of(context).cardColor,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
@@ -36,13 +37,9 @@ class MainDrawer extends StatelessWidget {
             _listItems(Icons.adb, 'Report Bugs', context),
             _listItems(Icons.group, 'Invite Friends', context),
             SizedBox(height: getRelativeHeight(0.13)),
-            const Text(
+            Text(
               "Connect with us",
-              style: const TextStyle(
-                fontSize: 15,
-                fontWeight: FontWeight.w700,
-                color: Color(0xFFFFFFFF),
-              ),
+              style: KTextStyles.kSimpleText,
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,

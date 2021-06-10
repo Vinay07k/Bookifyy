@@ -22,19 +22,19 @@ class SlideItem extends StatelessWidget {
             ),
           ),
         ),
-        SizedBox(
+        const SizedBox(
           height: 40,
         ),
         Text(
           slideList[index].title,
-          style: TextStyle(fontSize: 22, color: Colors.white),
+          style: const TextStyle(fontSize: 22, color: Colors.white),
         ),
-        SizedBox(
+        const SizedBox(
           height: 10,
         ),
         Text(
           slideList[index].description,
-          style: TextStyle(
+          style: const TextStyle(
             fontSize: 15,
             color: Color(0xFFC4C4C4),
           ),

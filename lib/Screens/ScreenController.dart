@@ -11,7 +11,7 @@ enum TABS {
 }
 
 class ScreenController extends StatefulWidget {
-  final routeName = '/screen-controller';
+  static final routeName = '/screen-controller';
   const ScreenController({Key? key}) : super(key: key);
 
   @override
@@ -44,7 +44,7 @@ class _ScreenControllerState extends State<ScreenController> {
             : FloatingActionButton(
                 backgroundColor: Theme.of(context).focusColor,
                 tooltip: 'Add Blurb',
-                child: Icon(
+                child: const Icon(
                   Icons.add_to_home_screen,
                   color: Colors.black,
                 ),
