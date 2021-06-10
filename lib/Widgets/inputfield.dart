@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-Widget textField(
+Widget inputtextField(
   String label,
   TextInputType keyboard, {
   int lines = 1,

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../Models/slide.dart';
+import 'package:bookify/Models/slide.dart';
 
 class SlideItem extends StatelessWidget {
   final int index;

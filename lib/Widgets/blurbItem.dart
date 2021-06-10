@@ -1,6 +1,7 @@
-import 'package:bookify/Screens/PostScreen.dart';
 import 'package:bookify/constants.dart';
 import 'package:flutter/material.dart';
+
+import 'package:bookify/Screens/Home/PostScreen.dart';
 
 class BlurbItem extends StatelessWidget {
   const BlurbItem(this.index, {Key? key}) : super(key: key);

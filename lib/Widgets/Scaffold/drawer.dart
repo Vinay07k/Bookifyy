@@ -1,3 +1,4 @@
+import 'package:bookify/Screens/InviteContactsScreen.dart';
 import 'package:bookify/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -30,12 +31,17 @@ class MainDrawer extends StatelessWidget {
               color: Colors.white,
               thickness: 0.5,
             ),
-            _listItems(Icons.person, 'View Profile', context),
-            _listItems(Icons.book, 'About Us', context),
-            _listItems(Icons.bookmark, 'Want to Reads', context),
-            _listItems(Icons.favorite, 'Rate on Play Store', context),
-            _listItems(Icons.adb, 'Report Bugs', context),
-            _listItems(Icons.group, 'Invite Friends', context),
+            _listItems(Icons.person, 'View Profile', context, () {}),
+            _listItems(Icons.book, 'About Us', context, () {}),
+            _listItems(Icons.bookmark, 'Want to Reads', context, () {}),
+            _listItems(Icons.favorite, 'Rate on Play Store', context, () {}),
+            _listItems(Icons.adb, 'Report Bugs', context, () {}),
+            _listItems(
+                Icons.group,
+                'Invite Friends',
+                context,
+                () => Navigator.of(context)
+                    .pushNamed(InviteContactsScreen.routeName)),
             SizedBox(height: getRelativeHeight(0.13)),
             Text(
               "Connect with us",
@@ -75,6 +81,7 @@ Widget _listItems(
   IconData icon,
   String title,
   BuildContext context,
+  void Function() onPressed,
 ) =>
     ListTile(
       contentPadding: const EdgeInsets.only(left: 35),
@@ -90,5 +97,5 @@ Widget _listItems(
           color: Theme.of(context).accentColor,
         ),
       ),
-      onTap: () {},
+      onTap: onPressed,
     );

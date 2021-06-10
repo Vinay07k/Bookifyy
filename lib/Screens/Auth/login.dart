@@ -30,9 +30,9 @@ class LoginScreen extends StatelessWidget {
                     style: KTextStyles.kScreenTitle,
                   ),
                   SizedBox(height: getRelativeHeight(0.035)),
-                  textField('Email', TextInputType.emailAddress),
+                  inputtextField('Email', TextInputType.emailAddress),
                   SizedBox(height: getRelativeHeight(0.025)),
-                  textField('Password', TextInputType.visiblePassword,
+                  inputtextField('Password', TextInputType.visiblePassword,
                       hiddenText: true),
                   SizedBox(height: getRelativeHeight(0.035)),
                   CustomElevatedButton(

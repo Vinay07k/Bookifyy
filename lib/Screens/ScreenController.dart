@@ -1,6 +1,6 @@
-import 'package:bookify/Screens/FeedsScreen.dart';
-import 'package:contacts_service/contacts_service.dart';
 import 'package:flutter/material.dart';
+
+import 'package:bookify/Screens/Home/FeedsScreen.dart';
 
 import 'package:bookify/Widgets/Scaffold/appbar.dart';
 import 'package:bookify/Widgets/Scaffold/drawer.dart';

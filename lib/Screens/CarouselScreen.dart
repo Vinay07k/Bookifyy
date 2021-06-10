@@ -8,8 +8,8 @@ import 'package:bookify/Models/slide.dart';
 import 'package:bookify/Screens/Auth/signup.dart';
 
 import 'package:bookify/Widgets/buttons.dart';
-import 'package:bookify/Widgets/slide_dots.dart';
-import 'package:bookify/Widgets/slide_item.dart';
+import 'package:bookify/Widgets/Carousel/slide_dots.dart';
+import 'package:bookify/Widgets/Carousel/slide_item.dart';
 
 class CarouselScreen extends StatefulWidget {
   final routeName = '/carousel';
@@ -20,10 +20,11 @@ class CarouselScreen extends StatefulWidget {
 
 class CarouselScreenState extends State<CarouselScreen> {
   int _currentPage = 0;
-  final PageController _pageController = PageController(initialPage: 0);
+  late PageController _pageController;
 
   @override
   void initState() {
+    _pageController = PageController(initialPage: 0);
     super.initState();
     Timer.periodic(Duration(seconds: 5), (Timer timer) {
       if (_currentPage < 2) {
