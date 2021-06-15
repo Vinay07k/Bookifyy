@@ -20,9 +20,9 @@ Widget inputtextField(
           maxLengthEnforcement: MaxLengthEnforcement.enforced,
           textAlignVertical: TextAlignVertical.center,
           obscureText: hiddenText,
-          style: const TextStyle(color: Colors.yellowAccent, fontSize: 18),
+          style: const TextStyle(color: Colors.white, fontSize: 18),
           keyboardType: keyboard,
-          cursorColor: Colors.yellowAccent,
+          cursorColor: Colors.white,
           cursorHeight: 24,
           decoration: InputDecoration(
             hintText: label,
