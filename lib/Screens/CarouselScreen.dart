@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'package:bookify/Screens/Auth/login.dart';
 import 'package:flutter/material.dart';
 
 import 'package:bookify/constants.dart';
@@ -98,39 +97,15 @@ class CarouselScreenState extends State<CarouselScreen> {
               const SizedBox(
                 height: 20,
               ),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                children: <Widget>[
-                  CustomElevatedButton(
-                    child: Text(
-                      'Create account',
-                      style: KTextStyles.kButtonText,
-                    ),
-                    onPressedFunction: () {
-                      Navigator.of(context)
-                          .pushReplacementNamed(SignUpScreen().routeName);
-                    },
-                  ),
-                  SizedBox(height: 8),
-                  FlatButton(
-                    color: Colors.black,
-                    child: Text(
-                      'Log in',
-                      style: const TextStyle(
-                        color: Colors.yellowAccent,
-                        fontSize: 18,
-                        fontWeight: FontWeight.w600,
-                      ),
-                    ),
-                    onPressed: () {
-                      Navigator.of(context).push(
-                        MaterialPageRoute(
-                          builder: (ctx) => LoginScreen(),
-                        ),
-                      );
-                    },
-                  ),
-                ],
+              CustomElevatedButton(
+                child: Text(
+                  'Get Started!',
+                  style: KTextStyles.kButtonText,
+                ),
+                onPressedFunction: () {
+                  Navigator.of(context)
+                      .pushReplacementNamed(SignUpScreen().routeName);
+                },
               )
             ],
           ),
