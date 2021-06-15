@@ -8,6 +8,11 @@ class KTextStyles {
     letterSpacing: 0.5,
   );
 
+  static final TextStyle kSubTitle = TextStyle(
+    color: Color.fromRGBO(196, 196, 196, 1),
+    fontSize: 16,
+  );
+
   static final TextStyle kCreatedTimeText = const TextStyle(
     color: Colors.white,
   );

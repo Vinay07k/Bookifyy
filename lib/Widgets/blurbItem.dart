@@ -34,7 +34,7 @@ class BlurbItem extends StatelessWidget {
             ),
             subtitle: const Text(
               '@theonlyone',
-              style: TextStyle(color: Colors.white),
+              style: const TextStyle(color: Colors.white),
             ),
             trailing: Text(
               '11m ago',
