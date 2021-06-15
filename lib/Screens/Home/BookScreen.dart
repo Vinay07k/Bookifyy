@@ -47,28 +47,6 @@ class _BookScreenState extends State<BookScreen> {
           SizedBox(
             height: 25,
           ),
-          // TabBar(
-          //   controller: _tabController,
-          //   indicatorColor: Colors.transparent,
-          //   labelColor: Color(0xffffff00),
-          //   isScrollable: true,
-          //   labelPadding: EdgeInsets.only(right: 45),
-          //   unselectedLabelColor: Color(0xffc4c4c4),
-          //   tabs: [
-          //     Tab(
-          //       child: CustomElevatedButton(
-          //         onPressedFunction: (){},
-          //         child: Text('Finance',
-          //         style: TextStyle(
-          //           color: Colors.white,
-          //           fontWeight: FontWeight.w600,
-          //           letterSpacing: 0.6,
-          //         ),),
-          //         ),
-          //     ),
-          //   ],
-
-          //   ),
         ],
       ),
     );
