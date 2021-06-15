@@ -1,9 +1,10 @@
-import 'package:bookify/Widgets/postScreenBlurb.dart';
-import 'package:bookify/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 
-import 'package:bookify/Widgets/commentItem.dart';
+import 'package:bookify/constants.dart';
+
+import 'package:bookify/Widgets/Post/postScreenBlurb.dart';
+import 'package:bookify/Widgets/Post/commentItem.dart';
 
 class PostScreen extends StatefulWidget {
   final routeName = '/post-screen';

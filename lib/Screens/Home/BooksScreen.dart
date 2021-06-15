@@ -1,7 +1,9 @@
-import 'package:bookify/Widgets/gridItem.dart';
-import 'package:bookify/Widgets/tabButtons.dart';
-import 'package:bookify/constants.dart';
 import 'package:flutter/material.dart';
+
+import 'package:bookify/constants.dart';
+
+import 'package:bookify/Widgets/Books/gridItem.dart';
+import 'package:bookify/Widgets/Books/tabButtons.dart';
 
 class BooksScreen extends StatefulWidget {
   const BooksScreen({Key? key}) : super(key: key);

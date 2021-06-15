@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'package:bookify/Widgets/blurbItem.dart';
+import 'package:bookify/Widgets/Post/blurbItem.dart';
 
 class FeedsScreen extends StatefulWidget {
   const FeedsScreen({Key? key}) : super(key: key);
