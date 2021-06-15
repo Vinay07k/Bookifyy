@@ -2,6 +2,7 @@ import 'package:bookify/Screens/Home/BookScreen.dart';
 import 'package:flutter/material.dart';
 
 import 'package:bookify/Screens/Home/FeedsScreen.dart';
+import 'package:bookify/Screens/Home/BooksScreen.dart';
 
 import 'package:bookify/Widgets/Scaffold/appbar.dart';
 import 'package:bookify/Widgets/Scaffold/drawer.dart';
@@ -34,7 +35,7 @@ class _ScreenControllerState extends State<ScreenController> {
       child: Scaffold(
         appBar: KAppBar(_switchTabs, _currentTab),
         drawer: MainDrawer(),
-        body: _currentTab == TABS.BOOKS ? BookScreen() : FeedsScreen(),
+        body: _currentTab == TABS.BOOKS ? BooksScreen() : FeedsScreen(),
         floatingActionButton: _currentTab == TABS.BOOKS
             ? null
             : FloatingActionButton(
