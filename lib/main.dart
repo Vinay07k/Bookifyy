@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import 'package:animated_splash_screen/animated_splash_screen.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -13,9 +14,7 @@ import 'package:bookify/Screens/ScreenController.dart';
 import 'package:bookify/Screens/Home/PostScreen.dart';
 import 'package:bookify/Screens/CarouselScreen.dart';
 
-void main() {
-  runApp(MyApp());
-}
+void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
   @override

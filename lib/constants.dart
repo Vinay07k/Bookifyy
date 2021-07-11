@@ -40,7 +40,7 @@ class KTextStyles {
 
   static final TextStyle kDescriptionText = const TextStyle(
     color: Colors.white,
-    fontWeight: FontWeight.w400,
+    fontWeight: FontWeight.w500,
     letterSpacing: 0.5,
   );
 }
