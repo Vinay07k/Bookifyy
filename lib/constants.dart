@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 
 class KTextStyles {
   static TextStyle kAppBarTitle(
-    Color color, {
+    Color color, [
     double fontSize = 26,
-  }) =>
+  ]) =>
       TextStyle(
         fontSize: fontSize,
         color: color,

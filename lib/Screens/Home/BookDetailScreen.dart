@@ -81,7 +81,7 @@ class _BookDetailScreenState extends State<BookDetailScreen> {
                           'Rich Dad Poor Dad',
                           style: KTextStyles.kAppBarTitle(
                             Theme.of(context).accentColor,
-                            fontSize: 28,
+                            28,
                           ),
                         ),
                         Row(
@@ -99,7 +99,7 @@ class _BookDetailScreenState extends State<BookDetailScreen> {
                           'About the book :',
                           style: KTextStyles.kAppBarTitle(
                             Theme.of(context).accentColor,
-                            fontSize: 22,
+                            22,
                           ),
                         ),
                         const SizedBox(height: 8),
