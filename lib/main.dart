@@ -1,3 +1,4 @@
+import 'package:bookify/Screens/Home/BookDetailScreen.dart';
 import 'package:flutter/material.dart';
 
 import 'package:animated_splash_screen/animated_splash_screen.dart';
@@ -7,7 +8,7 @@ import 'package:bookify/sizeconfig.dart';
 
 import 'package:bookify/Screens/EditScreen.dart';
 import 'package:bookify/Screens/InviteContactsScreen.dart';
-import 'package:bookify/Screens/ProfileScreen.dart';
+import 'package:bookify/Screens/Home/ProfileScreen.dart';
 import 'package:bookify/Screens/Auth/login.dart';
 import 'package:bookify/Screens/Auth/signup.dart';
 import 'package:bookify/Screens/ScreenController.dart';
@@ -46,13 +47,21 @@ class MyApp extends StatelessWidget {
         },
       ),
       routes: {
+        //Authentication screens
         SignUpScreen().routeName: (context) => SignUpScreen(),
         LoginScreen().routeName: (context) => LoginScreen(),
-        ScreenController.routeName: (context) => ScreenController(),
+
+        //Blurb screens
         PostScreen().routeName: (context) => PostScreen(),
+        ScreenController.routeName: (context) => ScreenController(),
         InviteContactsScreen.routeName: (context) => InviteContactsScreen(),
+
+        //Profile related screen
         ProfileScreen.routeName: (context) => ProfileScreen(),
         EditScreen.routeName: (context) => EditScreen(),
+
+        //Book related screens
+        BookDetailScreen.routeName: (context) => BookDetailScreen(),
       },
     );
   }

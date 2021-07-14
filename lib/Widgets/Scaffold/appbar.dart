@@ -28,7 +28,7 @@ class KAppBar extends StatelessWidget implements PreferredSizeWidget {
       ),
       title: Text(
         'Bookify',
-        style: KTextStyles.kAppBarTitle,
+        style: KTextStyles.kAppBarTitle(Theme.of(context).accentColor),
       ),
       actions: [
         IconButton(
