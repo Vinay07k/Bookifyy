@@ -1,11 +1,16 @@
 import 'package:flutter/material.dart';
 
 class KTextStyles {
-  static final TextStyle kAppBarTitle = TextStyle(
-    fontSize: 30,
-    fontWeight: FontWeight.bold,
-    letterSpacing: 0.5,
-  );
+  static TextStyle kAppBarTitle(
+    Color color, {
+    double fontSize = 26,
+  }) =>
+      TextStyle(
+        fontSize: fontSize,
+        color: color,
+        fontWeight: FontWeight.bold,
+        letterSpacing: 0.5,
+      );
 
   static final TextStyle kSubTitle = TextStyle(
     color: Color.fromRGBO(196, 196, 196, 1),

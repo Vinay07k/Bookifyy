@@ -22,7 +22,7 @@ class _EditScreenState extends State<EditScreen> {
           centerTitle: true,
           title: Text(
             'Edit Profile',
-            style: KTextStyles.kAppBarTitle,
+            style: KTextStyles.kAppBarTitle(Theme.of(context).accentColor),
           ),
           leading: IconButton(
             icon: Icon(

@@ -20,7 +20,7 @@ class _InviteContactsScreenState extends State<InviteContactsScreen> {
           centerTitle: true,
           title: Text(
             'Invite',
-            style: KTextStyles.kAppBarTitle,
+            style: KTextStyles.kAppBarTitle(Theme.of(context).accentColor),
           ),
         ),
         body: Padding(

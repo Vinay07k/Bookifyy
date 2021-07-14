@@ -1,3 +1,4 @@
+import 'package:bookify/Screens/Home/BookDetailScreen.dart';
 import 'package:flutter/material.dart';
 
 class GridItem extends StatelessWidget {
@@ -6,7 +7,9 @@ class GridItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () {},
+      onTap: () => Navigator.of(context).pushNamed(
+        BookDetailScreen.routeName,
+      ),
       child: Container(
         // padding: EdgeInsets.symmetric(horizontal: 8),
         child: Column(

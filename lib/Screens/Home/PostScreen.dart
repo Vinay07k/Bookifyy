@@ -43,7 +43,7 @@ class _PostScreenState extends State<PostScreen> {
           centerTitle: true,
           title: Text(
             'Blurb',
-            style: KTextStyles.kAppBarTitle,
+            style: KTextStyles.kAppBarTitle(Theme.of(context).accentColor),
           ),
         ),
         body: Column(

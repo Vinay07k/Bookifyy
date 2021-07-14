@@ -1,5 +1,5 @@
 import 'package:bookify/Screens/InviteContactsScreen.dart';
-import 'package:bookify/Screens/ProfileScreen.dart';
+import 'package:bookify/Screens/Home/ProfileScreen.dart';
 import 'package:bookify/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -32,8 +32,12 @@ class MainDrawer extends StatelessWidget {
               color: Colors.white,
               thickness: 0.5,
             ),
-            _listItems(Icons.person, 'View Profile', context,
-                () => Navigator.of(context).pushNamed(ProfileScreen.routeName)),
+            _listItems(
+              Icons.person,
+              'View Profile',
+              context,
+              () => Navigator.of(context).pushNamed(ProfileScreen.routeName),
+            ),
             _listItems(Icons.book, 'About Us', context, () {}),
             _listItems(Icons.bookmark, 'Want to Reads', context, () {}),
             _listItems(Icons.favorite, 'Rate on Play Store', context, () {}),
