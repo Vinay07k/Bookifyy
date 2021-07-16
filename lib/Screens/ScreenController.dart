@@ -1,3 +1,4 @@
+import 'package:bookify/Screens/CreateBlurbScreen.dart';
 import 'package:flutter/material.dart';
 
 import 'package:bookify/Screens/Home/BlurbsScreen.dart';
@@ -45,7 +46,8 @@ class _ScreenControllerState extends State<ScreenController> {
                   Icons.add_to_home_screen,
                   color: Colors.black,
                 ),
-                onPressed: () {},
+                onPressed: () => Navigator.of(context)
+                    .pushNamed(CreateBlurbScreen.routeName),
               ),
       ),
     );

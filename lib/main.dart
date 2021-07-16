@@ -1,3 +1,4 @@
+import 'package:bookify/Screens/CreateBlurbScreen.dart';
 import 'package:bookify/Screens/Home/BookDetailScreen.dart';
 import 'package:bookify/Screens/InputMobileNumberScreen.dart';
 import 'package:bookify/Screens/SearchScreen.dart';
@@ -59,6 +60,7 @@ class MyApp extends StatelessWidget {
         PostScreen().routeName: (context) => PostScreen(),
         ScreenController.routeName: (context) => ScreenController(),
         InviteContactsScreen.routeName: (context) => InviteContactsScreen(),
+        CreateBlurbScreen.routeName: (context) => CreateBlurbScreen(),
 
         //Profile related screen
         ProfileScreen.routeName: (context) => ProfileScreen(),
