@@ -1,3 +1,4 @@
+import 'package:bookify/Screens/InputMobileNumberScreen.dart';
 import 'package:bookify/Widgets/Books/price_box.dart';
 import 'package:bookify/Widgets/buttons.dart';
 import 'package:bookify/constants.dart';
@@ -109,7 +110,8 @@ class _BookDetailScreenState extends State<BookDetailScreen> {
                         ),
                         const SizedBox(height: 10),
                         CustomElevatedButton(
-                          onPressedFunction: () {},
+                          onPressedFunction: () => Navigator.of(context)
+                              .pushNamed(InputMobileNumberScreen.routeName),
                           child: Text(
                             'Buy Now',
                             style: KTextStyles.kButtonText,

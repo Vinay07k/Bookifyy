@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-Widget inputtextField(
-  String label,
-  TextInputType keyboard, {
+Widget inputtextField({
+  String? label,
+  TextInputType? keyboard,
   int lines = 1,
   bool hiddenText = false,
+  String? prefixtext,
 }) =>
     Center(
       child: Container(
@@ -25,6 +26,22 @@ Widget inputtextField(
           cursorColor: Colors.white,
           cursorHeight: 24,
           decoration: InputDecoration(
+            prefixIcon: prefixtext != null
+                ? Padding(
+                    padding: const EdgeInsets.all(10.0),
+                    child: Text(
+                      prefixtext,
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 18,
+                      ),
+                    ),
+                  )
+                : null,
+            // prefixText: 'prefixtext',
+            // prefixStyle: TextStyle(
+            //   color: Colors.white,
+            // ),
             hintText: label,
             hintStyle: const TextStyle(
               color: Color.fromRGBO(196, 196, 196, 1),

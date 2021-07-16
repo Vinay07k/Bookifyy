@@ -74,13 +74,15 @@ class _EditScreenState extends State<EditScreen> {
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    inputtextField('Name', TextInputType.name),
+                    inputtextField(label: 'Name', keyboard: TextInputType.name),
                     const SizedBox(height: 16),
-                    inputtextField('Username', TextInputType.name),
+                    inputtextField(
+                        label: 'Username', keyboard: TextInputType.name),
                     const SizedBox(height: 16),
-                    inputtextField('Bio', TextInputType.text, lines: 4),
+                    inputtextField(
+                        label: 'Bio', keyboard: TextInputType.text, lines: 4),
                     const SizedBox(height: 16),
-                    inputtextField('Insta', TextInputType.url),
+                    inputtextField(label: 'Insta', keyboard: TextInputType.url),
                   ],
                 ),
               ),

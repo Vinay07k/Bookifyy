@@ -30,7 +30,10 @@ class _InviteContactsScreenState extends State<InviteContactsScreen> {
           ),
           child: Column(
             children: [
-              inputtextField('Search your contacts...', TextInputType.name),
+              inputtextField(
+                label: 'Search your contacts...',
+                keyboard: TextInputType.name,
+              ),
               SizedBox(height: 12),
               Expanded(
                 child: ListView.builder(

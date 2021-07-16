@@ -65,14 +65,14 @@ class _PostScreenBlurbState extends State<PostScreenBlurb> {
                 Divider(
                   color: Colors.white,
                 ),
-                Text(
-                  '42 Likes',
-                  textAlign: TextAlign.start,
-                  style: TextStyle(color: Colors.white),
-                ),
-                Divider(
-                  color: Colors.white,
-                ),
+                // Text(
+                //   '42 Likes',
+                //   textAlign: TextAlign.start,
+                //   style: TextStyle(color: Colors.white),
+                // ),
+                // Divider(
+                //   color: Colors.white,
+                // ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [

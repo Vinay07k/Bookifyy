@@ -1,4 +1,6 @@
 import 'package:bookify/Screens/Home/BookDetailScreen.dart';
+import 'package:bookify/Screens/InputMobileNumberScreen.dart';
+import 'package:bookify/Screens/SearchScreen.dart';
 import 'package:flutter/material.dart';
 
 import 'package:animated_splash_screen/animated_splash_screen.dart';
@@ -12,7 +14,7 @@ import 'package:bookify/Screens/Home/ProfileScreen.dart';
 import 'package:bookify/Screens/Auth/login.dart';
 import 'package:bookify/Screens/Auth/signup.dart';
 import 'package:bookify/Screens/ScreenController.dart';
-import 'package:bookify/Screens/Home/PostScreen.dart';
+import 'package:bookify/Screens/Home/BlurbDetailScreen.dart';
 import 'package:bookify/Screens/CarouselScreen.dart';
 
 void main() => runApp(MyApp());
@@ -47,6 +49,8 @@ class MyApp extends StatelessWidget {
         },
       ),
       routes: {
+        SearchScreen.routeName: (context) => SearchScreen(),
+
         //Authentication screens
         SignUpScreen().routeName: (context) => SignUpScreen(),
         LoginScreen().routeName: (context) => LoginScreen(),
@@ -62,6 +66,10 @@ class MyApp extends StatelessWidget {
 
         //Book related screens
         BookDetailScreen.routeName: (context) => BookDetailScreen(),
+
+        //Order related screens
+        InputMobileNumberScreen.routeName: (context) =>
+            InputMobileNumberScreen(),
       },
     );
   }

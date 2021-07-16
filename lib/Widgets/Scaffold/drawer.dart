@@ -4,8 +4,6 @@ import 'package:bookify/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
-import 'package:bookify/sizeconfig.dart';
-
 class MainDrawer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -73,7 +71,7 @@ class MainDrawer extends StatelessWidget {
               () => Navigator.of(context).pushNamed(ProfileScreen.routeName),
             ),
             _listItems(Icons.book, 'About Us', context, () {}),
-            _listItems(Icons.bookmark, 'Want to Reads', context, () {}),
+            // _listItems(Icons.bookmark, 'Want to Reads', context, () {}),
             _listItems(Icons.favorite, 'Rate on Play Store', context, () {}),
             _listItems(Icons.adb, 'Report Bugs', context, () {}),
             _listItems(

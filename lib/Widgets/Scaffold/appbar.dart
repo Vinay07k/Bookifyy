@@ -1,3 +1,4 @@
+import 'package:bookify/Screens/SearchScreen.dart';
 import 'package:flutter/material.dart';
 
 import '../../Screens/ScreenController.dart' show TABS;
@@ -15,7 +16,7 @@ class KAppBar extends StatelessWidget implements PreferredSizeWidget {
   final TABS currentTab;
 
   @override
-  Size get preferredSize => Size.fromHeight(100);
+  Size get preferredSize => Size.fromHeight(50);
 
   @override
   Widget build(BuildContext context) {
@@ -32,34 +33,35 @@ class KAppBar extends StatelessWidget implements PreferredSizeWidget {
       ),
       actions: [
         IconButton(
-          onPressed: () {},
+          onPressed: () =>
+              Navigator.of(context).pushNamed(SearchScreen.routeName),
           icon: const Icon(
             Icons.search,
             size: 30,
           ),
         ),
       ],
-      bottom: PreferredSize(
-        child: Container(
-          height: 40,
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(12),
-            color: const Color.fromRGBO(46, 45, 45, 1),
-          ),
-          child: Row(
-            mainAxisSize: MainAxisSize.min,
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              tabButtons(
-                  () => switchTab(TABS.FEEDS), TABS.FEEDS, currentTab, 'Feeds'),
-              tabButtons(
-                  () => switchTab(TABS.BOOKS), TABS.BOOKS, currentTab, 'Books'),
-            ],
-          ),
-        ),
-        preferredSize: const Size(double.infinity, 30),
-      ),
+      // bottom: PreferredSize(
+      //   child: Container(
+      //     height: 40,
+      //     decoration: BoxDecoration(
+      //       borderRadius: BorderRadius.circular(12),
+      //       color: const Color.fromRGBO(46, 45, 45, 1),
+      //     ),
+      //     child: Row(
+      //       mainAxisSize: MainAxisSize.min,
+      //       mainAxisAlignment: MainAxisAlignment.center,
+      //       crossAxisAlignment: CrossAxisAlignment.center,
+      //       children: [
+      //         tabButtons(
+      //             () => switchTab(TABS.FEEDS), TABS.FEEDS, currentTab, 'Feeds'),
+      //         tabButtons(
+      //             () => switchTab(TABS.BOOKS), TABS.BOOKS, currentTab, 'Books'),
+      //       ],
+      //     ),
+      //   ),
+      //   preferredSize: const Size(double.infinity, 30),
+      // ),
     );
   }
 }

@@ -46,11 +46,24 @@ class SignUpScreen extends StatelessWidget {
                     style: KTextStyles.kScreenTitle,
                   ),
                   SizedBox(height: getRelativeHeight(0.03)),
-                  inputtextField('First Name', TextInputType.name),
+                  inputtextField(
+                    label: 'Full Name',
+                    keyboard: TextInputType.name,
+                  ),
                   SizedBox(height: getRelativeHeight(0.025)),
-                  inputtextField('Email', TextInputType.emailAddress),
+                  inputtextField(
+                    label: 'Username',
+                    keyboard: TextInputType.name,
+                  ),
                   SizedBox(height: getRelativeHeight(0.025)),
-                  inputtextField('Password', TextInputType.visiblePassword,
+                  inputtextField(
+                    label: 'Email',
+                    keyboard: TextInputType.emailAddress,
+                  ),
+                  SizedBox(height: getRelativeHeight(0.025)),
+                  inputtextField(
+                      label: 'Password',
+                      keyboard: TextInputType.visiblePassword,
                       hiddenText: true),
                   SizedBox(height: getRelativeHeight(0.03)),
                   CustomElevatedButton(
