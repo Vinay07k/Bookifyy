@@ -26,7 +26,7 @@ class _EditScreenState extends State<EditScreen> {
           ),
           leading: IconButton(
             icon: Icon(
-              Icons.exit_to_app,
+              Icons.arrow_back_sharp,
               size: 30,
             ),
             onPressed: () => Navigator.of(context).pop(),
