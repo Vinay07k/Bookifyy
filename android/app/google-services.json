@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "136463343288",
+    "project_id": "bookify-74f29",
+    "storage_bucket": "bookify-74f29.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:136463343288:android:f94d0bbb167d9b46fa5e4d",
+        "android_client_info": {
+          "package_name": "com.example.bookify_2"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "136463343288-ffrlbdcfcjs383npggocj1l4kvenq3ij.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBKSicq9DHOrT9GydbALMx33mq735bbVPU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "136463343288-ffrlbdcfcjs383npggocj1l4kvenq3ij.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

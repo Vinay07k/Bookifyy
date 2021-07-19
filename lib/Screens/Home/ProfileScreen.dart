@@ -39,7 +39,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 ),
                 Positioned(
                   right: 20,
-                  bottom: 5,
+                  bottom: -3,
                   child: CustomElevatedButton(
                     onPressedFunction: () =>
                         Navigator.of(context).pushNamed(EditScreen.routeName),
@@ -58,7 +58,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   alignment: Alignment.topLeft,
                   onPressed: () => Navigator.of(context).pop(),
                   icon: Icon(
-                    Icons.arrow_back_ios_new,
+                    Icons.arrow_back_sharp,
                     color: Theme.of(context).accentColor,
                     size: 26,
                   ),

@@ -13,13 +13,6 @@ class CreateBlurbScreen extends StatelessWidget {
       child: Scaffold(
         appBar: AppBar(
           centerTitle: true,
-          title: Text(
-            'Create Blurb',
-            style: KTextStyles.kAppBarTitle(
-              Theme.of(context).accentColor,
-              28,
-            ),
-          ),
           actions: [
             Padding(
               padding: const EdgeInsets.symmetric(
@@ -29,7 +22,7 @@ class CreateBlurbScreen extends StatelessWidget {
               child: CustomElevatedButton(
                 onPressedFunction: () {},
                 child: Text(
-                  'Post',
+                  'Blurb',
                   style: KTextStyles.kButtonText,
                 ),
                 size: const Size(80, 30),
@@ -44,13 +37,13 @@ class CreateBlurbScreen extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const SizedBox(height: 1),
+              const SizedBox(height: 10),
               inputtextField(
                 label: 'Share what you read today . . .',
                 lines: 10,
               ),
               Padding(
-                padding: const EdgeInsets.only(top: 8.0),
+                padding: const EdgeInsets.only(top: 8.0, left: 300),
                 child: Text(
                   '10 / 300',
                   style: KTextStyles.kAppBarTitle(
