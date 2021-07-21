@@ -8,7 +8,7 @@ import 'package:bookify/sizeconfig.dart';
 import 'package:bookify/Widgets/buttons.dart';
 import 'package:bookify/Widgets/inputfield.dart';
 
-import 'package:bookify/Screens/Auth/login.dart';
+import 'package:bookify/Screens/Auth/Login.dart';
 
 class SignUpScreen extends StatelessWidget {
   final routeName = '/signup';
@@ -18,29 +18,29 @@ class SignUpScreen extends StatelessWidget {
       child: GestureDetector(
         onTap: () => FocusScope.of(context).unfocus(),
         child: Scaffold(
-          appBar: AppBar(
-            leading: IconButton(
-              onPressed: () {
-                Navigator.pop(
-                  context,
-                  CarouselScreen(),
-                );
-              },
-              icon: Icon(
-                Icons.arrow_back_sharp,
-                size: 30,
-                color: Colors.white,
-              ),
-            ),
-            backgroundColor: Colors.black,
-          ),
+          // appBar: AppBar(
+          //   leading: IconButton(
+          //     onPressed: () {
+          //       Navigator.pop(
+          //         context,
+          //         CarouselScreen(),
+          //       );
+          //     },
+          //     icon: Icon(
+          //       Icons.arrow_back_sharp,
+          //       size: 30,
+          //       color: Colors.white,
+          //     ),
+          //   ),
+          //   backgroundColor: Colors.black,
+          // ),
           body: SingleChildScrollView(
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 20.0),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const SizedBox(height: 20),
+                  const SizedBox(height: 60),
                   Text(
                     'Create Account',
                     style: KTextStyles.kScreenTitle,

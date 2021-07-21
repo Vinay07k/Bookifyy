@@ -5,7 +5,7 @@ import 'package:bookify/constants.dart';
 
 import 'package:bookify/Models/slide.dart';
 
-import 'package:bookify/Screens/Auth/signup.dart';
+import 'package:bookify/Screens/Auth/Signup.dart';
 
 import 'package:bookify/Widgets/buttons.dart';
 import 'package:bookify/Widgets/Carousel/slide_dots.dart';

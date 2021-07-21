@@ -1,3 +1,4 @@
+import 'package:bookify/Screens/Auth/AddProfilePictureScreen.dart';
 import 'package:bookify/Screens/CreateBlurbScreen.dart';
 import 'package:bookify/Screens/Home/BookDetailScreen.dart';
 import 'package:bookify/Screens/InputMobileNumberScreen.dart';
@@ -12,8 +13,8 @@ import 'package:bookify/sizeconfig.dart';
 import 'package:bookify/Screens/EditScreen.dart';
 import 'package:bookify/Screens/InviteContactsScreen.dart';
 import 'package:bookify/Screens/Home/ProfileScreen.dart';
-import 'package:bookify/Screens/Auth/login.dart';
-import 'package:bookify/Screens/Auth/signup.dart';
+import 'package:bookify/Screens/Auth/Login.dart';
+import 'package:bookify/Screens/Auth/Signup.dart';
 import 'package:bookify/Screens/ScreenController.dart';
 import 'package:bookify/Screens/Home/BlurbDetailScreen.dart';
 import 'package:bookify/Screens/CarouselScreen.dart';
@@ -42,7 +43,7 @@ class MyApp extends StatelessWidget {
           return AnimatedSplashScreen(
             splashIconSize: double.infinity,
             splash: 'assets/splashscreenicon.png',
-            nextScreen: CarouselScreen(),
+            nextScreen: SignUpScreen(),
             duration: 500,
             backgroundColor: Theme.of(context).primaryColor,
             splashTransition: SplashTransition.fadeTransition,
@@ -55,6 +56,8 @@ class MyApp extends StatelessWidget {
         //Authentication screens
         SignUpScreen().routeName: (context) => SignUpScreen(),
         LoginScreen().routeName: (context) => LoginScreen(),
+        AddProfilePictureScreen.routeName: (context) =>
+            AddProfilePictureScreen(),
 
         //Blurb screens
         PostScreen().routeName: (context) => PostScreen(),

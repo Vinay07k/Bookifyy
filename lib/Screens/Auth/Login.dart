@@ -1,4 +1,5 @@
-import 'package:bookify/Screens/Auth/signup.dart';
+import 'package:bookify/Screens/Auth/AddProfilePictureScreen.dart';
+import 'package:bookify/Screens/Auth/Signup.dart';
 import 'package:bookify/Screens/CarouselScreen.dart';
 import 'package:bookify/constants.dart';
 import 'package:flutter/material.dart';
@@ -19,29 +20,29 @@ class LoginScreen extends StatelessWidget {
       child: GestureDetector(
         onTap: () => FocusScope.of(context).unfocus(),
         child: Scaffold(
-          appBar: AppBar(
-            leading: IconButton(
-              onPressed: () {
-                Navigator.pop(
-                  context,
-                  CarouselScreen(),
-                );
-              },
-              icon: Icon(
-                Icons.arrow_back_sharp,
-                size: 30,
-                color: Colors.white,
-              ),
-            ),
-            backgroundColor: Colors.black,
-          ),
+          // appBar: AppBar(
+          //   leading: IconButton(
+          //     onPressed: () {
+          //       Navigator.pop(
+          //         context,
+          //         CarouselScreen(),
+          //       );
+          //     },
+          //     icon: Icon(
+          //       Icons.arrow_back_sharp,
+          //       size: 30,
+          //       color: Colors.white,
+          //     ),
+          //   ),
+          //   backgroundColor: Colors.black,
+          // ),
           body: SingleChildScrollView(
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 20.0),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const SizedBox(height: 20),
+                  const SizedBox(height: 60),
                   Text(
                     'Log In',
                     style: KTextStyles.kScreenTitle,
@@ -61,7 +62,7 @@ class LoginScreen extends StatelessWidget {
                   CustomElevatedButton(
                     onPressedFunction: () {
                       Navigator.of(context)
-                          .pushNamed(ScreenController.routeName);
+                          .pushNamed(AddProfilePictureScreen.routeName);
                     },
                     child: Text(
                       'Log in',
