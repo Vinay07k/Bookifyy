@@ -43,7 +43,10 @@ class CreateBlurbScreen extends StatelessWidget {
                 lines: 10,
               ),
               Padding(
-                padding: const EdgeInsets.only(top: 8.0, left: 300),
+                padding: const EdgeInsets.only(
+                  top: 8.0,
+                  left: 4,
+                ),
                 child: Text(
                   '10 / 300',
                   style: KTextStyles.kAppBarTitle(
