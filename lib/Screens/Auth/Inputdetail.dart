@@ -12,8 +12,8 @@ import 'package:bookify/Screens/Auth/Signup.dart';
 import 'package:bookify/Widgets/buttons.dart';
 import 'package:bookify/Widgets/inputfield.dart';
 
-class LoginScreen extends StatelessWidget {
-  final routeName = '/login';
+class InputDetail extends StatelessWidget {
+  static final routeName = '/input-detail';
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -28,18 +28,30 @@ class LoginScreen extends StatelessWidget {
               children: [
                 const SizedBox(height: 60),
                 Text(
-                  'Log In',
+                  'Details',
                   style: KTextStyles.kScreenTitle,
                 ),
                 SizedBox(height: getRelativeHeight(0.035)),
                 inputtextField(
-                  label: 'Email',
-                  keyboard: TextInputType.emailAddress,
+                  label: 'Name',
+                  keyboard: TextInputType.name,
                 ),
                 SizedBox(height: getRelativeHeight(0.025)),
                 inputtextField(
-                  label: 'Password',
-                  keyboard: TextInputType.visiblePassword,
+                  label: 'Username',
+                  keyboard: TextInputType.text,
+                  hiddenText: true,
+                ),
+                SizedBox(height: getRelativeHeight(0.035)),
+                inputtextField(
+                  label: 'Bio (Optional)',
+                  keyboard: TextInputType.multiline,
+                  hiddenText: true,
+                ),
+                SizedBox(height: getRelativeHeight(0.035)),
+                inputtextField(
+                  label: 'Insta Handle (Optional)',
+                  keyboard: TextInputType.url,
                   hiddenText: true,
                 ),
                 // SizedBox(height: getRelativeHeight(0.035)),
@@ -50,28 +62,28 @@ class LoginScreen extends StatelessWidget {
                         .pushNamed(AddProfilePictureScreen.routeName);
                   },
                   child: Text(
-                    'Log in',
+                    'Create Account',
                     style: KTextStyles.kButtonText,
                   ),
                 ),
-                // const SizedBox(height: 8),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text(
-                      'Don\'t have an account?',
-                      style: KTextStyles.kSimpleText,
-                    ),
-                    TextButton(
-                      onPressed: () => Navigator.of(context)
-                          .pushReplacementNamed(SignUpScreen().routeName),
-                      child: Text(
-                        'Register!',
-                        style: KTextStyles.kSimpleText,
-                      ),
-                    ),
-                  ],
-                ),
+                const SizedBox(height: 14),
+                // Row(
+                //   mainAxisAlignment: MainAxisAlignment.center,
+                //   children: [
+                //     Text(
+                //       'Don\'t have an account?',
+                //       style: KTextStyles.kSimpleText,
+                //     ),
+                //     TextButton(
+                //       onPressed: () => Navigator.of(context)
+                //           .pushReplacementNamed(SignUpScreen().routeName),
+                //       child: Text(
+                //         'Register!',
+                //         style: KTextStyles.kSimpleText,
+                //       ),
+                //     ),
+                //   ],
+                // ),
               ],
             ),
           ),

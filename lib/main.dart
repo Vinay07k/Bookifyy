@@ -1,23 +1,26 @@
-import 'package:bookify/Screens/Auth/AddProfilePictureScreen.dart';
-import 'package:bookify/Screens/CreateBlurbScreen.dart';
-import 'package:bookify/Screens/Home/BookDetailScreen.dart';
-import 'package:bookify/Screens/InputMobileNumberScreen.dart';
-import 'package:bookify/Screens/SearchScreen.dart';
+import 'package:bookify/Screens/Auth/Inputdetail.dart';
 import 'package:flutter/material.dart';
 
+//Packages Imports
 import 'package:animated_splash_screen/animated_splash_screen.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+//Helpers Imports
 import 'package:bookify/sizeconfig.dart';
 
-import 'package:bookify/Screens/EditScreen.dart';
-import 'package:bookify/Screens/InviteContactsScreen.dart';
-import 'package:bookify/Screens/Home/ProfileScreen.dart';
+//Screens Imports
+import 'package:bookify/Screens/Auth/AddProfilePictureScreen.dart';
 import 'package:bookify/Screens/Auth/Login.dart';
 import 'package:bookify/Screens/Auth/Signup.dart';
-import 'package:bookify/Screens/ScreenController.dart';
+import 'package:bookify/Screens/Home/ProfileScreen.dart';
+import 'package:bookify/Screens/Home/BookDetailScreen.dart';
 import 'package:bookify/Screens/Home/BlurbDetailScreen.dart';
-import 'package:bookify/Screens/CarouselScreen.dart';
+import 'package:bookify/Screens/CreateBlurbScreen.dart';
+import 'package:bookify/Screens/InputMobileNumberScreen.dart';
+import 'package:bookify/Screens/SearchScreen.dart';
+import 'package:bookify/Screens/EditScreen.dart';
+import 'package:bookify/Screens/InviteContactsScreen.dart';
+import 'package:bookify/Screens/ScreenController.dart';
 
 void main() => runApp(MyApp());
 
@@ -58,6 +61,7 @@ class MyApp extends StatelessWidget {
         LoginScreen().routeName: (context) => LoginScreen(),
         AddProfilePictureScreen.routeName: (context) =>
             AddProfilePictureScreen(),
+        InputDetail.routeName: (context) => InputDetail(),
 
         //Blurb screens
         PostScreen().routeName: (context) => PostScreen(),

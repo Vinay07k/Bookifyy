@@ -6,6 +6,7 @@ import 'package:bookify/Screens/EditScreen.dart';
 //Widgets imports
 import 'package:bookify/Widgets/buttons.dart';
 import 'package:bookify/Widgets/description_box.dart';
+import 'package:bookify/Widgets/profile_info_dialog.dart';
 
 class ProfileScreen extends StatefulWidget {
   static final routeName = '/profile-screen';
@@ -20,6 +21,20 @@ class _ProfileScreenState extends State<ProfileScreen> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
+        appBar: AppBar(
+          backgroundColor: Colors.transparent,
+          elevation: 0,
+          actions: [
+            IconButton(
+              onPressed: () => showInfoBox(context),
+              icon: Icon(
+                Icons.info_outline,
+              ),
+              iconSize: 28,
+            ),
+          ],
+        ),
+        extendBodyBehindAppBar: true,
         body: Column(
           children: [
             // * : For Top Background Image, Profile Avatar and Edit Screen Button
@@ -54,18 +69,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     size: Size(80, 35),
                   ),
                 ),
-                IconButton(
-                  alignment: Alignment.topLeft,
-                  onPressed: () => Navigator.of(context).pop(),
-                  icon: Icon(
-                    Icons.arrow_back_sharp,
-                    color: Theme.of(context).accentColor,
-                    size: 26,
-                  ),
-                ),
               ],
             ),
             const DescriptionBox(),
+            //User posts
             Expanded(
               child: Center(
                 child: Text(
