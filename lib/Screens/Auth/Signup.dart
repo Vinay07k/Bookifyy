@@ -1,5 +1,6 @@
 import 'package:bookify/Providers/Authentication.dart';
 import 'package:bookify/Screens/Auth/Inputdetail.dart';
+import 'package:bookify/Screens/ScreenController.dart';
 import 'package:bookify/Widgets/Scaffold/bottom_snackbar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -28,6 +29,11 @@ class _SignUpScreenState extends State<SignUpScreen> {
   late TextEditingController _password;
   late TextEditingController _confirmpassword;
 
+  late String fullname;
+  late String username;
+  late String bio;
+  late String instahandle;
+
   @override
   void initState() {
     super.initState();
@@ -35,6 +41,24 @@ class _SignUpScreenState extends State<SignUpScreen> {
     _email = TextEditingController();
     _password = TextEditingController();
     _confirmpassword = TextEditingController();
+  }
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+
+    // * : To get about data from arguments
+    final Map<String, String> arguments =
+        ModalRoute.of(context)!.settings.arguments as Map<String, String>;
+    getAbout(arguments);
+  }
+
+  void getAbout(Map<String, Object> arguments) {
+    // print(arguments);
+    fullname = arguments['fullname'].toString();
+    username = arguments['username'].toString();
+    bio = arguments['bio'].toString();
+    instahandle = arguments['instahandle'].toString();
   }
 
   void onSubmit() async {
@@ -64,7 +88,19 @@ class _SignUpScreenState extends State<SignUpScreen> {
       setState(() {
         _loading = true;
       });
-      result = await Auth.singUpUser(email, password) ?? '';
+      result = await Auth().singUpUser(
+            fullname: fullname,
+            username: username,
+            bio: bio,
+            instahandle: instahandle,
+            email: email,
+            password: password,
+          ) ??
+          '';
+      Navigator.of(context).pushReplacementNamed(ScreenController.routeName);
+      // setState(() {
+      //   _loading = false;
+      // });
     }
 
     if (result.isNotEmpty) {
@@ -130,7 +166,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       Spacer(),
                       CustomElevatedButton(
                           child: Text(
-                            'Next >>',
+                            'Create Account',
                             style: KTextStyles.kButtonText,
                           ),
                           onPressedFunction: () => onSubmit()
@@ -150,7 +186,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                               'Login!',
                               style: KTextStyles.kSimpleText,
                             ),
-                          )
+                          ),
                         ],
                       ),
                     ],

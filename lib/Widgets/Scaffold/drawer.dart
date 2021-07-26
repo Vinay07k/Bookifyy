@@ -83,7 +83,7 @@ class MainDrawer extends StatelessWidget {
                   .pushNamed(InviteContactsScreen.routeName),
             ),
             _listItems(
-                Icons.logout_outlined, 'Logout', context, () => Auth.signOut),
+                Icons.logout_outlined, 'Logout', context, () => Auth().signOut),
             Spacer(),
             Center(
               child: Text(

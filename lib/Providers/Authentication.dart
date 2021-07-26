@@ -1,15 +1,34 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 class Auth {
-  static get signOut => FirebaseAuth.instance.signOut();
+  final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
+  final FirebaseFirestore _firebaseCloud = FirebaseFirestore.instance;
 
-  // get some => FirebaseAuth.instance.fetchSignInMethodsForEmail(email)
+  get signOut => _firebaseAuth.signOut();
 
-  static Future<String?> singUpUser(String email, String password) async {
+  Future<String?> singUpUser({
+    required String email,
+    required String password,
+    required String fullname,
+    required String username,
+    required String bio,
+    required String instahandle,
+  }) async {
     try {
-      await FirebaseAuth.instance
+      final UserCredential userCredential = await _firebaseAuth
           .createUserWithEmailAndPassword(email: email, password: password);
-      //
+
+      final String userId = userCredential.user!.uid;
+      await _firebaseCloud.collection('users').doc(userId).set({
+        'fullname': fullname,
+        'username': username,
+        'bio': bio,
+        'instahandle': instahandle,
+        'followers': 0,
+        'following': 0,
+        'profilePicUrls': '',
+      });
     } on FirebaseAuthException catch (exeception) {
       //
       if (exeception.code == 'email-already-in-use') {
@@ -29,10 +48,10 @@ class Auth {
     }
   }
 
-  static Future<String?> signInUser(String email, String password) async {
+  Future<String?> signInUser(String email, String password) async {
     try {
-      await FirebaseAuth.instance
-          .signInWithEmailAndPassword(email: email, password: password);
+      await _firebaseAuth.signInWithEmailAndPassword(
+          email: email, password: password);
 
       // print(user);
     } on FirebaseAuthException catch (exeception) {

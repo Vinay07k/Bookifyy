@@ -1,3 +1,4 @@
+import 'package:bookify/Screens/Auth/Inputdetail.dart';
 import 'package:flutter/material.dart';
 import 'package:bookify/Widgets/Scaffold/bottom_snackbar.dart';
 
@@ -59,7 +60,7 @@ class _LoginScreenState extends State<LoginScreen> {
       setState(() {
         _loading = true;
       });
-      result = await Auth.signInUser(_email.text, _password.text) ?? '';
+      result = await Auth().signInUser(_email.text, _password.text) ?? '';
     }
 
     if (result.isNotEmpty) {
@@ -123,7 +124,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           ),
                           TextButton(
                             onPressed: () => Navigator.of(context)
-                                .pushReplacementNamed(SignUpScreen.routeName),
+                                .pushReplacementNamed(InputDetail.routeName),
                             child: Text(
                               'Register!',
                               style: KTextStyles.kSimpleText,
