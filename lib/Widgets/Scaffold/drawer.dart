@@ -1,3 +1,4 @@
+import 'package:bookify/Providers/Authentication.dart';
 import 'package:bookify/Screens/InviteContactsScreen.dart';
 import 'package:bookify/Screens/Home/ProfileScreen.dart';
 import 'package:bookify/constants.dart';
@@ -81,7 +82,8 @@ class MainDrawer extends StatelessWidget {
               () => Navigator.of(context)
                   .pushNamed(InviteContactsScreen.routeName),
             ),
-            _listItems(Icons.logout_outlined, 'Logout', context, () {}),
+            _listItems(
+                Icons.logout_outlined, 'Logout', context, () => Auth.signOut),
             Spacer(),
             Center(
               child: Text(

@@ -5,8 +5,7 @@ import 'package:bookify/constants.dart';
 import 'package:bookify/sizeconfig.dart';
 
 //Screens Imports
-import 'package:bookify/Screens/Auth/AddProfilePictureScreen.dart';
-import 'package:bookify/Screens/Auth/Signup.dart';
+import 'package:bookify/Screens/ScreenController.dart';
 
 //Widgets Imports
 import 'package:bookify/Widgets/buttons.dart';
@@ -20,18 +19,17 @@ class InputDetail extends StatelessWidget {
       child: GestureDetector(
         onTap: () => FocusScope.of(context).unfocus(),
         child: Scaffold(
-          resizeToAvoidBottomInset: true,
-          body: Padding(
+          body: SingleChildScrollView(
             padding: const EdgeInsets.symmetric(horizontal: 20.0),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const SizedBox(height: 60),
+                const SizedBox(height: 20),
                 Text(
                   'Details',
                   style: KTextStyles.kScreenTitle,
                 ),
-                SizedBox(height: getRelativeHeight(0.035)),
+                SizedBox(height: getRelativeHeight(0.03)),
                 inputtextField(
                   label: 'Name',
                   keyboard: TextInputType.name,
@@ -40,33 +38,31 @@ class InputDetail extends StatelessWidget {
                 inputtextField(
                   label: 'Username',
                   keyboard: TextInputType.text,
-                  hiddenText: true,
                 ),
-                SizedBox(height: getRelativeHeight(0.035)),
+                SizedBox(height: getRelativeHeight(0.025)),
                 inputtextField(
                   label: 'Bio (Optional)',
                   keyboard: TextInputType.multiline,
-                  hiddenText: true,
+                  lines: 10,
                 ),
-                SizedBox(height: getRelativeHeight(0.035)),
+                SizedBox(height: getRelativeHeight(0.025)),
                 inputtextField(
                   label: 'Insta Handle (Optional)',
                   keyboard: TextInputType.url,
-                  hiddenText: true,
                 ),
-                // SizedBox(height: getRelativeHeight(0.035)),
-                Spacer(),
+                SizedBox(height: getRelativeHeight(0.085)),
+                // Spacer(),
                 CustomElevatedButton(
                   onPressedFunction: () {
                     Navigator.of(context)
-                        .pushNamed(AddProfilePictureScreen.routeName);
+                        .pushReplacementNamed(ScreenController.routeName);
                   },
                   child: Text(
                     'Create Account',
                     style: KTextStyles.kButtonText,
                   ),
                 ),
-                const SizedBox(height: 14),
+                // const SizedBox(height: 14),
                 // Row(
                 //   mainAxisAlignment: MainAxisAlignment.center,
                 //   children: [

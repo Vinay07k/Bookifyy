@@ -104,7 +104,7 @@ class CarouselScreenState extends State<CarouselScreen> {
                 ),
                 onPressedFunction: () {
                   Navigator.of(context)
-                      .pushReplacementNamed(SignUpScreen().routeName);
+                      .pushReplacementNamed(SignUpScreen.routeName);
                 },
               )
             ],

@@ -4,6 +4,7 @@ import 'package:flutter/services.dart';
 Widget inputtextField({
   String? label,
   TextInputType? keyboard,
+  TextEditingController? controller,
   int lines = 1,
   bool hiddenText = false,
   String? prefixtext,
@@ -17,6 +18,7 @@ Widget inputtextField({
           borderRadius: BorderRadius.circular(10),
         ),
         child: TextFormField(
+          controller: controller,
           maxLines: lines,
           maxLengthEnforcement: MaxLengthEnforcement.enforced,
           textAlignVertical: TextAlignVertical.center,
