@@ -12,8 +12,8 @@ class Auth {
     required String password,
     required String fullname,
     required String username,
-    required String bio,
-    required String instahandle,
+    // required String bio,
+    // required String instahandle,
   }) async {
     try {
       final UserCredential userCredential = await _firebaseAuth
@@ -23,10 +23,10 @@ class Auth {
       await _firebaseCloud.collection('users').doc(userId).set({
         'fullname': fullname,
         'username': username,
-        'bio': bio,
-        'instahandle': instahandle,
-        'followers': 0,
-        'following': 0,
+        'bio': '',
+        'instahandle': '',
+        'followers': [],
+        'following': [],
         'profilePicUrls': '',
       });
     } on FirebaseAuthException catch (exeception) {

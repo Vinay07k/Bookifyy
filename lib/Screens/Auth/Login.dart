@@ -1,4 +1,5 @@
 import 'package:bookify/Screens/Auth/Inputdetail.dart';
+import 'package:bookify/Widgets/loading.dart';
 import 'package:flutter/material.dart';
 import 'package:bookify/Widgets/Scaffold/bottom_snackbar.dart';
 
@@ -75,11 +76,7 @@ class _LoginScreenState extends State<LoginScreen> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: _loading
-          ? Center(
-              child: CircularProgressIndicator(
-                color: Theme.of(context).focusColor,
-              ),
-            )
+          ? Loading()
           : GestureDetector(
               onTap: () => FocusScope.of(context).unfocus(),
               child: Scaffold(
@@ -124,7 +121,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           ),
                           TextButton(
                             onPressed: () => Navigator.of(context)
-                                .pushReplacementNamed(InputDetail.routeName),
+                                .pushReplacementNamed(SignUpScreen.routeName),
                             child: Text(
                               'Register!',
                               style: KTextStyles.kSimpleText,

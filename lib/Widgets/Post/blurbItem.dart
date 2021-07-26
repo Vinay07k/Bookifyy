@@ -2,6 +2,7 @@ import 'package:bookify/constants.dart';
 import 'package:flutter/material.dart';
 
 import 'package:bookify/Screens/Home/BlurbDetailScreen.dart';
+import 'package:share_plus/share_plus.dart';
 
 class BlurbItem extends StatelessWidget {
   const BlurbItem(this.index, {Key? key}) : super(key: key);
@@ -79,7 +80,11 @@ class BlurbItem extends StatelessWidget {
                       label: Text('44'),
                     ),
                     IconButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        Share.share(
+                          'Hey There! I found this awesome platform for wonks to share your feedbacks and learnings. Make sure to check it out! - *Our PlayStore Link*',
+                        );
+                      },
                       icon: const Icon(Icons.share_outlined),
                       color: Theme.of(context).accentColor,
                     ),

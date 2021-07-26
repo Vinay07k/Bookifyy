@@ -2,6 +2,7 @@ import 'package:bookify/Providers/Authentication.dart';
 import 'package:bookify/Screens/Auth/Inputdetail.dart';
 import 'package:bookify/Screens/ScreenController.dart';
 import 'package:bookify/Widgets/Scaffold/bottom_snackbar.dart';
+import 'package:bookify/Widgets/loading.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -26,18 +27,20 @@ class _SignUpScreenState extends State<SignUpScreen> {
   bool _loading = false;
 
   late TextEditingController _email;
+  late TextEditingController _fullname;
   late TextEditingController _password;
   late TextEditingController _confirmpassword;
 
-  late String fullname;
-  late String username;
-  late String bio;
-  late String instahandle;
+  // late String fullname;
+  // late String username;
+  // late String bio;
+  // late String instahandle;
 
   @override
   void initState() {
     super.initState();
 
+    _fullname = TextEditingController();
     _email = TextEditingController();
     _password = TextEditingController();
     _confirmpassword = TextEditingController();
@@ -48,27 +51,32 @@ class _SignUpScreenState extends State<SignUpScreen> {
     super.didChangeDependencies();
 
     // * : To get about data from arguments
-    final Map<String, String> arguments =
-        ModalRoute.of(context)!.settings.arguments as Map<String, String>;
-    getAbout(arguments);
+    // final Map<String, String> arguments =
+    //     ModalRoute.of(context)!.settings.arguments as Map<String, String>;
+    // getAbout(arguments);
   }
 
-  void getAbout(Map<String, Object> arguments) {
-    // print(arguments);
-    fullname = arguments['fullname'].toString();
-    username = arguments['username'].toString();
-    bio = arguments['bio'].toString();
-    instahandle = arguments['instahandle'].toString();
-  }
+  // void getAbout(Map<String, Object> arguments) {
+  //   // print(arguments);
+  //   fullname = arguments['fullname'].toString();
+  //   username = arguments['username'].toString();
+  //   bio = arguments['bio'].toString();
+  //   instahandle = arguments['instahandle'].toString();
+  // }
 
   void onSubmit() async {
+    String fullname = _fullname.text.trim();
     final String email = _email.text;
     final String password = _password.text;
     final String confirmPassword = _confirmpassword.text;
     late String result;
 
+    if (fullname.length < 4) {
+      result = 'Full Name can not be less then 4 characters!';
+    }
     //For email validation
-    if (!RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
+    else if (!RegExp(
+                r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
             .hasMatch(email) ||
         email.isEmpty) {
       result = 'Invalid Email';
@@ -88,11 +96,12 @@ class _SignUpScreenState extends State<SignUpScreen> {
       setState(() {
         _loading = true;
       });
+
+      final String username = email.split('@')[0];
+
       result = await Auth().singUpUser(
             fullname: fullname,
-            username: username,
-            bio: bio,
-            instahandle: instahandle,
+            username: '@$username',
             email: email,
             password: password,
           ) ??
@@ -115,6 +124,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
   void dispose() {
     super.dispose();
 
+    _fullname.dispose();
     _email.dispose();
     _password.dispose();
     _confirmpassword.dispose();
@@ -124,19 +134,15 @@ class _SignUpScreenState extends State<SignUpScreen> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: _loading
-          ? Center(
-              child: CircularProgressIndicator(
-                color: Theme.of(context).focusColor,
-              ),
-            )
+          ? Loading()
           : GestureDetector(
               onTap: () => FocusScope.of(context).unfocus(),
               child: Scaffold(
-                resizeToAvoidBottomInset: true,
-                body: Padding(
+                body: SingleChildScrollView(
                   padding: const EdgeInsets.symmetric(horizontal: 20.0),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisSize: MainAxisSize.min,
                     children: [
                       const SizedBox(height: 60),
                       Text(
@@ -144,6 +150,12 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         style: KTextStyles.kScreenTitle,
                       ),
                       SizedBox(height: getRelativeHeight(0.03)),
+                      inputtextField(
+                        label: 'Full Name',
+                        keyboard: TextInputType.name,
+                        controller: _fullname,
+                      ),
+                      SizedBox(height: getRelativeHeight(0.025)),
                       inputtextField(
                         label: 'Email',
                         controller: _email,
@@ -163,7 +175,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         keyboard: TextInputType.visiblePassword,
                         hiddenText: true,
                       ),
-                      Spacer(),
+                      // Spacer(),
+                      SizedBox(height: getRelativeHeight(0.32)),
                       CustomElevatedButton(
                           child: Text(
                             'Create Account',
