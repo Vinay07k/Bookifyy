@@ -2,7 +2,24 @@ import 'package:bookify/constants.dart';
 import 'package:flutter/material.dart';
 
 class DescriptionBox extends StatelessWidget {
-  const DescriptionBox({Key? key}) : super(key: key);
+  final String fullname;
+  final String username;
+  final String? bio;
+  final DateTime dateJoined;
+  final String? instahandle;
+  final List<String>? followers;
+  final List<String>? following;
+
+  const DescriptionBox({
+    Key? key,
+    required this.fullname,
+    required this.username,
+    required this.bio,
+    required this.dateJoined,
+    required this.instahandle,
+    required this.followers,
+    required this.following,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -13,7 +30,7 @@ class DescriptionBox extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            'Angel Priya',
+            fullname,
             style: TextStyle(
               fontSize: 18,
               fontWeight: FontWeight.bold,
@@ -21,7 +38,7 @@ class DescriptionBox extends StatelessWidget {
             ),
           ),
           Text(
-            '@naughtyangle',
+            username,
             style: const TextStyle(
               fontSize: 14,
               fontWeight: FontWeight.w400,
@@ -30,7 +47,7 @@ class DescriptionBox extends StatelessWidget {
           ),
           const SizedBox(height: 12),
           Text(
-            'Lorem officia ea exercitation nostrud exercitation exercitation do dolor commodo voluptate est. Id cillum enim ullamco non. Irure eu ipsum ex irure excepteur fugiat irure magna pariatur esse. Et incididunt eiusmod consequat mollit velit tempor consectetur veniam ex consectetur nulla. Sunt est ex veniam cupidatat ad nulla exercitation aliqua qui consequat dolor. Pariatur quis excepteur officia anim culpa anim.',
+            bio ?? 'No bio Added',
             style: KTextStyles.kDescriptionText,
             maxLines: 3,
             overflow: TextOverflow.ellipsis,
@@ -46,31 +63,33 @@ class DescriptionBox extends StatelessWidget {
               ),
               const SizedBox(width: 8),
               Text(
-                'Joined June 2021',
+                monthlyDate(dateJoined),
                 style: TextStyle(
                   color: Theme.of(context).accentColor,
                   // fontSize: 16,
                 ),
               ),
               const SizedBox(width: 12),
-              Icon(
-                Icons.link,
-                color: Theme.of(context).focusColor,
-                size: 22,
-              ),
+              if (instahandle != null)
+                Icon(
+                  Icons.link,
+                  color: Theme.of(context).focusColor,
+                  size: 22,
+                ),
               const SizedBox(width: 8),
-              Expanded(
-                child: Text(
-                  'https://instagram.com/not',
-                  maxLines: 1,
-                  softWrap: true,
-                  overflow: TextOverflow.ellipsis,
-                  style: TextStyle(
-                    color: Theme.of(context).accentColor,
-                    // fontSize: 16,
+              if (instahandle != null)
+                Expanded(
+                  child: Text(
+                    instahandle!,
+                    maxLines: 1,
+                    softWrap: true,
+                    overflow: TextOverflow.ellipsis,
+                    style: TextStyle(
+                      color: Theme.of(context).accentColor,
+                      // fontSize: 16,
+                    ),
                   ),
                 ),
-              ),
             ],
           ),
           const SizedBox(height: 15),
@@ -78,7 +97,7 @@ class DescriptionBox extends StatelessWidget {
             children: [
               Expanded(
                 child: Text(
-                  '1500 Followers',
+                  '${followers ?? 0} Followers',
                   style: TextStyle(
                     letterSpacing: 0.8,
                     color: Theme.of(context).accentColor,
@@ -89,7 +108,7 @@ class DescriptionBox extends StatelessWidget {
               ),
               Expanded(
                 child: Text(
-                  '450 Following',
+                  '${following ?? 0} Following',
                   style: TextStyle(
                     letterSpacing: 0.8,
                     color: Theme.of(context).accentColor,
@@ -108,4 +127,23 @@ class DescriptionBox extends StatelessWidget {
       ),
     );
   }
+}
+
+String monthlyDate(DateTime date) {
+  Map<int, String> months = {
+    1: 'Jan',
+    2: 'Feb',
+    3: 'March',
+    4: 'April',
+    5: 'May',
+    6: 'June',
+    7: 'July',
+    8: 'Aug',
+    9: 'Sept',
+    10: 'Oct',
+    11: 'Nov',
+    12: 'Dec',
+  };
+
+  return 'Joined ${months[date.month]} ${date.year}';
 }

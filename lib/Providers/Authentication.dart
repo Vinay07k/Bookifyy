@@ -5,7 +5,7 @@ class Auth {
   final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
   final FirebaseFirestore _firebaseCloud = FirebaseFirestore.instance;
 
-  get signOut => _firebaseAuth.signOut();
+  Future<void> get signOut async => await _firebaseAuth.signOut();
 
   Future<String?> singUpUser({
     required String email,
@@ -23,11 +23,11 @@ class Auth {
       await _firebaseCloud.collection('users').doc(userId).set({
         'fullname': fullname,
         'username': username,
-        'bio': '',
-        'instahandle': '',
-        'followers': [],
-        'following': [],
-        'profilePicUrls': '',
+        'bio': null,
+        'instahandle': null,
+        'followers': null,
+        'following': null,
+        'profilePicUrl': null,
       });
     } on FirebaseAuthException catch (exeception) {
       //

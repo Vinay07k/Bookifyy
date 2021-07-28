@@ -22,7 +22,7 @@ import 'package:bookify/Screens/Home/BlurbDetailScreen.dart';
 import 'package:bookify/Screens/CreateBlurbScreen.dart';
 import 'package:bookify/Screens/InputMobileNumberScreen.dart';
 import 'package:bookify/Screens/SearchScreen.dart';
-import 'package:bookify/Screens/EditScreen.dart';
+import 'package:bookify/Screens/EditProfileScreen.dart';
 import 'package:bookify/Screens/InviteContactsScreen.dart';
 import 'package:bookify/Screens/ScreenController.dart';
 

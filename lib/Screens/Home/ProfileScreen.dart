@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 
+//Modal Imports
+import 'package:bookify/Models/Blurbuser.dart';
+
 //Screen imports
-import 'package:bookify/Screens/EditScreen.dart';
+import 'package:bookify/Screens/EditProfileScreen.dart';
 
 //Widgets imports
 import 'package:bookify/Widgets/buttons.dart';
@@ -17,8 +20,18 @@ class ProfileScreen extends StatefulWidget {
 }
 
 class _ProfileScreenState extends State<ProfileScreen> {
+  late BlurbUser user;
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    final Map<String, BlurbUser> data =
+        ModalRoute.of(context)!.settings.arguments as Map<String, BlurbUser>;
+    user = data['user']!;
+  }
+
   @override
   Widget build(BuildContext context) {
+    print(user);
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
@@ -48,16 +61,24 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   left: 20,
                   bottom: 10,
                   child: CircleAvatar(
-                    backgroundImage: AssetImage('assets/download.jpeg'),
+                    foregroundImage: (user.profilePicUrl != null)
+                        ? NetworkImage(user.profilePicUrl!)
+                        : AssetImage('assets/avatar_placeholder.jpg')
+                            as ImageProvider,
                     radius: 40,
+                    backgroundColor: Theme.of(context).primaryColor,
                   ),
                 ),
                 Positioned(
                   right: 20,
                   bottom: -3,
                   child: CustomElevatedButton(
-                    onPressedFunction: () =>
-                        Navigator.of(context).pushNamed(EditScreen.routeName),
+                    onPressedFunction: () => Navigator.of(context).pushNamed(
+                      EditScreen.routeName,
+                      arguments: {
+                        'user': user,
+                      },
+                    ),
                     child: Text(
                       'Edit Screen',
                       style: TextStyle(
@@ -71,7 +92,15 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 ),
               ],
             ),
-            const DescriptionBox(),
+            DescriptionBox(
+              fullname: user.fullname,
+              bio: user.bio,
+              dateJoined: user.dateJoined,
+              username: user.username,
+              instahandle: user.instahandle,
+              followers: user.followers,
+              following: user.followings,
+            ),
             //User posts
             Expanded(
               child: Center(

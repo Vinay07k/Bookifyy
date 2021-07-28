@@ -1,3 +1,4 @@
+import 'package:bookify/Models/Blurbuser.dart';
 import 'package:bookify/Widgets/inputfield.dart';
 import 'package:flutter/material.dart';
 
@@ -14,6 +15,15 @@ class EditScreen extends StatefulWidget {
 }
 
 class _EditScreenState extends State<EditScreen> {
+  late BlurbUser user;
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    final Map<String, BlurbUser> data =
+        ModalRoute.of(context)!.settings.arguments as Map<String, BlurbUser>;
+    user = data['user']!;
+  }
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -38,7 +48,7 @@ class _EditScreenState extends State<EditScreen> {
                 onPressedFunction: () {},
                 child: Text(
                   'Save',
-                  // style: KTextStyles.kButtonText,
+                  style: KTextStyles.kButtonText,
                 ),
                 size: Size(60, 20),
               ),
@@ -52,19 +62,19 @@ class _EditScreenState extends State<EditScreen> {
               Stack(
                 children: [
                   Container(
-                      margin: EdgeInsets.only(bottom: 40),
-                      child: Image.asset('assets/bg.png')),
+                    margin: EdgeInsets.only(bottom: 40),
+                    child: Image.asset('assets/bg.png'),
+                  ),
                   Positioned(
                     left: 20,
                     bottom: 0,
                     child: CircleAvatar(
-                      child: Icon(
-                        Icons.camera,
-                        color: Colors.white54,
-                        size: 40,
-                      ),
-                      backgroundImage: AssetImage('assets/download.jpeg'),
+                      foregroundImage: (user.profilePicUrl != null)
+                          ? NetworkImage(user.profilePicUrl!)
+                          : AssetImage('assets/avatar_placeholder.jpg')
+                              as ImageProvider,
                       radius: 40,
+                      backgroundColor: Theme.of(context).primaryColor,
                     ),
                   ),
                 ],
