@@ -44,7 +44,6 @@ class _MainDrawerState extends State<MainDrawer> {
 
   @override
   Widget build(BuildContext context) {
-    // print(user.profilePicUrl);
     return _loading
         ? Loading()
         : Drawer(
