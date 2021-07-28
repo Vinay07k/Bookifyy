@@ -1,4 +1,5 @@
 import 'package:bookify/Providers/Authentication.dart';
+import 'package:bookify/Screens/AboutUs.dart';
 import 'package:bookify/Screens/InviteContactsScreen.dart';
 import 'package:bookify/Screens/Home/ProfileScreen.dart';
 import 'package:bookify/constants.dart';
@@ -71,7 +72,12 @@ class MainDrawer extends StatelessWidget {
               context,
               () => Navigator.of(context).pushNamed(ProfileScreen.routeName),
             ),
-            _listItems(Icons.book, 'About Us', context, () {}),
+            _listItems(
+              Icons.book,
+              'About Us',
+              context,
+              () => Navigator.of(context).pushNamed(AboutUs.routeName),
+            ),
             // _listItems(Icons.bookmark, 'Want to Reads', context, () {}),
             _listItems(Icons.favorite, 'Rate on Play Store', context, () {}),
             _listItems(Icons.adb, 'Report Bugs', context, () {}),

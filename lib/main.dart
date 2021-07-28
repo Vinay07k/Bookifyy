@@ -1,3 +1,4 @@
+import 'package:bookify/Screens/AboutUs.dart';
 import 'package:bookify/Screens/Auth/Inputdetail.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -92,6 +93,7 @@ class MyApp extends StatelessWidget {
             //Blurb screens
             PostScreen().routeName: (context) => PostScreen(),
             ScreenController.routeName: (context) => ScreenController(),
+            AboutUs.routeName: (context) => AboutUs(),
             InviteContactsScreen.routeName: (context) => InviteContactsScreen(),
             CreateBlurbScreen.routeName: (context) => CreateBlurbScreen(),
 
