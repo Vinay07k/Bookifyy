@@ -96,6 +96,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         label: 'Email',
                         keyboard: TextInputType.emailAddress,
                         controller: _email,
+                        textInputAction: TextInputAction.next,
                       ),
                       SizedBox(height: getRelativeHeight(0.025)),
                       inputtextField(
@@ -103,6 +104,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         keyboard: TextInputType.visiblePassword,
                         controller: _password,
                         hiddenText: true,
+                        textInputAction: TextInputAction.done,
                       ),
                       Spacer(),
                       CustomElevatedButton(

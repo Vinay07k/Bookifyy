@@ -152,6 +152,7 @@ class _MainDrawerState extends State<MainDrawer> {
                     () async {
                       setState(() => _loading = true);
                       await Auth().signOut;
+                      setState(() => _loading = false);
                     },
                   ),
                   Spacer(),

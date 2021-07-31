@@ -52,7 +52,7 @@ class Auth {
     try {
       await _firebaseAuth.signInWithEmailAndPassword(
           email: email, password: password);
-
+      _firebaseAuth.currentUser!.reload();
       // print(user);
     } on FirebaseAuthException catch (exeception) {
       // print('>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>');

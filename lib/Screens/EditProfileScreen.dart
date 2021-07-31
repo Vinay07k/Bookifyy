@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:bookify/Models/Blurbuser.dart';
 import 'package:bookify/Screens/ScreenController.dart';
 import 'package:bookify/Widgets/Scaffold/bottom_snackbar.dart';
@@ -8,6 +10,7 @@ import 'package:flutter/material.dart';
 import 'package:bookify/Widgets/buttons.dart';
 
 import 'package:bookify/Providers/ProfileProvider.dart';
+import 'package:image_picker/image_picker.dart';
 
 import '../constants.dart';
 
@@ -21,6 +24,7 @@ class EditScreen extends StatefulWidget {
 class _EditScreenState extends State<EditScreen> {
   late BlurbUser user;
   bool _loading = false;
+  File? _imageFile;
 
   late TextEditingController _fullname;
   late TextEditingController _username;
@@ -101,10 +105,18 @@ class _EditScreenState extends State<EditScreen> {
                           left: 20,
                           bottom: 0,
                           child: CircleAvatar(
-                            foregroundImage: (user.profilePicUrl != null)
-                                ? NetworkImage(user.profilePicUrl!)
-                                : AssetImage('assets/avatar_placeholder.jpg')
-                                    as ImageProvider,
+                            backgroundImage: _imageFile != null
+                                ? FileImage(_imageFile!)
+                                : ((user.profilePicUrl != null)
+                                    ? NetworkImage(user.profilePicUrl!)
+                                    : AssetImage(
+                                            'assets/avatar_placeholder.jpg')
+                                        as ImageProvider),
+                            child: IconButton(
+                              iconSize: 30,
+                              icon: Icon(Icons.camera),
+                              onPressed: avatarImagePicker,
+                            ),
                             radius: 40,
                             backgroundColor: Theme.of(context).primaryColor,
                           ),
@@ -117,12 +129,6 @@ class _EditScreenState extends State<EditScreen> {
                         mainAxisSize: MainAxisSize.min,
                         children: [
                           inputtextField(
-                            label: 'Full Name',
-                            keyboard: TextInputType.name,
-                            controller: _fullname,
-                          ),
-                          const SizedBox(height: 16),
-                          inputtextField(
                             label: 'Username',
                             keyboard: TextInputType.name,
                             controller: _username,
@@ -130,16 +136,25 @@ class _EditScreenState extends State<EditScreen> {
                           ),
                           const SizedBox(height: 16),
                           inputtextField(
+                            label: 'Full Name',
+                            keyboard: TextInputType.name,
+                            controller: _fullname,
+                            textInputAction: TextInputAction.next,
+                          ),
+                          const SizedBox(height: 16),
+                          inputtextField(
                             label: 'Bio',
-                            keyboard: TextInputType.text,
+                            keyboard: TextInputType.multiline,
                             lines: 4,
                             controller: _bio,
+                            textInputAction: TextInputAction.newline,
                           ),
                           const SizedBox(height: 16),
                           inputtextField(
                             label: 'Insta',
                             keyboard: TextInputType.url,
                             controller: _instahandle,
+                            textInputAction: TextInputAction.done,
                           ),
                         ],
                       ),
@@ -167,19 +182,33 @@ class _EditScreenState extends State<EditScreen> {
     setState(() {
       _loading = true;
     });
-    await ProfileProvider().updateProfile({
-      'fullname': fullname,
-      'bio': bio,
-      'instahandle': instahandle,
-    });
+    //
+    try {
+      await ProfileProvider().updateProfile(
+        updatedProfileDetails: {
+          'fullname': fullname,
+          'bio': bio,
+          'instahandle': instahandle,
+        },
+        imageFile: _imageFile,
+      );
+    } catch (e) {
+      print(e);
+    }
 
     Navigator.of(context).pushNamed(ScreenController.routeName);
+  }
 
-    // if (result.isNotEmpty ) {
-    //   // setState(() {
-    //   //   _loading = false;
-    //   // });
-    //   showBottomSnackBar(context: context, text: '$result');
-    // }
+  void avatarImagePicker() async {
+    var file = await ImagePicker().pickImage(
+      source: ImageSource.gallery,
+      imageQuality: 50,
+      maxHeight: 1000,
+      maxWidth: 1000,
+    );
+
+    setState(() {
+      _imageFile = File(file!.path);
+    });
   }
 }

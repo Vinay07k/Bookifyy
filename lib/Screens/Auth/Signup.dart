@@ -154,12 +154,14 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         label: 'Full Name',
                         keyboard: TextInputType.name,
                         controller: _fullname,
+                        textInputAction: TextInputAction.next,
                       ),
                       SizedBox(height: getRelativeHeight(0.025)),
                       inputtextField(
                         label: 'Email',
                         controller: _email,
                         keyboard: TextInputType.emailAddress,
+                        textInputAction: TextInputAction.next,
                       ),
                       SizedBox(height: getRelativeHeight(0.025)),
                       inputtextField(
@@ -167,6 +169,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         controller: _password,
                         keyboard: TextInputType.visiblePassword,
                         hiddenText: true,
+                        textInputAction: TextInputAction.next,
                       ),
                       SizedBox(height: getRelativeHeight(0.025)),
                       inputtextField(
@@ -174,6 +177,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         controller: _confirmpassword,
                         keyboard: TextInputType.visiblePassword,
                         hiddenText: true,
+                        textInputAction: TextInputAction.done,
                       ),
                       // Spacer(),
                       SizedBox(height: getRelativeHeight(0.32)),
