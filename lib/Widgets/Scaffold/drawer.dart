@@ -6,7 +6,7 @@ import 'package:bookify/Models/Blurbuser.dart';
 
 //Providers Imports
 import 'package:bookify/Providers/Authentication.dart';
-import 'package:bookify/Providers/UserProvider.dart';
+import 'package:bookify/Providers/ProfileProvider.dart';
 
 //Screens Imports
 import 'package:bookify/Screens/InviteContactsScreen.dart';
@@ -34,7 +34,7 @@ class _MainDrawerState extends State<MainDrawer> {
     setState(() {
       _loading = true;
     });
-    UserProvider().getCurrentUser.then((value) {
+    ProfileProvider().getCurrentUser.then((value) {
       user = value;
       setState(() {
         _loading = false;

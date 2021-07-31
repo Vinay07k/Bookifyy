@@ -8,6 +8,7 @@ Widget inputtextField({
   int lines = 1,
   bool hiddenText = false,
   String? prefixtext,
+  bool disable = false,
 }) =>
     Center(
       child: Container(
@@ -18,6 +19,7 @@ Widget inputtextField({
           borderRadius: BorderRadius.circular(10),
         ),
         child: TextFormField(
+          readOnly: disable,
           controller: controller,
           maxLines: lines,
           maxLengthEnforcement: MaxLengthEnforcement.enforced,

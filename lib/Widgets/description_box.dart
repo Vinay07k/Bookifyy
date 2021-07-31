@@ -47,7 +47,7 @@ class DescriptionBox extends StatelessWidget {
           ),
           const SizedBox(height: 12),
           Text(
-            bio ?? 'No bio Added',
+            (bio == null || bio!.isEmpty) ? 'No bio Added' : bio!,
             style: KTextStyles.kDescriptionText,
             maxLines: 3,
             overflow: TextOverflow.ellipsis,
@@ -70,14 +70,14 @@ class DescriptionBox extends StatelessWidget {
                 ),
               ),
               const SizedBox(width: 12),
-              if (instahandle != null)
+              if (instahandle != null && instahandle!.isNotEmpty)
                 Icon(
                   Icons.link,
                   color: Theme.of(context).focusColor,
                   size: 22,
                 ),
               const SizedBox(width: 8),
-              if (instahandle != null)
+              if (instahandle != null && instahandle!.isNotEmpty)
                 Expanded(
                   child: Text(
                     instahandle!,

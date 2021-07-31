@@ -3,9 +3,11 @@ import 'package:bookify/Models/Blurbuser.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
-class UserProvider {
+class ProfileProvider {
   final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
   final FirebaseFirestore _firebaseCloud = FirebaseFirestore.instance;
+
+  String get userId => _firebaseAuth.currentUser!.uid;
 
   BlurbUser mapToBlurbUser(Map mappedUserData) {
     return BlurbUser(
@@ -23,9 +25,10 @@ class UserProvider {
 
   ///Returns Current Logged in UserBlurb object
   Future<BlurbUser> get getCurrentUser async {
+    //
     ///Meta User Details to access data from Firestore
-    await _firebaseAuth.currentUser!.reload();
-    final String userId = _firebaseAuth.currentUser!.uid;
+    // await _firebaseAuth.currentUser!.reload();
+
     final DateTime? dateJoined =
         _firebaseAuth.currentUser!.metadata.creationTime;
 
@@ -41,5 +44,13 @@ class UserProvider {
       'dateJoined': dateJoined!,
       ...userCredential,
     });
+  }
+
+  ///To update User profile details
+  Future<void> updateProfile(Map<String, String> updatedProfileDetails) async {
+    await _firebaseCloud
+        .collection('users')
+        .doc(userId)
+        .update(updatedProfileDetails);
   }
 }
