@@ -1,3 +1,7 @@
+import 'package:bookify/Models/BlurbModal.dart';
+import 'package:bookify/Providers/BlurbProvider.dart';
+import 'package:bookify/Widgets/Post/blurbItem.dart';
+import 'package:bookify/Widgets/loading.dart';
 import 'package:flutter/material.dart';
 
 //Modal Imports
@@ -10,6 +14,7 @@ import 'package:bookify/Screens/EditProfileScreen.dart';
 import 'package:bookify/Widgets/buttons.dart';
 import 'package:bookify/Widgets/description_box.dart';
 import 'package:bookify/Widgets/profile_info_dialog.dart';
+import 'package:provider/provider.dart';
 
 class ProfileScreen extends StatefulWidget {
   static final routeName = '/profile-screen';
@@ -21,6 +26,8 @@ class ProfileScreen extends StatefulWidget {
 
 class _ProfileScreenState extends State<ProfileScreen> {
   late BlurbUser user;
+  bool _loading = false;
+
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
@@ -31,7 +38,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
   @override
   Widget build(BuildContext context) {
-    print(user);
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
@@ -103,21 +109,39 @@ class _ProfileScreenState extends State<ProfileScreen> {
             ),
             //User posts
             Expanded(
-              child: Center(
-                child: Text(
-                  'No Posts yet',
-                  style: TextStyle(
-                    color: Theme.of(context).accentColor,
-                    // fontSize: 16,
-                  ),
-                ),
+              child: FutureBuilder(
+                future: BlurbProvider().getUserBlurbs(user.id),
+                builder:
+                    (context, AsyncSnapshot<List<BlurbItemModal>?> snapshot) {
+                  if (snapshot.connectionState != ConnectionState.done)
+                    return Loading();
+
+                  List<BlurbItemModal>? _blurbs = snapshot.data!;
+
+                  return _blurbs.isEmpty
+                      ? Center(
+                          child: Text(
+                            'No Posts yet',
+                            style: TextStyle(
+                              color: Theme.of(context).accentColor,
+                              fontSize: 16,
+                            ),
+                          ),
+                        )
+                      : ListView.builder(
+                          itemCount: _blurbs.length,
+                          itemBuilder: (context, index) {
+                            return BlurbItem(_blurbs[index]);
+                          },
+                        );
+                },
               ),
             )
           ],
         ),
         floatingActionButton: FloatingActionButton(
           backgroundColor: Theme.of(context).focusColor,
-          onPressed: () {},
+          onPressed: () => BlurbProvider().getUserBlurbs(user.id),
           child: Icon(Icons.open_in_new),
         ),
       ),

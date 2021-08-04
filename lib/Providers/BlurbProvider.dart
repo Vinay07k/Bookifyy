@@ -28,10 +28,24 @@ class BlurbProvider with ChangeNotifier {
   Future<List<BlurbItemModal>> get getBlurbs async {
     QuerySnapshot _data =
         await _blurbCollection.orderBy('createdAt', descending: true).get();
-    List data = _data.docs;
+    List blurbs = _data.docs;
 
-    return data.map((blurbData) => BlurbItemModal.fromMap(blurbData)).toList();
+    return blurbs
+        .map((blurbData) => BlurbItemModal.fromMap(blurbData))
+        .toList();
     // print(data[0].data());
+  }
+
+  Future<List<BlurbItemModal>?> getUserBlurbs(String userId) async {
+    QuerySnapshot data = await _blurbCollection
+        .where('userId', isEqualTo: userId)
+        // .orderBy('createdAt', descending: true)
+        .get();
+
+    List _blurbs = data.docs;
+    return _blurbs
+        .map((blurbData) => BlurbItemModal.fromMap(blurbData))
+        .toList();
   }
 
   // Future<List>
