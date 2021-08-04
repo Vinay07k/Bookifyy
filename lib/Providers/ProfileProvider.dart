@@ -5,48 +5,31 @@ import 'package:bookify/Models/Blurbuser.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
-import 'package:image_picker/image_picker.dart';
 
 class ProfileProvider {
   final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
   final FirebaseFirestore _firebaseCloud = FirebaseFirestore.instance;
   final FirebaseStorage _firebaseStorage = FirebaseStorage.instance;
 
-  String get userId => _firebaseAuth.currentUser!.uid;
-
-  BlurbUser mapToBlurbUser(Map mappedUserData) {
-    return BlurbUser(
-      id: mappedUserData['uid'],
-      fullname: mappedUserData['fullname'],
-      username: mappedUserData['username'],
-      bio: mappedUserData['bio'],
-      dateJoined: mappedUserData['dateJoined'],
-      profilePicUrl: mappedUserData['profilePicUrl'],
-      followers: mappedUserData['followers'],
-      followings: mappedUserData['followings'],
-      instahandle: mappedUserData['instahandle'],
-    );
-  }
+  String get currentuserId => _firebaseAuth.currentUser!.uid;
 
   ///Returns Current Logged in UserBlurb object
   Future<BlurbUser> get getCurrentUser async {
-    //
-    ///Meta User Details to access data from Firestore
-    // await _firebaseAuth.currentUser!.reload();
+    return await getUser(currentuserId);
+  }
 
-    final DateTime? dateJoined =
-        _firebaseAuth.currentUser!.metadata.creationTime;
-
+  ///To get BlurbUser of the provided "userId"
+  Future<BlurbUser> getUser(String userId) async {
     ///Get user info from CloudFirestore
     final DocumentSnapshot documentSnapshot =
         await _firebaseCloud.collection('users').doc(userId).get();
 
     final Map<String, dynamic> userCredential =
         documentSnapshot.data() as Map<String, dynamic>;
-    // print(userCredential);
-    return mapToBlurbUser({
+    print(userCredential);
+    //
+    return BlurbUser.mapToBlurbUser({
       'uid': userId,
-      'dateJoined': dateJoined!,
       ...userCredential,
     });
   }
@@ -60,7 +43,7 @@ class ProfileProvider {
     try {
       if (imageFile != null) {
         Reference reference =
-            _firebaseStorage.ref('profile_pictures/$userId.png');
+            _firebaseStorage.ref('profile_pictures/$currentuserId.png');
         await reference.putFile(imageFile);
         String _avatarImageUrl = await reference.getDownloadURL();
         //
@@ -72,7 +55,7 @@ class ProfileProvider {
 
       await _firebaseCloud
           .collection('users')
-          .doc(userId)
+          .doc(currentuserId)
           .update(updatedProfileDetails);
     } on Exception catch (e) {
       print(e);

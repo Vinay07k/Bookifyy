@@ -23,6 +23,7 @@ class Auth {
       await _firebaseCloud.collection('users').doc(userId).set({
         'fullname': fullname,
         'username': username,
+        'createdAt': DateTime.now(),
         'bio': null,
         'instahandle': null,
         'followers': null,

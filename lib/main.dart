@@ -1,3 +1,4 @@
+import 'package:bookify/Providers/BlurbProvider.dart';
 import 'package:bookify/Screens/AboutUs.dart';
 import 'package:bookify/Screens/Auth/Inputdetail.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -5,6 +6,7 @@ import 'package:flutter/material.dart';
 
 //Packages Imports
 import 'package:animated_splash_screen/animated_splash_screen.dart';
+import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 //Firebase Imports
@@ -27,8 +29,18 @@ import 'package:bookify/Screens/EditProfileScreen.dart';
 import 'package:bookify/Screens/InviteContactsScreen.dart';
 import 'package:bookify/Screens/ScreenController.dart';
 
+import 'package:provider/provider.dart';
+
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
+
+  SystemChrome.setSystemUIOverlayStyle(
+    SystemUiOverlayStyle(statusBarColor: Colors.transparent),
+  );
+  SystemChrome.setPreferredOrientations([
+    DeviceOrientation.portraitDown,
+    DeviceOrientation.portraitUp,
+  ]);
 
   runApp(MyApp());
 }
@@ -71,7 +83,10 @@ class MyApp extends StatelessWidget {
 
                     // print(snapshot.data);
                     //Homescreen if logged in User found
-                    return ScreenController();
+                    return ChangeNotifierProvider<BlurbProvider>(
+                      builder: (context, _) => ScreenController(),
+                      create: (context) => BlurbProvider(),
+                    );
                   },
                 ),
                 duration: 500,

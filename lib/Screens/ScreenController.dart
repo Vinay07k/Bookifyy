@@ -1,3 +1,4 @@
+import 'package:bookify/Providers/BlurbProvider.dart';
 import 'package:bookify/Screens/CreateBlurbScreen.dart';
 import 'package:flutter/material.dart';
 
@@ -35,16 +36,16 @@ class _ScreenControllerState extends State<ScreenController> {
       child: Scaffold(
         appBar: KAppBar(_switchTabs, _currentTab),
         drawer: MainDrawer(),
-        body: FeedsScreen(),
+        body: BlurbsScreen(),
         // body: _currentTab == TABS.BOOKS ? BooksScreen() : FeedsScreen(),
         floatingActionButton: _currentTab == TABS.BOOKS
             ? null
             : FloatingActionButton(
                 backgroundColor: Theme.of(context).focusColor,
                 tooltip: 'Add Blurb',
-                child: const Icon(
+                child: Icon(
                   Icons.add_to_home_screen,
-                  color: Colors.black,
+                  color: Theme.of(context).primaryColor,
                 ),
                 onPressed: () => Navigator.of(context)
                     .pushNamed(CreateBlurbScreen.routeName),

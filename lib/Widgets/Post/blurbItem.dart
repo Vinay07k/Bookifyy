@@ -1,13 +1,35 @@
+import 'package:bookify/Models/BlurbModal.dart';
+import 'package:bookify/Models/Blurbuser.dart';
+import 'package:bookify/Providers/ProfileProvider.dart';
+import 'package:bookify/Widgets/loading.dart';
 import 'package:bookify/constants.dart';
 import 'package:flutter/material.dart';
 
 import 'package:bookify/Screens/Home/BlurbDetailScreen.dart';
 import 'package:share_plus/share_plus.dart';
 
-class BlurbItem extends StatelessWidget {
-  const BlurbItem(this.index, {Key? key}) : super(key: key);
+class BlurbItem extends StatefulWidget {
+  const BlurbItem(this._blurb, {Key? key}) : super(key: key);
 
-  final int index;
+  final BlurbItemModal _blurb;
+
+  @override
+  _BlurbItemState createState() => _BlurbItemState();
+}
+
+class _BlurbItemState extends State<BlurbItem> {
+  bool _loading = false;
+
+  late String fullname;
+  late String username;
+  String? profilePicUrl;
+
+  @override
+  void initState() {
+    super.initState();
+    getUserdetails();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -22,26 +44,31 @@ class BlurbItem extends StatelessWidget {
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
-          ListTile(
-            onTap: () {},
-            contentPadding: const EdgeInsets.only(left: 10, right: 14),
-            leading: CircleAvatar(
-              radius: 24,
-              foregroundImage: AssetImage('assets/download.jpeg'),
-            ),
-            title: Text(
-              'Madara Uchiha',
-              style: KTextStyles.kNameText,
-            ),
-            subtitle: const Text(
-              '@theonlyone',
-              style: const TextStyle(color: Colors.white),
-            ),
-            trailing: Text(
-              '11m ago',
-              style: KTextStyles.kCreatedTimeText,
-            ),
-          ),
+          _loading
+              ? Loading()
+              : ListTile(
+                  onTap: () {},
+                  contentPadding: const EdgeInsets.only(left: 10, right: 14),
+                  leading: CircleAvatar(
+                    radius: 24,
+                    backgroundColor: Theme.of(context).primaryColor,
+                    foregroundImage: profilePicUrl == null
+                        ? AssetImage('assets/download.jpeg')
+                        : NetworkImage(profilePicUrl!) as ImageProvider,
+                  ),
+                  title: Text(
+                    fullname,
+                    style: KTextStyles.kNameText,
+                  ),
+                  subtitle: Text(
+                    username,
+                    style: const TextStyle(color: Colors.white),
+                  ),
+                  trailing: Text(
+                    '${((widget._blurb.createdAt.difference(DateTime.now()).inMinutes)).abs()} min ago',
+                    style: KTextStyles.kCreatedTimeText,
+                  ),
+                ),
           Padding(
             padding: const EdgeInsets.only(
               left: 60,
@@ -54,7 +81,7 @@ class BlurbItem extends StatelessWidget {
                   onTap: () =>
                       Navigator.of(context).pushNamed(PostScreen().routeName),
                   child: Text(
-                    'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mi posue fames pulvinar posuere. Eget vel sed ultrices mauris vestibulum, fringilla diam a. Ornare facilisis id turpis aliquam. Neque senectus sed vitae vestibulum et massa enim tempor.',
+                    widget._blurb.content,
                     style: KTextStyles.kDescriptionText,
                   ),
                 ),
@@ -68,7 +95,7 @@ class BlurbItem extends StatelessWidget {
                             Theme.of(context).focusColor),
                       ),
                       icon: const Icon(Icons.favorite),
-                      label: Text('44'),
+                      label: Text('${widget._blurb.likesCount ?? 0}'),
                     ),
                     TextButton.icon(
                       onPressed: () {},
@@ -77,7 +104,7 @@ class BlurbItem extends StatelessWidget {
                             Theme.of(context).accentColor),
                       ),
                       icon: const Icon(Icons.comment_outlined),
-                      label: Text('44'),
+                      label: Text('${widget._blurb.commentCount ?? 0}'),
                     ),
                     IconButton(
                       onPressed: () {
@@ -96,5 +123,16 @@ class BlurbItem extends StatelessWidget {
         ],
       ),
     );
+  }
+
+  void getUserdetails() async {
+    setState(() => _loading = true);
+    final BlurbUser user =
+        await ProfileProvider().getUser(widget._blurb.userId);
+
+    fullname = user.fullname;
+    username = user.username;
+    profilePicUrl = user.profilePicUrl;
+    setState(() => _loading = false);
   }
 }
