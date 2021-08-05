@@ -15,7 +15,6 @@ class BlurbsScreen extends StatefulWidget {
 
 class _BlurbsScreenState extends State<BlurbsScreen> {
   late List<BlurbItemModal> _blurbs;
-  var _just;
 
   @override
   Widget build(BuildContext context) {

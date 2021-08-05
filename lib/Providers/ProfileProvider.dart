@@ -26,7 +26,7 @@ class ProfileProvider {
 
     final Map<String, dynamic> userCredential =
         documentSnapshot.data() as Map<String, dynamic>;
-    print(userCredential);
+    // print(userCredential);
     //
     return BlurbUser.mapToBlurbUser({
       'uid': userId,

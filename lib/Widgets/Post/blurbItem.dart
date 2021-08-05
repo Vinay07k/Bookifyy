@@ -6,6 +6,7 @@ import 'package:bookify/constants.dart';
 import 'package:flutter/material.dart';
 
 import 'package:bookify/Screens/Home/BlurbDetailScreen.dart';
+import 'package:intl/intl.dart';
 import 'package:share_plus/share_plus.dart';
 
 class BlurbItem extends StatefulWidget {
@@ -65,7 +66,7 @@ class _BlurbItemState extends State<BlurbItem> {
                     style: const TextStyle(color: Colors.white),
                   ),
                   trailing: Text(
-                    '${((widget._blurb.createdAt.difference(DateTime.now()).inMinutes)).abs()} min ago',
+                    '${getDate()}',
                     style: KTextStyles.kCreatedTimeText,
                   ),
                 ),
@@ -75,14 +76,19 @@ class _BlurbItemState extends State<BlurbItem> {
               right: 10,
             ),
             child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisSize: MainAxisSize.min,
               children: [
                 GestureDetector(
                   onTap: () =>
-                      Navigator.of(context).pushNamed(PostScreen().routeName),
-                  child: Text(
-                    widget._blurb.content,
-                    style: KTextStyles.kDescriptionText,
+                      Navigator.of(context).pushNamed(BlurbScreen().routeName),
+                  child: Padding(
+                    padding: const EdgeInsets.only(left: 12.0),
+                    child: Text(
+                      widget._blurb.content,
+                      textAlign: TextAlign.start,
+                      style: KTextStyles.kDescriptionText,
+                    ),
                   ),
                 ),
                 Row(
@@ -106,15 +112,29 @@ class _BlurbItemState extends State<BlurbItem> {
                       icon: const Icon(Icons.comment_outlined),
                       label: Text('${widget._blurb.commentCount ?? 0}'),
                     ),
-                    IconButton(
-                      onPressed: () {
-                        Share.share(
-                          'Hey There! I found this awesome platform for wonks to share your feedbacks and learnings. Make sure to check it out! - *Our PlayStore Link*',
-                        );
-                      },
-                      icon: const Icon(Icons.share_outlined),
-                      color: Theme.of(context).accentColor,
+                    Padding(
+                      padding: const EdgeInsets.only(right: 8.0),
+                      child: GestureDetector(
+                        child: Icon(
+                          Icons.share_outlined,
+                          color: Theme.of(context).accentColor,
+                        ),
+                        onTap: () {
+                          Share.share(
+                            'Hey There! I found this awesome platform for wonks to share your feedbacks and learnings. Make sure to check it out! - *Our PlayStore Link*',
+                          );
+                        },
+                      ),
                     ),
+                    // IconButton(
+                    //   onPressed: () {
+                    //     Share.share(
+                    //       'Hey There! I found this awesome platform for wonks to share your feedbacks and learnings. Make sure to check it out! - *Our PlayStore Link*',
+                    //     );
+                    //   },
+                    //   icon: const Icon(Icons.share_outlined),
+                    //   color: Theme.of(context).accentColor,
+                    // ),
                   ],
                 ),
               ],
@@ -134,5 +154,22 @@ class _BlurbItemState extends State<BlurbItem> {
     username = user.username;
     profilePicUrl = user.profilePicUrl;
     setState(() => _loading = false);
+  }
+
+  String getDate() {
+    Duration date =
+        ((widget._blurb.createdAt.difference(DateTime.now()))).abs();
+    if (date.inMinutes <= 60)
+      return (date.inMinutes < 2
+              ? '${date.inMinutes} min'
+              : '${date.inMinutes} mins') +
+          ' ago';
+    if (date.inHours <= 24)
+      return (date.inHours < 2 ? '${date.inHours} hr' : '${date.inHours} hrs') +
+          ' ago';
+    if (date.inDays <= 7)
+      return (date.inDays < 2 ? '${date.inDays} day' : '${date.inDays} days') +
+          ' ago';
+    return DateFormat('dd-MM-yy').format(widget._blurb.createdAt).toString();
   }
 }

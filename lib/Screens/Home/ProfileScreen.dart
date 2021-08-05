@@ -54,62 +54,62 @@ class _ProfileScreenState extends State<ProfileScreen> {
           ],
         ),
         extendBodyBehindAppBar: true,
-        body: Column(
-          children: [
-            // * : For Top Background Image, Profile Avatar and Edit Screen Button
-            Stack(
-              children: [
-                Container(
-                  margin: EdgeInsets.only(bottom: 50),
-                  child: Image.asset('assets/bg.png'),
-                ),
-                Positioned(
-                  left: 20,
-                  bottom: 10,
-                  child: CircleAvatar(
-                    foregroundImage: (user.profilePicUrl != null)
-                        ? NetworkImage(user.profilePicUrl!)
-                        : AssetImage('assets/avatar_placeholder.jpg')
-                            as ImageProvider,
-                    radius: 40,
-                    backgroundColor: Theme.of(context).primaryColor,
+        body: SingleChildScrollView(
+          child: Column(
+            children: [
+              // * : For Top Background Image, Profile Avatar and Edit Screen Button
+              Stack(
+                children: [
+                  Container(
+                    margin: EdgeInsets.only(bottom: 50),
+                    child: Image.asset('assets/bg.png'),
                   ),
-                ),
-                Positioned(
-                  right: 20,
-                  bottom: -3,
-                  child: CustomElevatedButton(
-                    onPressedFunction: () => Navigator.of(context).pushNamed(
-                      EditScreen.routeName,
-                      arguments: {
-                        'user': user,
-                      },
+                  Positioned(
+                    left: 20,
+                    bottom: 10,
+                    child: CircleAvatar(
+                      foregroundImage: (user.profilePicUrl != null)
+                          ? NetworkImage(user.profilePicUrl!)
+                          : AssetImage('assets/avatar_placeholder.jpg')
+                              as ImageProvider,
+                      radius: 40,
+                      backgroundColor: Theme.of(context).primaryColor,
                     ),
-                    child: Text(
-                      'Edit Screen',
-                      style: TextStyle(
-                        color: Theme.of(context).primaryColor,
-                        fontWeight: FontWeight.w900,
-                        fontSize: 16,
+                  ),
+                  Positioned(
+                    right: 20,
+                    bottom: -3,
+                    child: CustomElevatedButton(
+                      onPressedFunction: () => Navigator.of(context).pushNamed(
+                        EditScreen.routeName,
+                        arguments: {
+                          'user': user,
+                        },
                       ),
+                      child: Text(
+                        'Edit Screen',
+                        style: TextStyle(
+                          color: Theme.of(context).primaryColor,
+                          fontWeight: FontWeight.w900,
+                          fontSize: 16,
+                        ),
+                      ),
+                      size: Size(80, 35),
                     ),
-                    size: Size(80, 35),
                   ),
-                ),
-              ],
-            ),
-            DescriptionBox(
-              fullname: user.fullname,
-              bio: user.bio,
-              dateJoined: user.dateJoined,
-              username: user.username,
-              instahandle: user.instahandle,
-              followers: user.followers,
-              following: user.followings,
-            ),
-            //User posts
-            Expanded(
-              child: FutureBuilder(
+                ],
+              ),
+              DescriptionBox(
+                fullname: user.fullname,
+                bio: user.bio,
+                dateJoined: user.dateJoined,
+                username: user.username,
+                instahandle: user.instahandle,
+                followers: user.followers,
+                following: user.followings,
+              ),
+              //User posts
+              FutureBuilder(
                 future: BlurbProvider().getUserBlurbs(user.id),
                 builder:
                     (context, AsyncSnapshot<List<BlurbItemModal>?> snapshot) {
@@ -129,15 +129,17 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           ),
                         )
                       : ListView.builder(
+                          shrinkWrap: true,
+                          physics: NeverScrollableScrollPhysics(),
                           itemCount: _blurbs.length,
                           itemBuilder: (context, index) {
                             return BlurbItem(_blurbs[index]);
                           },
                         );
                 },
-              ),
-            )
-          ],
+              )
+            ],
+          ),
         ),
         floatingActionButton: FloatingActionButton(
           backgroundColor: Theme.of(context).focusColor,

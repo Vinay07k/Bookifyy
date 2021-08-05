@@ -6,15 +6,15 @@ import 'package:bookify/constants.dart';
 import 'package:bookify/Widgets/Post/postScreenBlurb.dart';
 import 'package:bookify/Widgets/Post/commentItem.dart';
 
-class PostScreen extends StatefulWidget {
+class BlurbScreen extends StatefulWidget {
   final routeName = '/post-screen';
-  const PostScreen({Key? key}) : super(key: key);
+  const BlurbScreen({Key? key}) : super(key: key);
 
   @override
-  _PostScreenState createState() => _PostScreenState();
+  _BlurbScreenState createState() => _BlurbScreenState();
 }
 
-class _PostScreenState extends State<PostScreen> {
+class _BlurbScreenState extends State<BlurbScreen> {
   bool _shouldBeVisible = true;
   late ScrollController _scrollController;
   @override
@@ -46,20 +46,22 @@ class _PostScreenState extends State<PostScreen> {
             style: KTextStyles.kAppBarTitle(Theme.of(context).accentColor),
           ),
         ),
-        body: Column(
-          mainAxisSize: MainAxisSize.min,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            const PostScreenBlurb(),
-            Divider(color: Theme.of(context).accentColor),
-            Expanded(
-              child: ListView.builder(
+        body: SingleChildScrollView(
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              const PostScreenBlurb(),
+              Divider(color: Theme.of(context).accentColor),
+              ListView.builder(
+                shrinkWrap: true,
+                physics: NeverScrollableScrollPhysics(),
                 controller: _scrollController,
                 itemCount: 10,
                 itemBuilder: (BuildContext context, int index) => CommentItem(),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
         floatingActionButton: _shouldBeVisible
             ? FloatingActionButton(
