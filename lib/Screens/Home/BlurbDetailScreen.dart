@@ -1,3 +1,4 @@
+import 'package:bookify/Models/BlurbModal.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 
@@ -17,6 +18,8 @@ class BlurbScreen extends StatefulWidget {
 class _BlurbScreenState extends State<BlurbScreen> {
   bool _shouldBeVisible = true;
   late ScrollController _scrollController;
+
+  late final BlurbItemModal _blurb;
   @override
   void initState() {
     super.initState();
@@ -30,9 +33,15 @@ class _BlurbScreenState extends State<BlurbScreen> {
   }
 
   @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    _blurb = ModalRoute.of(context)!.settings.arguments as BlurbItemModal;
+  }
+
+  @override
   void dispose() {
-    super.dispose();
     _scrollController.dispose();
+    super.dispose();
   }
 
   @override
@@ -51,7 +60,7 @@ class _BlurbScreenState extends State<BlurbScreen> {
             mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              const PostScreenBlurb(),
+              PostScreenBlurb(_blurb),
               Divider(color: Theme.of(context).accentColor),
               ListView.builder(
                 shrinkWrap: true,

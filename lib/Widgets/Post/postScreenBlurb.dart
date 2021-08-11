@@ -1,13 +1,32 @@
+import 'package:bookify/Models/BlurbModal.dart';
+import 'package:bookify/Models/Blurbuser.dart';
+import 'package:bookify/Providers/ProfileProvider.dart';
+import 'package:bookify/Widgets/loading.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 class PostScreenBlurb extends StatefulWidget {
-  const PostScreenBlurb({Key? key}) : super(key: key);
+  const PostScreenBlurb(this._blurb, {Key? key}) : super(key: key);
+
+  final BlurbItemModal _blurb;
 
   @override
   _PostScreenBlurbState createState() => _PostScreenBlurbState();
 }
 
 class _PostScreenBlurbState extends State<PostScreenBlurb> {
+  bool _loading = false;
+
+  late String fullname;
+  late String username;
+  String? profilePicUrl;
+
+  @override
+  void initState() {
+    super.initState();
+    getUserdetails();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -22,30 +41,35 @@ class _PostScreenBlurbState extends State<PostScreenBlurb> {
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
-          ListTile(
-            onTap: () {},
-            contentPadding: EdgeInsets.only(left: 10, right: 14),
-            leading: CircleAvatar(
-              radius: 24,
-              foregroundImage: AssetImage('assets/download.jpeg'),
-            ),
-            title: Text(
-              'Madara Uchiha',
-              style: TextStyle(
-                color: Colors.white,
-                fontWeight: FontWeight.w600,
-                letterSpacing: 0.6,
-              ),
-            ),
-            subtitle: Text(
-              '@theonlyone',
-              style: TextStyle(color: Colors.white),
-            ),
-            trailing: Text(
-              '11m ago',
-              style: TextStyle(color: Colors.white),
-            ),
-          ),
+          _loading
+              ? Loading()
+              : ListTile(
+                  onTap: () {},
+                  contentPadding: EdgeInsets.only(left: 10, right: 14),
+                  leading: CircleAvatar(
+                    radius: 24,
+                    backgroundColor: Theme.of(context).primaryColor,
+                    foregroundImage: profilePicUrl == null
+                        ? AssetImage('assets/avatar_placeholder.jpg')
+                        : NetworkImage(profilePicUrl!) as ImageProvider,
+                  ),
+                  title: Text(
+                    fullname,
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontWeight: FontWeight.w600,
+                      letterSpacing: 0.6,
+                    ),
+                  ),
+                  subtitle: Text(
+                    username,
+                    style: TextStyle(color: Colors.white),
+                  ),
+                  trailing: Text(
+                    '${getDate()}',
+                    style: TextStyle(color: Colors.white),
+                  ),
+                ),
           Padding(
             padding: const EdgeInsets.only(
               left: 10,
@@ -55,7 +79,7 @@ class _PostScreenBlurbState extends State<PostScreenBlurb> {
               mainAxisSize: MainAxisSize.min,
               children: [
                 Text(
-                  'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mi posue fames pulvinar posuere. Eget vel sed ultrices mauris vestibulum, fringilla diam a. Ornare facilisis id turpis aliquam. Neque senectus sed vitae vestibulum et massa enim tempor.',
+                  widget._blurb.content,
                   style: TextStyle(
                     color: Colors.white,
                     fontWeight: FontWeight.w400,
@@ -83,7 +107,7 @@ class _PostScreenBlurbState extends State<PostScreenBlurb> {
                             Theme.of(context).focusColor),
                       ),
                       icon: Icon(Icons.favorite),
-                      label: Text('44'),
+                      label: Text('${widget._blurb.likesCount ?? 0}'),
                     ),
                     TextButton.icon(
                       onPressed: () {},
@@ -92,7 +116,7 @@ class _PostScreenBlurbState extends State<PostScreenBlurb> {
                             MaterialStateProperty.all(Colors.white),
                       ),
                       icon: Icon(Icons.comment_outlined),
-                      label: Text('44'),
+                      label: Text('${widget._blurb.commentCount ?? 0}'),
                     ),
                     IconButton(
                       onPressed: () {},
@@ -107,5 +131,33 @@ class _PostScreenBlurbState extends State<PostScreenBlurb> {
         ],
       ),
     );
+  }
+
+  void getUserdetails() async {
+    setState(() => _loading = true);
+    final BlurbUser user =
+        await ProfileProvider().getUser(widget._blurb.userId);
+
+    fullname = user.fullname;
+    username = user.username;
+    profilePicUrl = user.profilePicUrl;
+    setState(() => _loading = false);
+  }
+
+  String getDate() {
+    Duration date =
+        ((widget._blurb.createdAt.difference(DateTime.now()))).abs();
+    if (date.inMinutes <= 60)
+      return (date.inMinutes < 2
+              ? '${date.inMinutes} min'
+              : '${date.inMinutes} mins') +
+          ' ago';
+    if (date.inHours <= 24)
+      return (date.inHours < 2 ? '${date.inHours} hr' : '${date.inHours} hrs') +
+          ' ago';
+    if (date.inDays <= 7)
+      return (date.inDays < 2 ? '${date.inDays} day' : '${date.inDays} days') +
+          ' ago';
+    return DateFormat('dd-MM-yy').format(widget._blurb.createdAt).toString();
   }
 }

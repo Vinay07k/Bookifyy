@@ -54,7 +54,7 @@ class _BlurbItemState extends State<BlurbItem> {
                     radius: 24,
                     backgroundColor: Theme.of(context).primaryColor,
                     foregroundImage: profilePicUrl == null
-                        ? AssetImage('assets/download.jpeg')
+                        ? AssetImage('assets/avatar_placeholder.jpg')
                         : NetworkImage(profilePicUrl!) as ImageProvider,
                   ),
                   title: Text(
@@ -80,8 +80,10 @@ class _BlurbItemState extends State<BlurbItem> {
               mainAxisSize: MainAxisSize.min,
               children: [
                 GestureDetector(
-                  onTap: () =>
-                      Navigator.of(context).pushNamed(BlurbScreen().routeName),
+                  onTap: () => Navigator.of(context).pushNamed(
+                    BlurbScreen().routeName,
+                    arguments: widget._blurb,
+                  ),
                   child: Padding(
                     padding: const EdgeInsets.only(left: 12.0),
                     child: Text(
