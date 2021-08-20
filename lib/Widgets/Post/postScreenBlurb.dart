@@ -4,6 +4,7 @@ import 'package:bookify/Providers/ProfileProvider.dart';
 import 'package:bookify/Widgets/loading.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:share_plus/share_plus.dart';
 
 class PostScreenBlurb extends StatefulWidget {
   const PostScreenBlurb(this._blurb, {Key? key}) : super(key: key);
@@ -118,10 +119,19 @@ class _PostScreenBlurbState extends State<PostScreenBlurb> {
                       icon: Icon(Icons.comment_outlined),
                       label: Text('${widget._blurb.commentCount ?? 0}'),
                     ),
-                    IconButton(
-                      onPressed: () {},
-                      icon: Icon(Icons.share_outlined),
-                      color: Colors.white,
+                    Padding(
+                      padding: const EdgeInsets.only(right: 8.0),
+                      child: GestureDetector(
+                        child: Icon(
+                          Icons.share_outlined,
+                          color: Theme.of(context).accentColor,
+                        ),
+                        onTap: () {
+                          Share.share(
+                            'Hey There! I found this awesome platform for wonks to share your feedbacks and learnings. Make sure to check it out! - *Our PlayStore Link*',
+                          );
+                        },
+                      ),
                     ),
                   ],
                 ),

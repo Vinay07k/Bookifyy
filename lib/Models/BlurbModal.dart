@@ -4,6 +4,8 @@ import 'comment.dart';
 import 'package:intl/intl.dart';
 
 class BlurbItemModal {
+  final String blurbId;
+
   /// Users Id can be used to fetch [BlurbUser]'s detail
   final String userId;
 
@@ -16,10 +18,11 @@ class BlurbItemModal {
   ///List of [Comment] items of the Blurb
   final List<Comment>? comments;
 
-  ///List of [BlurbUser]'s which liked the Blurb
+  ///List of [BlurbUser]'s ID which liked the Blurb
   final List<String>? likes;
 
   const BlurbItemModal({
+    required this.blurbId,
     required this.userId,
     required this.content,
     required this.createdAt,
@@ -36,11 +39,13 @@ class BlurbItemModal {
     // Timestamp data =  mappedData['createdAt'];
     // print(data.toDate());
     return BlurbItemModal(
+      blurbId: mappedData.id,
       userId: mappedData['userId'],
       content: mappedData['content'],
       createdAt: mappedData['createdAt'].toDate(),
       comments: mappedData['comments'],
-      likes: mappedData['likes'],
+      likes:
+          mappedData['likes'] == null ? null : List.from(mappedData['likes']),
     );
   }
 }

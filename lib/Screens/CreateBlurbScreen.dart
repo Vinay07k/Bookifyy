@@ -117,11 +117,13 @@ class _CreateBlurbScreenState extends State<CreateBlurbScreen> {
         _loading = false;
       });
       showBottomSnackBar(
-          context: context,
-          text: 'Text length can not be more than 300 charachters!');
+        context: context,
+        text: 'Content can not be more than 300 charachters!',
+      );
       return;
     }
-    await BlurbProvider().createBlurb(content);
+    await Provider.of<BlurbProvider>(context, listen: false)
+        .createBlurb(content);
 
     Navigator.of(context).pop();
   }

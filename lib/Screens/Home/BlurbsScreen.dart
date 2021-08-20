@@ -29,6 +29,7 @@ class _BlurbsScreenState extends State<BlurbsScreen> {
         builder: (context, blurbProvider, child) => FutureBuilder(
           future: blurbProvider.getBlurbs,
           builder: (context, AsyncSnapshot<List<BlurbItemModal>> snapshot) {
+            // print(snapshot.data);
             if (snapshot.connectionState != ConnectionState.done)
               return Loading();
             _blurbs = snapshot.data!;

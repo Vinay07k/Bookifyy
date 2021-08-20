@@ -30,6 +30,9 @@ class BlurbProvider with ChangeNotifier {
         await _blurbCollection.orderBy('createdAt', descending: true).get();
     List blurbs = _data.docs;
 
+    // blurbs.forEach((element) {
+    //   print(element.);
+    // });
     return blurbs
         .map((blurbData) => BlurbItemModal.fromMap(blurbData))
         .toList();
@@ -48,5 +51,39 @@ class BlurbProvider with ChangeNotifier {
         .toList();
   }
 
-  // Future<List>
+  Future<void> toggleLike({
+    required String blurbId,
+    required String userId,
+  }) async {
+    DocumentReference _blurbref = _blurbCollection.doc(blurbId);
+    DocumentSnapshot _blurb = await _blurbref.get();
+    Map<String, dynamic> blurbData = _blurb.data() as Map<String, dynamic>;
+    // final List = blurbData['likes'];
+    final List? likes = blurbData['likes'];
+
+    try {
+      ///When there are no likes
+      if (likes == null) {
+        await _blurbref.update({
+          'likes': [userId]
+        });
+      } else {
+        ///When the user has not liked this post
+        if (!likes.contains(userId)) {
+          likes.add(userId);
+          await _blurbref.update({'likes': likes});
+
+          ///When the user has already liked the post
+        } else {
+          likes.remove(userId);
+          await _blurbref.update({'likes': likes});
+        }
+      }
+      notifyListeners();
+    } catch (e) {
+      print(e);
+    }
+
+    // print(_blurb['likes']);
+  }
 }

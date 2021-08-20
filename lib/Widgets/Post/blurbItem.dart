@@ -1,5 +1,6 @@
 import 'package:bookify/Models/BlurbModal.dart';
 import 'package:bookify/Models/Blurbuser.dart';
+import 'package:bookify/Providers/BlurbProvider.dart';
 import 'package:bookify/Providers/ProfileProvider.dart';
 import 'package:bookify/Widgets/loading.dart';
 import 'package:bookify/constants.dart';
@@ -7,6 +8,7 @@ import 'package:flutter/material.dart';
 
 import 'package:bookify/Screens/Home/BlurbDetailScreen.dart';
 import 'package:intl/intl.dart';
+import 'package:provider/provider.dart';
 import 'package:share_plus/share_plus.dart';
 
 class BlurbItem extends StatefulWidget {
@@ -33,6 +35,7 @@ class _BlurbItemState extends State<BlurbItem> {
 
   @override
   Widget build(BuildContext context) {
+    BlurbProvider _blurbProvider = Provider.of<BlurbProvider>(context);
     return Container(
       margin: const EdgeInsets.symmetric(
         horizontal: 20,
@@ -96,15 +99,28 @@ class _BlurbItemState extends State<BlurbItem> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
+                    ///Like and Like count button
                     TextButton.icon(
-                      onPressed: () {},
+                      onPressed: () async {
+                        _blurbProvider.toggleLike(
+                          blurbId: widget._blurb.blurbId,
+                          userId: ProfileProvider().currentuserId,
+                        );
+                        // setState(() {});
+                      },
                       style: ButtonStyle(
                         foregroundColor: MaterialStateProperty.all(
                             Theme.of(context).focusColor),
                       ),
-                      icon: const Icon(Icons.favorite),
+                      icon: Icon(widget._blurb.likes != null &&
+                              (widget._blurb.likes!
+                                  .contains(ProfileProvider().currentuserId))
+                          ? Icons.favorite
+                          : Icons.favorite_border_outlined),
                       label: Text('${widget._blurb.likesCount ?? 0}'),
                     ),
+
+                    ///Comment and Comment count button
                     TextButton.icon(
                       onPressed: () {},
                       style: ButtonStyle(
@@ -114,6 +130,8 @@ class _BlurbItemState extends State<BlurbItem> {
                       icon: const Icon(Icons.comment_outlined),
                       label: Text('${widget._blurb.commentCount ?? 0}'),
                     ),
+
+                    ///Share button
                     Padding(
                       padding: const EdgeInsets.only(right: 8.0),
                       child: GestureDetector(
