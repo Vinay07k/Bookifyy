@@ -7,7 +7,6 @@ import 'package:bookify/constants.dart';
 import 'package:flutter/material.dart';
 
 import 'package:bookify/Screens/Home/BlurbDetailScreen.dart';
-import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:share_plus/share_plus.dart';
 
@@ -69,7 +68,7 @@ class _BlurbItemState extends State<BlurbItem> {
                     style: const TextStyle(color: Colors.white),
                   ),
                   trailing: Text(
-                    '${getDate()}',
+                    '${getDate(widget._blurb.createdAt)}',
                     style: KTextStyles.kCreatedTimeText,
                   ),
                 ),
@@ -122,7 +121,10 @@ class _BlurbItemState extends State<BlurbItem> {
 
                     ///Comment and Comment count button
                     TextButton.icon(
-                      onPressed: () {},
+                      onPressed: () => Navigator.of(context).pushNamed(
+                        BlurbScreen().routeName,
+                        arguments: widget._blurb,
+                      ),
                       style: ButtonStyle(
                         foregroundColor: MaterialStateProperty.all(
                             Theme.of(context).accentColor),
@@ -165,22 +167,5 @@ class _BlurbItemState extends State<BlurbItem> {
     username = user.username;
     profilePicUrl = user.profilePicUrl;
     setState(() => _loading = false);
-  }
-
-  String getDate() {
-    Duration date =
-        ((widget._blurb.createdAt.difference(DateTime.now()))).abs();
-    if (date.inMinutes <= 60)
-      return (date.inMinutes < 2
-              ? '${date.inMinutes} min'
-              : '${date.inMinutes} mins') +
-          ' ago';
-    if (date.inHours <= 24)
-      return (date.inHours < 2 ? '${date.inHours} hr' : '${date.inHours} hrs') +
-          ' ago';
-    if (date.inDays <= 7)
-      return (date.inDays < 2 ? '${date.inDays} day' : '${date.inDays} days') +
-          ' ago';
-    return DateFormat('dd-MM-yy').format(widget._blurb.createdAt).toString();
   }
 }

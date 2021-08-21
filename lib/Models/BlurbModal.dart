@@ -1,5 +1,3 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
-
 import 'comment.dart';
 import 'package:intl/intl.dart';
 
@@ -16,7 +14,7 @@ class BlurbItemModal {
   final DateTime createdAt;
 
   ///List of [Comment] items of the Blurb
-  final List<Comment>? comments;
+  final List<Map>? comments;
 
   ///List of [BlurbUser]'s ID which liked the Blurb
   List<String>? likes;
@@ -38,14 +36,16 @@ class BlurbItemModal {
   // set updateLike(List<String> likes) => this.likes = likes;
 
   factory BlurbItemModal.fromMap(mappedData) {
-    // Timestamp data =  mappedData['createdAt'];
-    // print(data.toDate());
+    // var data = mappedData['comments'];
+    // print((data) is List);
     return BlurbItemModal(
       blurbId: mappedData.id,
       userId: mappedData['userId'],
       content: mappedData['content'],
       createdAt: mappedData['createdAt'].toDate(),
-      comments: mappedData['comments'],
+      comments: mappedData['comments'] == null
+          ? null
+          : List.from(mappedData['comments']),
       likes:
           mappedData['likes'] == null ? null : List.from(mappedData['likes']),
     );

@@ -14,7 +14,6 @@ import 'package:bookify/Screens/EditProfileScreen.dart';
 import 'package:bookify/Widgets/buttons.dart';
 import 'package:bookify/Widgets/description_box.dart';
 import 'package:bookify/Widgets/profile_info_dialog.dart';
-import 'package:provider/provider.dart';
 
 class ProfileScreen extends StatefulWidget {
   static final routeName = '/profile-screen';
@@ -26,7 +25,6 @@ class ProfileScreen extends StatefulWidget {
 
 class _ProfileScreenState extends State<ProfileScreen> {
   late BlurbUser user;
-  bool _loading = false;
 
   @override
   void didChangeDependencies() {

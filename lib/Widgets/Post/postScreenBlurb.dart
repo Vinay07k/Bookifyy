@@ -1,5 +1,6 @@
 import 'package:bookify/Models/BlurbModal.dart';
 import 'package:bookify/Models/Blurbuser.dart';
+import 'package:bookify/Providers/BlurbProvider.dart';
 import 'package:bookify/Providers/ProfileProvider.dart';
 import 'package:bookify/Widgets/loading.dart';
 import 'package:flutter/material.dart';
@@ -67,7 +68,7 @@ class _PostScreenBlurbState extends State<PostScreenBlurb> {
                     style: TextStyle(color: Colors.white),
                   ),
                   trailing: Text(
-                    '${getDate()}',
+                    '${getDate(widget._blurb.createdAt)}',
                     style: TextStyle(color: Colors.white),
                   ),
                 ),
@@ -152,22 +153,5 @@ class _PostScreenBlurbState extends State<PostScreenBlurb> {
     username = user.username;
     profilePicUrl = user.profilePicUrl;
     setState(() => _loading = false);
-  }
-
-  String getDate() {
-    Duration date =
-        ((widget._blurb.createdAt.difference(DateTime.now()))).abs();
-    if (date.inMinutes <= 60)
-      return (date.inMinutes < 2
-              ? '${date.inMinutes} min'
-              : '${date.inMinutes} mins') +
-          ' ago';
-    if (date.inHours <= 24)
-      return (date.inHours < 2 ? '${date.inHours} hr' : '${date.inHours} hrs') +
-          ' ago';
-    if (date.inDays <= 7)
-      return (date.inDays < 2 ? '${date.inDays} day' : '${date.inDays} days') +
-          ' ago';
-    return DateFormat('dd-MM-yy').format(widget._blurb.createdAt).toString();
   }
 }

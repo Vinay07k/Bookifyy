@@ -2,6 +2,7 @@ import 'package:bookify/Models/BlurbModal.dart';
 import 'package:bookify/Providers/ProfileProvider.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 class BlurbProvider with ChangeNotifier {
   // final FirebaseFirestore _firebaseCloud = FirebaseFirestore.instance;
@@ -89,4 +90,24 @@ class BlurbProvider with ChangeNotifier {
 
     // print(_blurb['likes']);
   }
+}
+
+String getDate(date) {
+  Duration dateDiff = ((date.difference(DateTime.now()))).abs();
+  if (dateDiff.inMinutes <= 60)
+    return (dateDiff.inMinutes < 2
+            ? '${dateDiff.inMinutes} min'
+            : '${dateDiff.inMinutes} mins') +
+        ' ago';
+  if (dateDiff.inHours <= 24)
+    return (dateDiff.inHours < 2
+            ? '${dateDiff.inHours} hr'
+            : '${dateDiff.inHours} hrs') +
+        ' ago';
+  if (dateDiff.inDays <= 7)
+    return (dateDiff.inDays < 2
+            ? '${dateDiff.inDays} day'
+            : '${dateDiff.inDays} days') +
+        ' ago';
+  return DateFormat('dd-MM-yy').format(date).toString();
 }

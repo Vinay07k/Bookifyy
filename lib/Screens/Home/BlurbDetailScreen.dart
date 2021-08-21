@@ -66,8 +66,10 @@ class _BlurbScreenState extends State<BlurbScreen> {
                 shrinkWrap: true,
                 physics: NeverScrollableScrollPhysics(),
                 controller: _scrollController,
-                itemCount: 10,
-                itemBuilder: (BuildContext context, int index) => CommentItem(),
+                itemCount: _blurb.commentCount ?? 0,
+                itemBuilder: (BuildContext context, int index) => CommentItem(
+                  commentData: _blurb.comments![index] as Map<String, dynamic>,
+                ),
               ),
             ],
           ),
