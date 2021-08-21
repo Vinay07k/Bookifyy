@@ -102,11 +102,11 @@ class _BlurbItemState extends State<BlurbItem> {
                     ///Like and Like count button
                     TextButton.icon(
                       onPressed: () async {
-                        _blurbProvider.toggleLike(
-                          blurbId: widget._blurb.blurbId,
+                        await _blurbProvider.toggleLike(
+                          blurb: widget._blurb,
                           userId: ProfileProvider().currentuserId,
                         );
-                        // setState(() {});
+                        setState(() {});
                       },
                       style: ButtonStyle(
                         foregroundColor: MaterialStateProperty.all(
@@ -146,15 +146,6 @@ class _BlurbItemState extends State<BlurbItem> {
                         },
                       ),
                     ),
-                    // IconButton(
-                    //   onPressed: () {
-                    //     Share.share(
-                    //       'Hey There! I found this awesome platform for wonks to share your feedbacks and learnings. Make sure to check it out! - *Our PlayStore Link*',
-                    //     );
-                    //   },
-                    //   icon: const Icon(Icons.share_outlined),
-                    //   color: Theme.of(context).accentColor,
-                    // ),
                   ],
                 ),
               ],

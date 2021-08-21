@@ -19,9 +19,9 @@ class BlurbItemModal {
   final List<Comment>? comments;
 
   ///List of [BlurbUser]'s ID which liked the Blurb
-  final List<String>? likes;
+  List<String>? likes;
 
-  const BlurbItemModal({
+  BlurbItemModal({
     required this.blurbId,
     required this.userId,
     required this.content,
@@ -34,6 +34,8 @@ class BlurbItemModal {
   int? get likesCount => this.likes?.length;
   String get createdTime => DateFormat('hh:mm').format(this.createdAt);
   String get createdDate => DateFormat('dd-MMMM-yyyy').format(this.createdAt);
+
+  // set updateLike(List<String> likes) => this.likes = likes;
 
   factory BlurbItemModal.fromMap(mappedData) {
     // Timestamp data =  mappedData['createdAt'];

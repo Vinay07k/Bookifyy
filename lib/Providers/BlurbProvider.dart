@@ -52,10 +52,10 @@ class BlurbProvider with ChangeNotifier {
   }
 
   Future<void> toggleLike({
-    required String blurbId,
+    required BlurbItemModal blurb,
     required String userId,
   }) async {
-    DocumentReference _blurbref = _blurbCollection.doc(blurbId);
+    DocumentReference _blurbref = _blurbCollection.doc(blurb.blurbId);
     DocumentSnapshot _blurb = await _blurbref.get();
     Map<String, dynamic> blurbData = _blurb.data() as Map<String, dynamic>;
     // final List = blurbData['likes'];
@@ -67,19 +67,22 @@ class BlurbProvider with ChangeNotifier {
         await _blurbref.update({
           'likes': [userId]
         });
+        blurb.likes = [userId];
       } else {
         ///When the user has not liked this post
         if (!likes.contains(userId)) {
           likes.add(userId);
           await _blurbref.update({'likes': likes});
+          blurb.likes = likes.cast<String>();
 
           ///When the user has already liked the post
         } else {
           likes.remove(userId);
           await _blurbref.update({'likes': likes});
+          blurb.likes = likes.cast<String>();
         }
       }
-      notifyListeners();
+      // notifyListeners();
     } catch (e) {
       print(e);
     }
