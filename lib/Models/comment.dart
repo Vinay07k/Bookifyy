@@ -13,7 +13,9 @@ class Comment {
     return Comment(
       userId: data['userId'],
       commentText: data['commentText'],
-      createdAt: data['createdAt'].toDate(),
+      createdAt: data['createdAt'] == DateTime
+          ? data['createdAt']
+          : data['createdAt'].toDate(),
     );
   }
 }

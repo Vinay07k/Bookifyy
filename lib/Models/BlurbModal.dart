@@ -14,7 +14,7 @@ class BlurbItemModal {
   final DateTime createdAt;
 
   ///List of [Comment] items of the Blurb
-  final List<Map>? comments;
+  List<Map>? comments;
 
   ///List of [BlurbUser]'s ID which liked the Blurb
   List<String>? likes;

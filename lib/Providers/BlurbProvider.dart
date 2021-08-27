@@ -32,7 +32,7 @@ class BlurbProvider with ChangeNotifier {
     List blurbs = _data.docs;
 
     // blurbs.forEach((element) {
-    //   print(element.);
+    //   print(element);
     // });
     return blurbs
         .map((blurbData) => BlurbItemModal.fromMap(blurbData))
@@ -87,8 +87,35 @@ class BlurbProvider with ChangeNotifier {
     } catch (e) {
       print(e);
     }
+  }
 
-    // print(_blurb['likes']);
+  Future<void> writeComment({
+    required BlurbItemModal blurb,
+    required String text,
+  }) async {
+    DocumentSnapshot _blurbSnap =
+        await _blurbCollection.doc(blurb.blurbId).get();
+    Map<String, dynamic> _blurb = _blurbSnap.data() as Map<String, dynamic>;
+    if (_blurb['comments'] == null) {
+      _blurb['comments'] = [
+        {
+          'commentText': text,
+          'createdAt': DateTime.now(),
+          'userId': ProfileProvider().currentuserId,
+        }
+      ];
+    } else {
+      _blurb['comments'].add({
+        'commentText': text,
+        'createdAt': DateTime.now(),
+        'userId': ProfileProvider().currentuserId,
+      });
+    }
+    await _blurbCollection
+        .doc(blurb.blurbId)
+        .update({'comments': _blurb['comments']});
+    blurb.comments = List.from(_blurb['comments']);
+    notifyListeners();
   }
 }
 

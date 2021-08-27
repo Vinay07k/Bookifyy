@@ -4,7 +4,6 @@ import 'package:bookify/Providers/BlurbProvider.dart';
 import 'package:bookify/Providers/ProfileProvider.dart';
 import 'package:bookify/Widgets/loading.dart';
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
 import 'package:share_plus/share_plus.dart';
 
 class PostScreenBlurb extends StatefulWidget {

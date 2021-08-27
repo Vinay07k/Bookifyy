@@ -85,7 +85,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         },
                       ),
                       child: Text(
-                        'Edit Screen',
+                        'Edit Profile',
                         style: TextStyle(
                           color: Theme.of(context).primaryColor,
                           fontWeight: FontWeight.w900,
@@ -139,11 +139,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
             ],
           ),
         ),
-        floatingActionButton: FloatingActionButton(
-          backgroundColor: Theme.of(context).focusColor,
-          onPressed: () => BlurbProvider().getUserBlurbs(user.id),
-          child: Icon(Icons.open_in_new),
-        ),
+        // floatingActionButton: FloatingActionButton(
+        //   backgroundColor: Theme.of(context).focusColor,
+        //   onPressed: () => BlurbProvider().getUserBlurbs(user.id),
+        //   child: Icon(Icons.open_in_new),
+        // ),
       ),
     );
   }

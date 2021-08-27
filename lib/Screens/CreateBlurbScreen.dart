@@ -83,7 +83,9 @@ class _CreateBlurbScreenState extends State<CreateBlurbScreen> {
                       child: Text(
                         '$_contentLength / 300',
                         style: KTextStyles.kAppBarTitle(
-                          Theme.of(context).focusColor,
+                          _contentLength > 300
+                              ? Colors.redAccent
+                              : Theme.of(context).focusColor,
                           14,
                         ),
                       ),

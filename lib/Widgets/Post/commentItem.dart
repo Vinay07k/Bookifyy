@@ -59,7 +59,11 @@ class CommentItem extends StatelessWidget {
                     ),
                   ),
                   trailing: Text(
-                    getDate(commentData['createdAt'].toDate()),
+                    getDate(
+                      commentData['createdAt'] is DateTime
+                          ? commentData['createdAt']
+                          : commentData['createdAt'].toDate(),
+                    ),
                     style: KTextStyles.kCreatedTimeText,
                   ),
                 );
