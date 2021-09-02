@@ -1,16 +1,20 @@
 import 'dart:io';
 
+import 'package:flutter/material.dart';
+import 'package:bookify/Providers/ProfileProvider.dart';
+import 'package:image_picker/image_picker.dart';
+
+//Models import
 import 'package:bookify/Models/Blurbuser.dart';
+
+//Screens import
 import 'package:bookify/Screens/ScreenController.dart';
+
+//Widgets import
+import 'package:bookify/Widgets/buttons.dart';
 import 'package:bookify/Widgets/Scaffold/bottom_snackbar.dart';
 import 'package:bookify/Widgets/inputfield.dart';
 import 'package:bookify/Widgets/loading.dart';
-import 'package:flutter/material.dart';
-
-import 'package:bookify/Widgets/buttons.dart';
-
-import 'package:bookify/Providers/ProfileProvider.dart';
-import 'package:image_picker/image_picker.dart';
 
 import '../constants.dart';
 
