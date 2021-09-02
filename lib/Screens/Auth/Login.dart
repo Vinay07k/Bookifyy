@@ -1,4 +1,3 @@
-import 'package:bookify/Screens/Auth/Inputdetail.dart';
 import 'package:bookify/Widgets/loading.dart';
 import 'package:flutter/material.dart';
 import 'package:bookify/Widgets/Scaffold/bottom_snackbar.dart';

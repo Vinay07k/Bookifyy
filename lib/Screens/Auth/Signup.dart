@@ -1,5 +1,4 @@
 import 'package:bookify/Providers/Authentication.dart';
-import 'package:bookify/Screens/Auth/Inputdetail.dart';
 import 'package:bookify/Screens/ScreenController.dart';
 import 'package:bookify/Widgets/Scaffold/bottom_snackbar.dart';
 import 'package:bookify/Widgets/loading.dart';

@@ -1,3 +1,7 @@
+import 'package:bookify/Models/BlurbModal.dart';
+import 'package:bookify/Providers/BlurbProvider.dart';
+import 'package:bookify/Widgets/Post/blurbItem.dart';
+import 'package:bookify/Widgets/loading.dart';
 import 'package:flutter/material.dart';
 
 //Modal Imports
@@ -21,6 +25,7 @@ class ProfileScreen extends StatefulWidget {
 
 class _ProfileScreenState extends State<ProfileScreen> {
   late BlurbUser user;
+
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
@@ -31,7 +36,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
   @override
   Widget build(BuildContext context) {
-    print(user);
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
@@ -48,78 +52,98 @@ class _ProfileScreenState extends State<ProfileScreen> {
           ],
         ),
         extendBodyBehindAppBar: true,
-        body: Column(
-          children: [
-            // * : For Top Background Image, Profile Avatar and Edit Screen Button
-            Stack(
-              children: [
-                Container(
-                  margin: EdgeInsets.only(bottom: 50),
-                  child: Image.asset('assets/bg.png'),
-                ),
-                Positioned(
-                  left: 20,
-                  bottom: 10,
-                  child: CircleAvatar(
-                    foregroundImage: (user.profilePicUrl != null)
-                        ? NetworkImage(user.profilePicUrl!)
-                        : AssetImage('assets/avatar_placeholder.jpg')
-                            as ImageProvider,
-                    radius: 40,
-                    backgroundColor: Theme.of(context).primaryColor,
+        body: SingleChildScrollView(
+          child: Column(
+            children: [
+              // * : For Top Background Image, Profile Avatar and Edit Screen Button
+              Stack(
+                children: [
+                  Container(
+                    margin: EdgeInsets.only(bottom: 50),
+                    child: Image.asset('assets/bg.png'),
                   ),
-                ),
-                Positioned(
-                  right: 20,
-                  bottom: -3,
-                  child: CustomElevatedButton(
-                    onPressedFunction: () => Navigator.of(context).pushNamed(
-                      EditScreen.routeName,
-                      arguments: {
-                        'user': user,
-                      },
+                  Positioned(
+                    left: 20,
+                    bottom: 10,
+                    child: CircleAvatar(
+                      foregroundImage: (user.profilePicUrl != null)
+                          ? NetworkImage(user.profilePicUrl!)
+                          : AssetImage('assets/avatar_placeholder.jpg')
+                              as ImageProvider,
+                      radius: 40,
+                      backgroundColor: Theme.of(context).primaryColor,
                     ),
-                    child: Text(
-                      'Edit Screen',
-                      style: TextStyle(
-                        color: Theme.of(context).primaryColor,
-                        fontWeight: FontWeight.w900,
-                        fontSize: 16,
+                  ),
+                  Positioned(
+                    right: 20,
+                    bottom: -3,
+                    child: CustomElevatedButton(
+                      onPressedFunction: () => Navigator.of(context).pushNamed(
+                        EditScreen.routeName,
+                        arguments: {
+                          'user': user,
+                        },
                       ),
+                      child: Text(
+                        'Edit Profile',
+                        style: TextStyle(
+                          color: Theme.of(context).primaryColor,
+                          fontWeight: FontWeight.w900,
+                          fontSize: 16,
+                        ),
+                      ),
+                      size: Size(80, 35),
                     ),
-                    size: Size(80, 35),
                   ),
-                ),
-              ],
-            ),
-            DescriptionBox(
-              fullname: user.fullname,
-              bio: user.bio,
-              dateJoined: user.dateJoined,
-              username: user.username,
-              instahandle: user.instahandle,
-              followers: user.followers,
-              following: user.followings,
-            ),
-            //User posts
-            Expanded(
-              child: Center(
-                child: Text(
-                  'No Posts yet',
-                  style: TextStyle(
-                    color: Theme.of(context).accentColor,
-                    // fontSize: 16,
-                  ),
-                ),
+                ],
               ),
-            )
-          ],
+              DescriptionBox(
+                fullname: user.fullname,
+                bio: user.bio,
+                dateJoined: user.dateJoined,
+                username: user.username,
+                instahandle: user.instahandle,
+                followers: user.followers,
+                following: user.followings,
+              ),
+              //User posts
+              FutureBuilder(
+                future: BlurbProvider().getUserBlurbs(user.id),
+                builder:
+                    (context, AsyncSnapshot<List<BlurbItemModal>?> snapshot) {
+                  if (snapshot.connectionState != ConnectionState.done)
+                    return Loading();
+
+                  List<BlurbItemModal>? _blurbs = snapshot.data!;
+
+                  return _blurbs.isEmpty
+                      ? Center(
+                          child: Text(
+                            'No Posts yet',
+                            style: TextStyle(
+                              color: Theme.of(context).accentColor,
+                              fontSize: 16,
+                            ),
+                          ),
+                        )
+                      : ListView.builder(
+                          shrinkWrap: true,
+                          physics: NeverScrollableScrollPhysics(),
+                          itemCount: _blurbs.length,
+                          itemBuilder: (context, index) {
+                            return BlurbItem(_blurbs[index]);
+                          },
+                        );
+                },
+              )
+            ],
+          ),
         ),
-        floatingActionButton: FloatingActionButton(
-          backgroundColor: Theme.of(context).focusColor,
-          onPressed: () {},
-          child: Icon(Icons.open_in_new),
-        ),
+        // floatingActionButton: FloatingActionButton(
+        //   backgroundColor: Theme.of(context).focusColor,
+        //   onPressed: () => BlurbProvider().getUserBlurbs(user.id),
+        //   child: Icon(Icons.open_in_new),
+        // ),
       ),
     );
   }

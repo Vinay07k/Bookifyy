@@ -10,6 +10,7 @@ Widget inputtextField({
   String? prefixtext,
   bool disable = false,
   TextInputAction? textInputAction,
+  FocusNode? focusNode,
 }) =>
     Center(
       child: Container(
@@ -20,6 +21,7 @@ Widget inputtextField({
           borderRadius: BorderRadius.circular(10),
         ),
         child: TextFormField(
+          focusNode: focusNode,
           textInputAction: textInputAction,
           readOnly: disable,
           controller: controller,

@@ -1,8 +1,17 @@
+import 'package:bookify/Models/Blurbuser.dart';
+import 'package:bookify/Providers/BlurbProvider.dart';
+import 'package:bookify/Providers/ProfileProvider.dart';
+import 'package:bookify/Widgets/loading.dart';
 import 'package:bookify/constants.dart';
 import 'package:flutter/material.dart';
 
 class CommentItem extends StatelessWidget {
-  const CommentItem({Key? key}) : super(key: key);
+  const CommentItem({
+    Key? key,
+    required this.commentData,
+  }) : super(key: key);
+
+  final Map<String, dynamic> commentData;
 
   @override
   Widget build(BuildContext context) {
@@ -18,34 +27,47 @@ class CommentItem extends StatelessWidget {
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
-          ListTile(
-            onTap: () {},
-            contentPadding: const EdgeInsets.only(left: 10, right: 12),
-            leading: CircleAvatar(
-              radius: 20,
-              foregroundImage: AssetImage('assets/download.jpeg'),
-            ),
-            title: Text(
-              'Madara Uchiha',
-              style: const TextStyle(
-                color: Colors.white,
-                fontSize: 14,
-                fontWeight: FontWeight.w600,
-                letterSpacing: 0.6,
-              ),
-            ),
-            subtitle: const Text(
-              'Replying to @theonlyone',
-              style: TextStyle(
-                fontSize: 10,
-                color: Colors.yellow,
-              ),
-            ),
-            trailing: Text(
-              '11m ago',
-              style: KTextStyles.kCreatedTimeText,
-            ),
-          ),
+          FutureBuilder(
+              future: getUserdetails(),
+              builder: (context, AsyncSnapshot<BlurbUser> snapshot) {
+                if (snapshot.connectionState != ConnectionState.done)
+                  return Loading();
+                return ListTile(
+                  contentPadding: const EdgeInsets.only(left: 10, right: 12),
+                  leading: CircleAvatar(
+                    radius: 20,
+                    backgroundColor: Theme.of(context).primaryColor,
+                    foregroundImage: snapshot.data!.profilePicUrl == null
+                        ? AssetImage('assets/avatar_placeholder.jpg')
+                        : NetworkImage(snapshot.data!.profilePicUrl!)
+                            as ImageProvider,
+                  ),
+                  title: Text(
+                    snapshot.data!.fullname,
+                    style: const TextStyle(
+                      color: Colors.white,
+                      fontSize: 14,
+                      fontWeight: FontWeight.w600,
+                      letterSpacing: 0.6,
+                    ),
+                  ),
+                  subtitle: Text(
+                    'Replying to ${snapshot.data!.username}',
+                    style: const TextStyle(
+                      fontSize: 10,
+                      color: Colors.yellow,
+                    ),
+                  ),
+                  trailing: Text(
+                    getDate(
+                      commentData['createdAt'] is DateTime
+                          ? commentData['createdAt']
+                          : commentData['createdAt'].toDate(),
+                    ),
+                    style: KTextStyles.kCreatedTimeText,
+                  ),
+                );
+              }),
           Padding(
             padding: const EdgeInsets.only(
               right: 10.0,
@@ -53,12 +75,22 @@ class CommentItem extends StatelessWidget {
               bottom: 10.0,
             ),
             child: Text(
-              'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mi posue fames pulvinar posuere. Eget vel sed ultrices mauris vestibulum, fringilla diam a. Ornare facilisis id turpis aliquam. Neque senectus sed vitae vestibulum et massa enim tempor.',
+              commentData['commentText'],
               style: KTextStyles.kDescriptionText,
             ),
           ),
         ],
       ),
     );
+  }
+
+  Future<BlurbUser> getUserdetails() async {
+    // setState(() => _loading = true);
+    return await ProfileProvider().getUser(commentData['userId']);
+
+    // fullname = user.fullname;
+    // username = user.username;
+    // profilePicUrl = user.profilePicUrl;
+    // setState(() => _loading = false);
   }
 }

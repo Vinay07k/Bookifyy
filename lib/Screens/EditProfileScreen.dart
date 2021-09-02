@@ -200,7 +200,7 @@ class _EditScreenState extends State<EditScreen> {
       print(e);
     }
 
-    Navigator.of(context).pushNamed(ScreenController.routeName);
+    Navigator.of(context).pushReplacementNamed(ScreenController.routeName);
   }
 
   void avatarImagePicker() async {

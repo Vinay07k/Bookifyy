@@ -1,3 +1,4 @@
+import 'package:bookify/Providers/BlurbProvider.dart';
 import 'package:bookify/Screens/AboutUs.dart';
 import 'package:bookify/Screens/Auth/Inputdetail.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -5,6 +6,7 @@ import 'package:flutter/material.dart';
 
 //Packages Imports
 import 'package:animated_splash_screen/animated_splash_screen.dart';
+import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 //Firebase Imports
@@ -27,8 +29,18 @@ import 'package:bookify/Screens/EditProfileScreen.dart';
 import 'package:bookify/Screens/InviteContactsScreen.dart';
 import 'package:bookify/Screens/ScreenController.dart';
 
+import 'package:provider/provider.dart';
+
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
+
+  SystemChrome.setSystemUIOverlayStyle(
+    SystemUiOverlayStyle(statusBarColor: Colors.transparent),
+  );
+  SystemChrome.setPreferredOrientations([
+    DeviceOrientation.portraitDown,
+    DeviceOrientation.portraitUp,
+  ]);
 
   runApp(MyApp());
 }
@@ -43,71 +55,74 @@ class MyApp extends StatelessWidget {
           return Center(
             child: CircularProgressIndicator(),
           );
-        return MaterialApp(
-          debugShowCheckedModeBanner: false,
-          title: 'Bookify',
-          theme: ThemeData(
-            scaffoldBackgroundColor: Colors.black,
-            primaryColor: Colors.black,
-            accentColor: Colors.white,
-            focusColor: Colors.yellow,
-            cardColor: Color.fromRGBO(23, 23, 23, 1),
-            textTheme: GoogleFonts.poppinsTextTheme(
-              Theme.of(context).textTheme,
+        return ChangeNotifierProvider<BlurbProvider>(
+          create: (context) => BlurbProvider(),
+          child: MaterialApp(
+            debugShowCheckedModeBanner: false,
+            title: 'Bookify',
+            theme: ThemeData(
+              scaffoldBackgroundColor: Colors.black,
+              primaryColor: Colors.black,
+              accentColor: Colors.white,
+              focusColor: Colors.yellow,
+              cardColor: Color.fromRGBO(23, 23, 23, 1),
+              textTheme: GoogleFonts.poppinsTextTheme(
+                Theme.of(context).textTheme,
+              ),
             ),
-          ),
-          home: Builder(
-            builder: (BuildContext context) {
-              ScreenSize.intialize(context);
-              return AnimatedSplashScreen(
-                splashIconSize: double.infinity,
-                splash: 'assets/splashscreenicon.png',
-                nextScreen: StreamBuilder(
-                  stream: FirebaseAuth.instance.authStateChanges(),
-                  builder:
-                      (BuildContext context, AsyncSnapshot<User?> snapshot) {
-                    //Loginscreen if no logged in User found
-                    if (snapshot.data == null) return LoginScreen();
+            home: Builder(
+              builder: (BuildContext context) {
+                ScreenSize.intialize(context);
+                return AnimatedSplashScreen(
+                  splashIconSize: double.infinity,
+                  splash: 'assets/splashscreenicon.png',
+                  nextScreen: StreamBuilder(
+                    stream: FirebaseAuth.instance.authStateChanges(),
+                    builder:
+                        (BuildContext context, AsyncSnapshot<User?> snapshot) {
+                      //Loginscreen if no logged in User found
+                      if (snapshot.data == null) return LoginScreen();
 
-                    // print(snapshot.data);
-                    //Homescreen if logged in User found
-                    return ScreenController();
-                  },
-                ),
-                duration: 500,
-                backgroundColor: Theme.of(context).primaryColor,
-                splashTransition: SplashTransition.fadeTransition,
-              );
+                      //Homescreen if logged in User found
+                      return ScreenController();
+                    },
+                  ),
+                  duration: 500,
+                  backgroundColor: Theme.of(context).primaryColor,
+                  splashTransition: SplashTransition.fadeTransition,
+                );
+              },
+            ),
+            routes: {
+              SearchScreen.routeName: (context) => SearchScreen(),
+
+              //Authentication screens
+              SignUpScreen.routeName: (context) => SignUpScreen(),
+              LoginScreen().routeName: (context) => LoginScreen(),
+              AddProfilePictureScreen.routeName: (context) =>
+                  AddProfilePictureScreen(),
+              InputDetail.routeName: (context) => InputDetail(),
+
+              //Blurb screens
+              BlurbScreen().routeName: (context) => BlurbScreen(),
+              ScreenController.routeName: (context) => ScreenController(),
+              AboutUs.routeName: (context) => AboutUs(),
+              InviteContactsScreen.routeName: (context) =>
+                  InviteContactsScreen(),
+              CreateBlurbScreen.routeName: (context) => CreateBlurbScreen(),
+
+              //Profile related screen
+              ProfileScreen.routeName: (context) => ProfileScreen(),
+              EditScreen.routeName: (context) => EditScreen(),
+
+              //Book related screens
+              BookDetailScreen.routeName: (context) => BookDetailScreen(),
+
+              //Order related screens
+              InputMobileNumberScreen.routeName: (context) =>
+                  InputMobileNumberScreen(),
             },
           ),
-          routes: {
-            SearchScreen.routeName: (context) => SearchScreen(),
-
-            //Authentication screens
-            SignUpScreen.routeName: (context) => SignUpScreen(),
-            LoginScreen().routeName: (context) => LoginScreen(),
-            AddProfilePictureScreen.routeName: (context) =>
-                AddProfilePictureScreen(),
-            InputDetail.routeName: (context) => InputDetail(),
-
-            //Blurb screens
-            PostScreen().routeName: (context) => PostScreen(),
-            ScreenController.routeName: (context) => ScreenController(),
-            AboutUs.routeName: (context) => AboutUs(),
-            InviteContactsScreen.routeName: (context) => InviteContactsScreen(),
-            CreateBlurbScreen.routeName: (context) => CreateBlurbScreen(),
-
-            //Profile related screen
-            ProfileScreen.routeName: (context) => ProfileScreen(),
-            EditScreen.routeName: (context) => EditScreen(),
-
-            //Book related screens
-            BookDetailScreen.routeName: (context) => BookDetailScreen(),
-
-            //Order related screens
-            InputMobileNumberScreen.routeName: (context) =>
-                InputMobileNumberScreen(),
-          },
         );
       },
     );

@@ -20,4 +20,18 @@ class BlurbUser {
     required this.followers,
     required this.followings,
   });
+
+  factory BlurbUser.mapToBlurbUser(Map mappedUserData) {
+    return BlurbUser(
+      id: mappedUserData['uid'],
+      fullname: mappedUserData['fullname'],
+      username: mappedUserData['username'],
+      dateJoined: mappedUserData['createdAt'].toDate(),
+      bio: mappedUserData['bio'],
+      profilePicUrl: mappedUserData['profilePicUrl'],
+      followers: mappedUserData['followers'],
+      followings: mappedUserData['followings'],
+      instahandle: mappedUserData['instahandle'],
+    );
+  }
 }
