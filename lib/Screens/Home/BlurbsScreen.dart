@@ -36,11 +36,8 @@ class _BlurbsScreenState extends State<BlurbsScreen> {
             return Padding(
               padding: const EdgeInsets.only(top: 10.0),
               child: ListView.builder(
-                // physics: BouncingScrollPhysics(),
                 itemCount: _blurbs.length,
-                itemBuilder: (context, index) {
-                  return BlurbItem(_blurbs[index]);
-                },
+                itemBuilder: (context, index) => BlurbItem(_blurbs[index]),
               ),
             );
           },

@@ -37,7 +37,7 @@ class BlurbItemModal {
 
   factory BlurbItemModal.fromMap(mappedData) {
     // var data = mappedData['comments'];
-    // print((data) is List);
+    print(mappedData.id);
     return BlurbItemModal(
       blurbId: mappedData.id,
       userId: mappedData['userId'],

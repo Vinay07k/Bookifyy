@@ -127,12 +127,12 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           ),
                         )
                       : ListView.builder(
+                          padding: const EdgeInsets.all(0),
                           shrinkWrap: true,
                           physics: NeverScrollableScrollPhysics(),
                           itemCount: _blurbs.length,
-                          itemBuilder: (context, index) {
-                            return BlurbItem(_blurbs[index]);
-                          },
+                          itemBuilder: (context, index) =>
+                              BlurbItem(_blurbs[index]),
                         );
                 },
               )

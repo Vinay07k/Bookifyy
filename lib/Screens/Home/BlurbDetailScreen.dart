@@ -1,6 +1,5 @@
 import 'package:bookify/Models/BlurbModal.dart';
 import 'package:bookify/Providers/BlurbProvider.dart';
-import 'package:bookify/Providers/ProfileProvider.dart';
 import 'package:bookify/Widgets/buttons.dart';
 import 'package:bookify/Widgets/inputfield.dart';
 import 'package:flutter/material.dart';

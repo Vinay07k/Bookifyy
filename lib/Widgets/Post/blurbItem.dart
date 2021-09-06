@@ -2,6 +2,7 @@ import 'package:bookify/Models/BlurbModal.dart';
 import 'package:bookify/Models/Blurbuser.dart';
 import 'package:bookify/Providers/BlurbProvider.dart';
 import 'package:bookify/Providers/ProfileProvider.dart';
+import 'package:bookify/Screens/Home/ProfileScreen.dart';
 import 'package:bookify/Widgets/loading.dart';
 import 'package:bookify/constants.dart';
 import 'package:flutter/material.dart';
@@ -50,7 +51,13 @@ class _BlurbItemState extends State<BlurbItem> {
           _loading
               ? Loading()
               : ListTile(
-                  onTap: () {},
+                  onTap: () async {
+                    print('tapped');
+                    BlurbUser user =
+                        await ProfileProvider().getUser(widget._blurb.userId);
+                    Navigator.of(context).pushNamed(ProfileScreen.routeName,
+                        arguments: {'user': user});
+                  },
                   contentPadding: const EdgeInsets.only(left: 10, right: 14),
                   leading: CircleAvatar(
                     radius: 24,

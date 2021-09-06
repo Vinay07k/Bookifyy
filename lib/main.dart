@@ -1,6 +1,4 @@
 import 'package:bookify/Providers/BlurbProvider.dart';
-import 'package:bookify/Screens/AboutUs.dart';
-import 'package:bookify/Screens/Auth/Inputdetail.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
@@ -22,6 +20,8 @@ import 'package:bookify/Screens/Auth/Signup.dart';
 import 'package:bookify/Screens/Home/ProfileScreen.dart';
 import 'package:bookify/Screens/Home/BookDetailScreen.dart';
 import 'package:bookify/Screens/Home/BlurbDetailScreen.dart';
+import 'package:bookify/Screens/AboutUs.dart';
+import 'package:bookify/Screens/Auth/Inputdetail.dart';
 import 'package:bookify/Screens/CreateBlurbScreen.dart';
 import 'package:bookify/Screens/InputMobileNumberScreen.dart';
 import 'package:bookify/Screens/SearchScreen.dart';
