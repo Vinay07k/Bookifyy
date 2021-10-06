@@ -1,5 +1,6 @@
 import 'package:bookify/Models/BlurbModal.dart';
 import 'package:bookify/Providers/BlurbProvider.dart';
+import 'package:bookify/Providers/ProfileProvider.dart';
 import 'package:bookify/Widgets/Post/blurbItem.dart';
 import 'package:bookify/Widgets/loading.dart';
 import 'package:flutter/material.dart';
@@ -78,14 +79,17 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     right: 20,
                     bottom: -3,
                     child: CustomElevatedButton(
-                      onPressedFunction: () => Navigator.of(context).pushNamed(
-                        EditScreen.routeName,
-                        arguments: {
-                          'user': user,
-                        },
-                      ),
+                      onPressedFunction: ProfileProvider().currentuserId ==
+                              user.id
+                          ? () => Navigator.of(context)
+                                  .pushNamed(EditScreen.routeName, arguments: {
+                                'user': user,
+                              })
+                          : () {},
                       child: Text(
-                        'Edit Profile',
+                        ProfileProvider().currentuserId == user.id
+                            ? 'Edit Profile'
+                            : 'Follow',
                         style: TextStyle(
                           color: Theme.of(context).primaryColor,
                           fontWeight: FontWeight.w900,

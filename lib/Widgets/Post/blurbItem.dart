@@ -22,6 +22,7 @@ class BlurbItem extends StatefulWidget {
 
 class _BlurbItemState extends State<BlurbItem> {
   bool _loading = false;
+  late final BlurbUser user;
 
   late String fullname;
   late String username;
@@ -52,11 +53,15 @@ class _BlurbItemState extends State<BlurbItem> {
               ? Loading()
               : ListTile(
                   onTap: () async {
-                    print('tapped');
-                    BlurbUser user =
-                        await ProfileProvider().getUser(widget._blurb.userId);
+                    setState(() {
+                      _loading = true;
+                    });
+
                     Navigator.of(context).pushNamed(ProfileScreen.routeName,
                         arguments: {'user': user});
+                    setState(() {
+                      _loading = false;
+                    });
                   },
                   contentPadding: const EdgeInsets.only(left: 10, right: 14),
                   leading: CircleAvatar(
@@ -167,8 +172,7 @@ class _BlurbItemState extends State<BlurbItem> {
 
   void getUserdetails() async {
     setState(() => _loading = true);
-    final BlurbUser user =
-        await ProfileProvider().getUser(widget._blurb.userId);
+    user = await ProfileProvider().getUser(widget._blurb.userId);
 
     fullname = user.fullname;
     username = user.username;

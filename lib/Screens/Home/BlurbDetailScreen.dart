@@ -1,5 +1,6 @@
 import 'package:bookify/Models/BlurbModal.dart';
 import 'package:bookify/Providers/BlurbProvider.dart';
+import 'package:bookify/Widgets/Scaffold/bottom_snackbar.dart';
 import 'package:bookify/Widgets/buttons.dart';
 import 'package:bookify/Widgets/inputfield.dart';
 import 'package:flutter/material.dart';
@@ -151,11 +152,18 @@ class _CommentSectionState extends State<CommentSection> {
                 CustomElevatedButton(
                   onPressedFunction: () async {
                     _commentFocusNode.unfocus();
-                    await Provider.of<BlurbProvider>(context, listen: false)
-                        .writeComment(
-                      blurb: widget.blurb,
-                      text: _commentController.text.trim(),
-                    );
+                    if (_commentController.text.isEmpty) {
+                      showBottomSnackBar(
+                          context: context, text: 'It can not be empty!');
+                    } else {
+                      await Provider.of<BlurbProvider>(context, listen: false)
+                          .writeComment(
+                        blurb: widget.blurb,
+                        text: _commentController.text.trim(),
+                      );
+                      _commentController.clear();
+                    }
+
                     setState(() {});
                   },
                   child: Text(

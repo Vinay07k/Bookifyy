@@ -2,6 +2,7 @@ import 'package:bookify/Models/BlurbModal.dart';
 import 'package:bookify/Models/Blurbuser.dart';
 import 'package:bookify/Providers/BlurbProvider.dart';
 import 'package:bookify/Providers/ProfileProvider.dart';
+import 'package:bookify/Screens/Home/ProfileScreen.dart';
 import 'package:bookify/Widgets/loading.dart';
 import 'package:flutter/material.dart';
 import 'package:share_plus/share_plus.dart';
@@ -17,6 +18,8 @@ class PostScreenBlurb extends StatefulWidget {
 
 class _PostScreenBlurbState extends State<PostScreenBlurb> {
   bool _loading = false;
+
+  late final BlurbUser user;
 
   late String fullname;
   late String username;
@@ -45,7 +48,20 @@ class _PostScreenBlurbState extends State<PostScreenBlurb> {
           _loading
               ? Loading()
               : ListTile(
-                  onTap: () {},
+                  onTap: () async {
+                    setState(() {
+                      _loading = true;
+                    });
+                    // BlurbUser user =
+                    //     await ProfileProvider().getUser(widget._blurb.userId);
+                    Navigator.of(context).pushNamed(
+                      ProfileScreen.routeName,
+                      arguments: {'user': user},
+                    );
+                    setState(() {
+                      _loading = false;
+                    });
+                  },
                   contentPadding: EdgeInsets.only(left: 10, right: 14),
                   leading: CircleAvatar(
                     radius: 24,
@@ -145,8 +161,7 @@ class _PostScreenBlurbState extends State<PostScreenBlurb> {
 
   void getUserdetails() async {
     setState(() => _loading = true);
-    final BlurbUser user =
-        await ProfileProvider().getUser(widget._blurb.userId);
+    user = await ProfileProvider().getUser(widget._blurb.userId);
 
     fullname = user.fullname;
     username = user.username;
