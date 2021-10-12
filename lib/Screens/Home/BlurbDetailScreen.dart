@@ -21,6 +21,7 @@ class BlurbScreen extends StatefulWidget {
 }
 
 class _BlurbScreenState extends State<BlurbScreen> {
+  //Comment input field
   bool _shouldBeVisible = true;
   late ScrollController _scrollController;
 

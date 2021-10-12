@@ -34,6 +34,22 @@ class ProfileProvider {
     });
   }
 
+  ///Get users details from user id's
+  Future<List<BlurbUser>> getUsers(List<String> userIds) async {
+    QuerySnapshot response = await _firebaseCloud
+        .collection('users')
+        .where(FieldPath.documentId, whereIn: userIds)
+        .get();
+    // print(response.docs[0].data());
+    return response.docs
+        .map(
+          (userData) => BlurbUser.mapToBlurbUser(
+            {'uid': '', ...userData.data() as Map<dynamic, dynamic>},
+          ),
+        )
+        .toList();
+  }
+
   ///To update User profile details
   Future<void> updateProfile({
     required Map<String, String?> updatedProfileDetails,

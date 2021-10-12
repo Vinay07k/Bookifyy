@@ -3,6 +3,7 @@ import 'package:bookify/Models/Blurbuser.dart';
 import 'package:bookify/Providers/BlurbProvider.dart';
 import 'package:bookify/Providers/ProfileProvider.dart';
 import 'package:bookify/Screens/Home/ProfileScreen.dart';
+import 'package:bookify/Screens/ListUsersScreen.dart';
 import 'package:bookify/Widgets/loading.dart';
 import 'package:flutter/material.dart';
 import 'package:share_plus/share_plus.dart';
@@ -105,35 +106,64 @@ class _PostScreenBlurbState extends State<PostScreenBlurb> {
                 ),
                 Divider(
                   color: Colors.white,
+                  height: 2,
                 ),
-                // Text(
-                //   '42 Likes',
-                //   textAlign: TextAlign.start,
-                //   style: TextStyle(color: Colors.white),
-                // ),
-                // Divider(
-                //   color: Colors.white,
-                // ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    TextButton(
+                      onPressed: () => Navigator.of(context).push(
+                        MaterialPageRoute(
+                          builder: (context) => ListUsersScreen(
+                            title: 'Liked By',
+                            userIds: widget._blurb.likes,
+                          ),
+                        ),
+                      ),
+                      child: Text(
+                        '${widget._blurb.likesCount ?? 0} likes',
+                        textAlign: TextAlign.start,
+                        style: TextStyle(color: Colors.white),
+                      ),
+                    ),
+                    TextButton(
+                      onPressed: () {},
+                      child: Text(
+                        '${widget._blurb.commentCount ?? 0} comments',
+                        textAlign: TextAlign.start,
+                        style: TextStyle(color: Colors.white),
+                      ),
+                    ),
+                  ],
+                ),
+                Divider(
+                  color: Colors.white,
+                  height: 2,
+                ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    TextButton.icon(
+                    IconButton(
                       onPressed: () {},
-                      style: ButtonStyle(
-                        foregroundColor: MaterialStateProperty.all(
-                            Theme.of(context).focusColor),
+                      // style: ButtonStyle(
+                      //   foregroundColor: MaterialStateProperty.all(
+                      //       Theme.of(context).focusColor),
+                      // ),
+                      icon: Icon(
+                        Icons.favorite,
                       ),
-                      icon: Icon(Icons.favorite),
-                      label: Text('${widget._blurb.likesCount ?? 0}'),
+                      color: Theme.of(context).focusColor,
+                      // label: Text('${widget._blurb.likesCount ?? 0}'),
                     ),
-                    TextButton.icon(
+                    IconButton(
                       onPressed: () {},
-                      style: ButtonStyle(
-                        foregroundColor:
-                            MaterialStateProperty.all(Colors.white),
-                      ),
+                      // style: ButtonStyle(
+                      //   foregroundColor:
+                      //       MaterialStateProperty.all(Colors.white),
+                      // ),
                       icon: Icon(Icons.comment_outlined),
-                      label: Text('${widget._blurb.commentCount ?? 0}'),
+                      color: Theme.of(context).accentColor,
+                      // label: Text('${widget._blurb.commentCount ?? 0}'),
                     ),
                     Padding(
                       padding: const EdgeInsets.only(right: 8.0),

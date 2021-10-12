@@ -61,6 +61,10 @@ class MyApp extends StatelessWidget {
             debugShowCheckedModeBanner: false,
             title: 'Bookify',
             theme: ThemeData(
+              appBarTheme: AppBarTheme(
+                backgroundColor: Colors.transparent,
+                elevation: 0,
+              ),
               scaffoldBackgroundColor: Colors.black,
               primaryColor: Colors.black,
               accentColor: Colors.white,
