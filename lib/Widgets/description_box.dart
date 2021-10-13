@@ -1,3 +1,4 @@
+import 'package:bookify/Widgets/buttons.dart';
 import 'package:bookify/constants.dart';
 import 'package:flutter/material.dart';
 
@@ -5,21 +6,23 @@ class DescriptionBox extends StatelessWidget {
   final String fullname;
   final String username;
   final String? bio;
+  final String? profilePicUrl;
   final DateTime dateJoined;
   final String? instahandle;
   final List<String>? followers;
   final List<String>? following;
 
-  const DescriptionBox({
-    Key? key,
-    required this.fullname,
-    required this.username,
-    required this.bio,
-    required this.dateJoined,
-    required this.instahandle,
-    required this.followers,
-    required this.following,
-  }) : super(key: key);
+  const DescriptionBox(
+      {Key? key,
+      required this.fullname,
+      required this.username,
+      required this.bio,
+      required this.dateJoined,
+      required this.instahandle,
+      required this.followers,
+      required this.following,
+      required this.profilePicUrl})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -29,21 +32,68 @@ class DescriptionBox extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(
-            fullname,
-            style: TextStyle(
-              fontSize: 18,
-              fontWeight: FontWeight.bold,
-              color: Theme.of(context).accentColor,
-            ),
-          ),
-          Text(
-            username,
-            style: const TextStyle(
-              fontSize: 14,
-              fontWeight: FontWeight.w400,
-              color: Color.fromRGBO(196, 196, 196, 1),
-            ),
+          Row(
+            children: [
+              Expanded(
+                child: CircleAvatar(
+                  radius: 40,
+                  foregroundImage: NetworkImage(
+                    profilePicUrl ??
+                        'https://wallpaperaccess.com/full/6186864.jpg',
+                  ),
+                ),
+              ),
+              Expanded(
+                flex: 2,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      fullname,
+                      style: TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.bold,
+                        color: Theme.of(context).accentColor,
+                      ),
+                    ),
+                    Text(
+                      username,
+                      style: const TextStyle(
+                        fontSize: 12,
+                        fontWeight: FontWeight.w400,
+                        color: Color.fromRGBO(196, 196, 196, 1),
+                      ),
+                    ),
+                    SizedBox(
+                      height: 18,
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          '${followers ?? 0} Followers',
+                          style: TextStyle(
+                            letterSpacing: 0.8,
+                            color: Theme.of(context).accentColor,
+                            fontSize: 14,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        Text(
+                          '${following ?? 0} Following',
+                          style: TextStyle(
+                            letterSpacing: 0.8,
+                            color: Theme.of(context).accentColor,
+                            fontSize: 14,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+              ),
+            ],
           ),
           const SizedBox(height: 12),
           Text(
@@ -93,36 +143,10 @@ class DescriptionBox extends StatelessWidget {
             ],
           ),
           const SizedBox(height: 15),
-          Row(
-            children: [
-              Expanded(
-                child: Text(
-                  '${followers ?? 0} Followers',
-                  style: TextStyle(
-                    letterSpacing: 0.8,
-                    color: Theme.of(context).accentColor,
-                    fontSize: 16,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-              ),
-              Expanded(
-                child: Text(
-                  '${following ?? 0} Following',
-                  style: TextStyle(
-                    letterSpacing: 0.8,
-                    color: Theme.of(context).accentColor,
-                    fontSize: 16,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-              ),
-            ],
-          ),
-          Divider(
-            color: Theme.of(context).accentColor,
-            height: 25,
-          ),
+          // Divider(
+          //   color: Theme.of(context).accentColor,
+          //   height: 25,
+          // ),
         ],
       ),
     );

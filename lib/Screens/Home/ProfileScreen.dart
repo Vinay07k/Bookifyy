@@ -1,47 +1,43 @@
-import 'package:bookify/Models/BlurbModal.dart';
+import 'package:bookify/constants.dart';
+import 'package:flutter/material.dart';
 import 'package:bookify/Providers/BlurbProvider.dart';
 import 'package:bookify/Providers/ProfileProvider.dart';
-import 'package:bookify/Widgets/Post/blurbItem.dart';
-import 'package:bookify/Widgets/loading.dart';
-import 'package:flutter/material.dart';
 
 //Modal Imports
+import 'package:bookify/Models/BlurbModal.dart';
 import 'package:bookify/Models/Blurbuser.dart';
 
 //Screen imports
 import 'package:bookify/Screens/EditProfileScreen.dart';
 
 //Widgets imports
+import 'package:bookify/Widgets/Post/blurbItem.dart';
+import 'package:bookify/Widgets/loading.dart';
 import 'package:bookify/Widgets/buttons.dart';
 import 'package:bookify/Widgets/description_box.dart';
 import 'package:bookify/Widgets/profile_info_dialog.dart';
 
-class ProfileScreen extends StatefulWidget {
+class ProfileScreen extends StatelessWidget {
   static final routeName = '/profile-screen';
-  const ProfileScreen({Key? key}) : super(key: key);
+  ProfileScreen({Key? key}) : super(key: key);
 
-  @override
-  _ProfileScreenState createState() => _ProfileScreenState();
-}
-
-class _ProfileScreenState extends State<ProfileScreen> {
-  late BlurbUser user;
-
-  @override
-  void didChangeDependencies() {
-    super.didChangeDependencies();
-    final Map<String, BlurbUser> data =
-        ModalRoute.of(context)!.settings.arguments as Map<String, BlurbUser>;
-    user = data['user']!;
-  }
+  late final BlurbUser user;
 
   @override
   Widget build(BuildContext context) {
+    final Map<String, BlurbUser> data =
+        ModalRoute.of(context)!.settings.arguments as Map<String, BlurbUser>;
+    user = data['user']!;
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
-          backgroundColor: Colors.transparent,
           elevation: 0,
+          title: Text(
+            'Profile',
+            style: KTextStyles.kAppBarTitle(Colors.white)
+                .copyWith(letterSpacing: 0.5),
+          ),
+          centerTitle: true,
           actions: [
             IconButton(
               onPressed: () => showInfoBox(context),
@@ -52,56 +48,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
             ),
           ],
         ),
-        extendBodyBehindAppBar: true,
         body: SingleChildScrollView(
           child: Column(
             children: [
-              // * : For Top Background Image, Profile Avatar and Edit Screen Button
-              Stack(
-                children: [
-                  Container(
-                    margin: EdgeInsets.only(bottom: 50),
-                    child: Image.asset('assets/bg.png'),
-                  ),
-                  Positioned(
-                    left: 20,
-                    bottom: 10,
-                    child: CircleAvatar(
-                      foregroundImage: (user.profilePicUrl != null)
-                          ? NetworkImage(user.profilePicUrl!)
-                          : AssetImage('assets/avatar_placeholder.jpg')
-                              as ImageProvider,
-                      radius: 40,
-                      backgroundColor: Theme.of(context).primaryColor,
-                    ),
-                  ),
-                  Positioned(
-                    right: 20,
-                    bottom: -3,
-                    child: CustomElevatedButton(
-                      onPressedFunction: ProfileProvider().currentuserId ==
-                              user.id
-                          ? () => Navigator.of(context)
-                                  .pushNamed(EditScreen.routeName, arguments: {
-                                'user': user,
-                              })
-                          : () {},
-                      child: Text(
-                        ProfileProvider().currentuserId == user.id
-                            ? 'Edit Profile'
-                            : 'Follow',
-                        style: TextStyle(
-                          color: Theme.of(context).primaryColor,
-                          fontWeight: FontWeight.w900,
-                          fontSize: 16,
-                        ),
-                      ),
-                      size: Size(80, 35),
-                    ),
-                  ),
-                ],
-              ),
               DescriptionBox(
+                profilePicUrl: user.profilePicUrl,
                 fullname: user.fullname,
                 bio: user.bio,
                 dateJoined: user.dateJoined,
@@ -109,6 +60,22 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 instahandle: user.instahandle,
                 followers: user.followers,
                 following: user.followings,
+              ),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 20),
+                child: CustomElevatedButton(
+                  onPressedFunction: ProfileProvider().currentuserId == user.id
+                      ? () => Navigator.of(context).pushNamed(
+                          EditScreen.routeName,
+                          arguments: {'user': user})
+                      : () {},
+                  child: Text(
+                    ProfileProvider().currentuserId == user.id
+                        ? 'Edit Profile'
+                        : 'Follow',
+                    style: KTextStyles.kButtonText.copyWith(letterSpacing: 0.7),
+                  ),
+                ),
               ),
               //User posts
               FutureBuilder(
@@ -143,11 +110,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
             ],
           ),
         ),
-        // floatingActionButton: FloatingActionButton(
-        //   backgroundColor: Theme.of(context).focusColor,
-        //   onPressed: () => BlurbProvider().getUserBlurbs(user.id),
-        //   child: Icon(Icons.open_in_new),
-        // ),
       ),
     );
   }
