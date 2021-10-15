@@ -71,7 +71,7 @@ class DescriptionBox extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text(
-                          '${followers ?? 0} Followers',
+                          '${followers != null ? followers!.length : 0} Followers',
                           style: TextStyle(
                             letterSpacing: 0.8,
                             color: Theme.of(context).accentColor,
@@ -80,7 +80,7 @@ class DescriptionBox extends StatelessWidget {
                           ),
                         ),
                         Text(
-                          '${following ?? 0} Following',
+                          '${following != null ? following!.length : 0} Following',
                           style: TextStyle(
                             letterSpacing: 0.8,
                             color: Theme.of(context).accentColor,

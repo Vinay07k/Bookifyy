@@ -27,7 +27,7 @@ class Auth {
         'bio': null,
         'instahandle': null,
         'followers': null,
-        'following': null,
+        'followings': null,
         'profilePicUrl': null,
       });
     } on FirebaseAuthException catch (exeception) {

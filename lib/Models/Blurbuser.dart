@@ -6,8 +6,8 @@ class BlurbUser {
   final String? bio;
   final String? profilePicUrl;
   final String? instahandle;
-  final List<String>? followers;
-  final List<String>? followings;
+  List<String>? followers;
+  List<String>? followings;
 
   BlurbUser({
     required this.id,
@@ -22,16 +22,20 @@ class BlurbUser {
   });
 
   factory BlurbUser.mapToBlurbUser(Map mappedUserData) {
-    // print(mappedUserData);
+    print(mappedUserData);
     return BlurbUser(
-      id: mappedUserData['uid'],
+      id: mappedUserData['uid'] ?? '',
       fullname: mappedUserData['fullname'],
       username: mappedUserData['username'],
       dateJoined: mappedUserData['createdAt'].toDate(),
       bio: mappedUserData['bio'],
       profilePicUrl: mappedUserData['profilePicUrl'],
-      followers: mappedUserData['followers'],
-      followings: mappedUserData['followings'],
+      followers: mappedUserData['followers'] == null
+          ? null
+          : List.from(mappedUserData['followers']),
+      followings: mappedUserData['followings'] == null
+          ? null
+          : List.from(mappedUserData['followings']),
       instahandle: mappedUserData['instahandle'],
     );
   }

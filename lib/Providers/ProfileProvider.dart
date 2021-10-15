@@ -18,23 +18,19 @@ class ProfileProvider {
     return await getUser(currentuserId);
   }
 
-  ///To get BlurbUser of the provided "userId"
   Future<BlurbUser> getUser(String userId) async {
-    ///Get user info from CloudFirestore
     final DocumentSnapshot documentSnapshot =
         await _firebaseCloud.collection('users').doc(userId).get();
 
     final Map<String, dynamic> userCredential =
         documentSnapshot.data() as Map<String, dynamic>;
-    // print(userCredential);
-    //
+
     return BlurbUser.mapToBlurbUser({
       'uid': userId,
       ...userCredential,
     });
   }
 
-  ///Get users details from user id's
   Future<List<BlurbUser>> getUsers(List<String> userIds) async {
     QuerySnapshot response = await _firebaseCloud
         .collection('users')
@@ -50,7 +46,6 @@ class ProfileProvider {
         .toList();
   }
 
-  ///To update User profile details
   Future<void> updateProfile({
     required Map<String, String?> updatedProfileDetails,
     File? imageFile,
@@ -78,4 +73,40 @@ class ProfileProvider {
       throw 'Something went wrong! Please try again later.';
     }
   }
+
+  Future<void> followUser(BlurbUser user) async {
+    BlurbUser userDetails = await getUser(user.id);
+
+    if (userDetails.followers == null) {
+      await _firebaseCloud.collection('users').doc(user.id).update({
+        'followers': [this.currentuserId]
+      });
+      user.followers = [this.currentuserId];
+    } else {
+      user.followers!.add(this.currentuserId);
+      await _firebaseCloud.collection('users').doc(user.id).update({
+        'followers': [user.followers]
+      });
+    }
+    //To update user id in active user's following list
+    // DocumentSnapshot currentUser =
+    //     await _firebaseCloud.collection('users').doc(currentuserId).get();
+    // BlurbUser currentUserDetails =
+    //     BlurbUser.mapToBlurbUser(currentUser.data() as Map);
+    BlurbUser currentUserDetails = await getUser(currentuserId);
+
+    if (currentUserDetails.followings == null) {
+      await _firebaseCloud.collection('users').doc(currentuserId).update({
+        'followings': [user.id],
+      });
+    } else {
+      currentUserDetails.followings!.add(user.id);
+      await _firebaseCloud
+          .collection('users')
+          .doc(currentuserId)
+          .update({'followings': currentUserDetails.followings});
+    }
+  }
+
+  Future<void> unfollowUser(String userId) async {}
 }

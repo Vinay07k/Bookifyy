@@ -17,17 +17,27 @@ import 'package:bookify/Widgets/buttons.dart';
 import 'package:bookify/Widgets/description_box.dart';
 import 'package:bookify/Widgets/profile_info_dialog.dart';
 
-class ProfileScreen extends StatelessWidget {
+class ProfileScreen extends StatefulWidget {
   static final routeName = '/profile-screen';
   ProfileScreen({Key? key}) : super(key: key);
 
+  @override
+  State<ProfileScreen> createState() => _ProfileScreenState();
+}
+
+class _ProfileScreenState extends State<ProfileScreen> {
   late final BlurbUser user;
 
   @override
-  Widget build(BuildContext context) {
+  void didChangeDependencies() {
+    super.didChangeDependencies();
     final Map<String, BlurbUser> data =
         ModalRoute.of(context)!.settings.arguments as Map<String, BlurbUser>;
     user = data['user']!;
+  }
+
+  @override
+  Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
@@ -68,11 +78,18 @@ class ProfileScreen extends StatelessWidget {
                       ? () => Navigator.of(context).pushNamed(
                           EditScreen.routeName,
                           arguments: {'user': user})
-                      : () {},
+                      : () async {
+                          await ProfileProvider().followUser(user);
+                          setState(() {});
+                        },
                   child: Text(
                     ProfileProvider().currentuserId == user.id
                         ? 'Edit Profile'
-                        : 'Follow',
+                        : user.followers == null ||
+                                !user.followers!
+                                    .contains(ProfileProvider().currentuserId)
+                            ? 'Follow'
+                            : 'Unfollow',
                     style: KTextStyles.kButtonText.copyWith(letterSpacing: 0.7),
                   ),
                 ),
