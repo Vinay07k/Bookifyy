@@ -11,6 +11,7 @@ class ProfileProvider {
   final FirebaseFirestore _firebaseCloud = FirebaseFirestore.instance;
   final FirebaseStorage _firebaseStorage = FirebaseStorage.instance;
 
+  CollectionReference get usersCollection => _firebaseCloud.collection('users');
   String get currentuserId => _firebaseAuth.currentUser!.uid;
 
   ///Returns Current Logged in UserBlurb object
@@ -20,7 +21,7 @@ class ProfileProvider {
 
   Future<BlurbUser> getUser(String userId) async {
     final DocumentSnapshot documentSnapshot =
-        await _firebaseCloud.collection('users').doc(userId).get();
+        await usersCollection.doc(userId).get();
 
     final Map<String, dynamic> userCredential =
         documentSnapshot.data() as Map<String, dynamic>;
@@ -32,8 +33,7 @@ class ProfileProvider {
   }
 
   Future<List<BlurbUser>> getUsers(List<String> userIds) async {
-    QuerySnapshot response = await _firebaseCloud
-        .collection('users')
+    QuerySnapshot response = await usersCollection
         .where(FieldPath.documentId, whereIn: userIds)
         .get();
     // print(response.docs[0].data());
@@ -64,10 +64,7 @@ class ProfileProvider {
         };
       }
 
-      await _firebaseCloud
-          .collection('users')
-          .doc(currentuserId)
-          .update(updatedProfileDetails);
+      await usersCollection.doc(currentuserId).update(updatedProfileDetails);
     } on Exception catch (e) {
       print(e);
       throw 'Something went wrong! Please try again later.';
@@ -78,28 +75,24 @@ class ProfileProvider {
     BlurbUser userDetails = await getUser(user.id);
 
     if (userDetails.followers == null) {
-      await _firebaseCloud.collection('users').doc(user.id).update({
+      await usersCollection.doc(user.id).update({
         'followers': [this.currentuserId]
       });
       // * : Updating local data to reflect in the app in realtime
       user.followers = [this.currentuserId];
     } else {
       user.followers!.add(this.currentuserId);
-      await _firebaseCloud
-          .collection('users')
-          .doc(user.id)
-          .update({'followers': user.followers});
+      await usersCollection.doc(user.id).update({'followers': user.followers});
     }
     BlurbUser currentUserDetails = await getUser(currentuserId);
 
     if (currentUserDetails.followings == null) {
-      await _firebaseCloud.collection('users').doc(currentuserId).update({
+      await usersCollection.doc(currentuserId).update({
         'followings': [user.id],
       });
     } else {
       currentUserDetails.followings!.add(user.id);
-      await _firebaseCloud
-          .collection('users')
+      await usersCollection
           .doc(currentuserId)
           .update({'followings': currentUserDetails.followings});
     }
@@ -110,16 +103,12 @@ class ProfileProvider {
     if (userDetails.followers!.contains(currentuserId)) {
       user.followers = userDetails.followers;
       user.followers!.remove(currentuserId);
-      await _firebaseCloud
-          .collection('users')
-          .doc(user.id)
-          .update({'followers': user.followers});
+      await usersCollection.doc(user.id).update({'followers': user.followers});
     }
     BlurbUser currentUserDetails = await getUser(currentuserId);
     if (currentUserDetails.followings!.contains(user.id)) {
       currentUserDetails.followings!.remove(user.id);
-      await _firebaseCloud
-          .collection('users')
+      await usersCollection
           .doc(currentuserId)
           .update({'followings': currentUserDetails.followings});
     }
