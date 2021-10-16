@@ -81,18 +81,15 @@ class ProfileProvider {
       await _firebaseCloud.collection('users').doc(user.id).update({
         'followers': [this.currentuserId]
       });
+      // * : Updating local data to reflect in the app in realtime
       user.followers = [this.currentuserId];
     } else {
       user.followers!.add(this.currentuserId);
-      await _firebaseCloud.collection('users').doc(user.id).update({
-        'followers': [user.followers]
-      });
+      await _firebaseCloud
+          .collection('users')
+          .doc(user.id)
+          .update({'followers': user.followers});
     }
-    //To update user id in active user's following list
-    // DocumentSnapshot currentUser =
-    //     await _firebaseCloud.collection('users').doc(currentuserId).get();
-    // BlurbUser currentUserDetails =
-    //     BlurbUser.mapToBlurbUser(currentUser.data() as Map);
     BlurbUser currentUserDetails = await getUser(currentuserId);
 
     if (currentUserDetails.followings == null) {
@@ -108,5 +105,23 @@ class ProfileProvider {
     }
   }
 
-  Future<void> unfollowUser(String userId) async {}
+  Future<void> unFollowUser(BlurbUser user) async {
+    BlurbUser userDetails = await getUser(user.id);
+    if (userDetails.followers!.contains(currentuserId)) {
+      user.followers = userDetails.followers;
+      user.followers!.remove(currentuserId);
+      await _firebaseCloud
+          .collection('users')
+          .doc(user.id)
+          .update({'followers': user.followers});
+    }
+    BlurbUser currentUserDetails = await getUser(currentuserId);
+    if (currentUserDetails.followings!.contains(user.id)) {
+      currentUserDetails.followings!.remove(user.id);
+      await _firebaseCloud
+          .collection('users')
+          .doc(currentuserId)
+          .update({'followings': currentUserDetails.followings});
+    }
+  }
 }

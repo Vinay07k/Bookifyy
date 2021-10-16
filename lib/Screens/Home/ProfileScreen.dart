@@ -78,10 +78,19 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       ? () => Navigator.of(context).pushNamed(
                           EditScreen.routeName,
                           arguments: {'user': user})
-                      : () async {
-                          await ProfileProvider().followUser(user);
-                          setState(() {});
-                        },
+                      : user.followers == null ||
+                              !user.followers!
+                                  .contains(ProfileProvider().currentuserId)
+                          //To Follow
+                          ? () async {
+                              await ProfileProvider().followUser(user);
+                              setState(() {});
+                            }
+                          //To Unfollow
+                          : () async {
+                              await ProfileProvider().unFollowUser(user);
+                              setState(() {});
+                            },
                   child: Text(
                     ProfileProvider().currentuserId == user.id
                         ? 'Edit Profile'
