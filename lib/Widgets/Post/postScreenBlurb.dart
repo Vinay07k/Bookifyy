@@ -117,6 +117,7 @@ class _PostScreenBlurbState extends State<PostScreenBlurb> {
                           builder: (context) => ListUsersScreen(
                             title: 'Liked By',
                             userIds: widget._blurb.likes,
+                            onEmpty: 'No likes yet!',
                           ),
                         ),
                       ),

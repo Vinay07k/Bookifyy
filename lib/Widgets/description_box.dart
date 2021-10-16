@@ -1,4 +1,5 @@
-import 'package:bookify/Widgets/buttons.dart';
+// import 'package:bookify/Widgets/buttons.dart';
+import 'package:bookify/Screens/ListUsersScreen.dart';
 import 'package:bookify/constants.dart';
 import 'package:flutter/material.dart';
 
@@ -70,22 +71,44 @@ class DescriptionBox extends StatelessWidget {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Text(
-                          '${followers != null ? followers!.length : 0} Followers',
-                          style: TextStyle(
-                            letterSpacing: 0.8,
-                            color: Theme.of(context).accentColor,
-                            fontSize: 14,
-                            fontWeight: FontWeight.bold,
+                        GestureDetector(
+                          onTap: () => Navigator.of(context).push(
+                            MaterialPageRoute(
+                              builder: (context) => ListUsersScreen(
+                                onEmpty: 'No Followers yet!',
+                                title: 'Followers',
+                                userIds: followers,
+                              ),
+                            ),
+                          ),
+                          child: Text(
+                            '${followers != null ? followers!.length : 0} Followers',
+                            style: TextStyle(
+                              letterSpacing: 0.8,
+                              color: Theme.of(context).accentColor,
+                              fontSize: 14,
+                              fontWeight: FontWeight.bold,
+                            ),
                           ),
                         ),
-                        Text(
-                          '${following != null ? following!.length : 0} Following',
-                          style: TextStyle(
-                            letterSpacing: 0.8,
-                            color: Theme.of(context).accentColor,
-                            fontSize: 14,
-                            fontWeight: FontWeight.bold,
+                        GestureDetector(
+                          onTap: () => Navigator.of(context).push(
+                            MaterialPageRoute(
+                              builder: (context) => ListUsersScreen(
+                                onEmpty: 'No Followings yet!',
+                                title: 'Followings',
+                                userIds: following,
+                              ),
+                            ),
+                          ),
+                          child: Text(
+                            '${following != null ? following!.length : 0} Following',
+                            style: TextStyle(
+                              letterSpacing: 0.8,
+                              color: Theme.of(context).accentColor,
+                              fontSize: 14,
+                              fontWeight: FontWeight.bold,
+                            ),
                           ),
                         ),
                       ],

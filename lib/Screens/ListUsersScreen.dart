@@ -6,11 +6,13 @@ import 'package:bookify/constants.dart';
 
 class ListUsersScreen extends StatelessWidget {
   final String title;
+  final String onEmpty;
   final List<String>? userIds;
 
   const ListUsersScreen({
     Key? key,
     required this.title,
+    required this.onEmpty,
     required this.userIds,
   }) : super(key: key);
 
@@ -23,7 +25,7 @@ class ListUsersScreen extends StatelessWidget {
         body: userIds == null || userIds!.isEmpty
             ? Center(
                 child: Text(
-                  'No likes yet!',
+                  onEmpty,
                   style: KTextStyles.kAppBarTitle(Theme.of(context).focusColor)
                       .copyWith(),
                 ),
@@ -54,14 +56,29 @@ class ListUsersScreen extends StatelessWidget {
                         users[index].username,
                         style: TextStyle(color: Theme.of(context).accentColor),
                       ),
-                      trailing: CustomElevatedButton(
-                        onPressedFunction: () {},
-                        size: Size(30, 20),
-                        child: Text(
-                          '* 132',
-                          style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                          ),
+                      trailing: Container(
+                        padding: const EdgeInsets.symmetric(horizontal: 4),
+                        decoration: BoxDecoration(
+                          color: Theme.of(context).focusColor,
+                          borderRadius: BorderRadius.circular(12),
+                        ),
+                        child: Row(
+                          mainAxisSize: MainAxisSize.min,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Icon(
+                              Icons.star,
+                              size: 20,
+                              color: Theme.of(context).primaryColor,
+                            ),
+                            Text(
+                              '132',
+                              style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                          ],
                         ),
                       ),
                     ),
