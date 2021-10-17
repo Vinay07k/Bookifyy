@@ -85,9 +85,8 @@ class _BlurbItemState extends State<BlurbItem> {
                   ),
                 ),
           Padding(
-            padding: const EdgeInsets.only(
-              left: 60,
-              right: 10,
+            padding: const EdgeInsets.symmetric(
+              horizontal: 10,
             ),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,

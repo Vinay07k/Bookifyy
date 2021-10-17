@@ -26,6 +26,7 @@ class CommentItem extends StatelessWidget {
       ),
       child: Column(
         mainAxisSize: MainAxisSize.min,
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           FutureBuilder(
               future: getUserdetails(),
