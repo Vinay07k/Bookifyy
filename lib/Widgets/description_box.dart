@@ -2,6 +2,7 @@
 import 'package:bookify/Screens/ListUsersScreen.dart';
 import 'package:bookify/constants.dart';
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class DescriptionBox extends StatelessWidget {
   final String fullname;
@@ -152,14 +153,17 @@ class DescriptionBox extends StatelessWidget {
               const SizedBox(width: 8),
               if (instahandle != null && instahandle!.isNotEmpty)
                 Expanded(
-                  child: Text(
-                    instahandle!,
-                    maxLines: 1,
-                    softWrap: true,
-                    overflow: TextOverflow.ellipsis,
-                    style: TextStyle(
-                      color: Theme.of(context).accentColor,
-                      // fontSize: 16,
+                  child: GestureDetector(
+                    onTap: openInstagramLink,
+                    child: Text(
+                      instahandle!,
+                      maxLines: 1,
+                      softWrap: true,
+                      overflow: TextOverflow.ellipsis,
+                      style: TextStyle(
+                        color: Theme.of(context).accentColor,
+                        // fontSize: 16,
+                      ),
                     ),
                   ),
                 ),
@@ -174,6 +178,10 @@ class DescriptionBox extends StatelessWidget {
       ),
     );
   }
+
+  void openInstagramLink() async => await canLaunch(instahandle!)
+      ? await launch(instahandle!)
+      : throw 'Could not launch $instahandle!';
 }
 
 String monthlyDate(DateTime date) {
