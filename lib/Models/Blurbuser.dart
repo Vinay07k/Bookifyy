@@ -22,7 +22,7 @@ class BlurbUser {
   });
 
   factory BlurbUser.mapToBlurbUser(Map mappedUserData) {
-    print(mappedUserData);
+    // print(mappedUserData);
     return BlurbUser(
       id: mappedUserData['uid'] ?? '',
       fullname: mappedUserData['fullname'],

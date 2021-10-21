@@ -113,4 +113,20 @@ class ProfileProvider {
           .update({'followings': currentUserDetails.followings});
     }
   }
+
+  Future<List<BlurbUser>> searchUsers(String reference) async {
+    QuerySnapshot usersSnapshot = await usersCollection.get();
+
+    List<BlurbUser> users = usersSnapshot.docs
+        .map((e) => BlurbUser.mapToBlurbUser({'uid': e.id, ...e.data() as Map}))
+        .toList();
+
+    List<BlurbUser> result = users
+        .where((user) =>
+            user.username.toLowerCase().contains(reference.toLowerCase()) ||
+            user.fullname.toLowerCase().contains(reference.toLowerCase()))
+        .toList();
+    // print(result);
+    return result;
+  }
 }

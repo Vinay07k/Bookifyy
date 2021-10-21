@@ -34,6 +34,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
     final Map<String, BlurbUser> data =
         ModalRoute.of(context)!.settings.arguments as Map<String, BlurbUser>;
     user = data['user']!;
+    print('>>>>>>>>>>' + user.id);
   }
 
   @override
