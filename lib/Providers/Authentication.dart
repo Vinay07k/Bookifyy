@@ -25,6 +25,7 @@ class Auth {
         'username': username,
         'createdAt': DateTime.now(),
         'bio': null,
+        'blurb_count': 0,
         'instahandle': null,
         'followers': null,
         'followings': null,

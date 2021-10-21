@@ -1,11 +1,13 @@
 import 'package:bookify/Models/BlurbModal.dart';
+import 'package:bookify/Models/Blurbuser.dart';
 import 'package:bookify/Providers/ProfileProvider.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
 class BlurbProvider with ChangeNotifier {
-  // final FirebaseFirestore _firebaseCloud = FirebaseFirestore.instance;
+  final CollectionReference _usersCollection =
+      FirebaseFirestore.instance.collection('users');
   final CollectionReference<Map<String, dynamic>> _blurbCollection =
       FirebaseFirestore.instance.collection('blurbs');
 
@@ -19,6 +21,16 @@ class BlurbProvider with ChangeNotifier {
     };
     try {
       await _blurbCollection.doc().set(_blurb);
+      DocumentSnapshot userDoc =
+          await _usersCollection.doc(ProfileProvider().currentuserId).get();
+
+      Map<String, dynamic> userDetails = userDoc.data() as Map<String, dynamic>;
+
+      userDetails['blurb_count']++;
+      await _usersCollection
+          .doc(ProfileProvider().currentuserId)
+          .update(userDetails);
+
       // notifyListeners();
     } on Exception catch (e) {
       print(e);

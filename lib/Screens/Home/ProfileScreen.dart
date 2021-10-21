@@ -71,6 +71,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 instahandle: user.instahandle,
                 followers: user.followers,
                 following: user.followings,
+                blurbCount: user.blurbCount,
               ),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 20),

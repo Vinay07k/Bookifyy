@@ -4,12 +4,14 @@ class BlurbUser {
   final String username;
   final DateTime dateJoined;
   final String? bio;
+  int blurbCount;
   final String? profilePicUrl;
   final String? instahandle;
   List<String>? followers;
   List<String>? followings;
 
   BlurbUser({
+    required this.blurbCount,
     required this.id,
     required this.fullname,
     required this.username,
@@ -25,6 +27,7 @@ class BlurbUser {
     // print(mappedUserData);
     return BlurbUser(
       id: mappedUserData['uid'] ?? '',
+      blurbCount: mappedUserData['blurb_count'],
       fullname: mappedUserData['fullname'],
       username: mappedUserData['username'],
       dateJoined: mappedUserData['createdAt'].toDate(),

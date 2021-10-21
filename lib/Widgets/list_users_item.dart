@@ -2,6 +2,8 @@ import 'package:bookify/Models/Blurbuser.dart';
 import 'package:bookify/Screens/Home/ProfileScreen.dart';
 import 'package:flutter/material.dart';
 
+import 'blurb_count_widget.dart';
+
 class ListUsersItem extends StatelessWidget {
   const ListUsersItem({
     Key? key,
@@ -31,31 +33,7 @@ class ListUsersItem extends StatelessWidget {
           users[index].username,
           style: TextStyle(color: Theme.of(context).accentColor),
         ),
-        trailing: Container(
-          padding: const EdgeInsets.symmetric(horizontal: 4),
-          decoration: BoxDecoration(
-            color: Theme.of(context).focusColor,
-            borderRadius: BorderRadius.circular(12),
-          ),
-          child: Row(
-            mainAxisSize: MainAxisSize.min,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Icon(
-                Icons.star,
-                size: 20,
-                color: Theme.of(context).primaryColor,
-              ),
-              Text(
-                '132',
-                style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-            ],
-          ),
-        ),
+        trailing: BlurbCountWidget(blurbCount: users[index].blurbCount),
       ),
     );
   }

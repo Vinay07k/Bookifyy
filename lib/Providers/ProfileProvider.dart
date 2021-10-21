@@ -47,7 +47,7 @@ class ProfileProvider {
   }
 
   Future<void> updateProfile({
-    required Map<String, String?> updatedProfileDetails,
+    required Map<String, dynamic> updatedProfileDetails,
     File? imageFile,
   }) async {
     //

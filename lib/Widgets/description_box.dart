@@ -1,5 +1,6 @@
 // import 'package:bookify/Widgets/buttons.dart';
 import 'package:bookify/Screens/ListUsersScreen.dart';
+import 'package:bookify/Widgets/blurb_count_widget.dart';
 import 'package:bookify/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -13,6 +14,7 @@ class DescriptionBox extends StatelessWidget {
   final String? instahandle;
   final List<String>? followers;
   final List<String>? following;
+  final int blurbCount;
 
   const DescriptionBox(
       {Key? key,
@@ -23,6 +25,7 @@ class DescriptionBox extends StatelessWidget {
       required this.instahandle,
       required this.followers,
       required this.following,
+      required this.blurbCount,
       required this.profilePicUrl})
       : super(key: key);
 
@@ -37,12 +40,27 @@ class DescriptionBox extends StatelessWidget {
           Row(
             children: [
               Expanded(
-                child: CircleAvatar(
-                  radius: 40,
-                  foregroundImage: NetworkImage(
-                    profilePicUrl ??
-                        'https://wallpaperaccess.com/full/6186864.jpg',
-                  ),
+                child: Stack(
+                  children: [
+                    CircleAvatar(
+                      radius: 40,
+                      foregroundImage: NetworkImage(
+                        profilePicUrl ??
+                            'https://wallpaperaccess.com/full/6186864.jpg',
+                      ),
+                    ),
+                    Positioned(
+                      bottom: -1,
+                      left: 0,
+                      // right: 0,
+                      child: Padding(
+                        padding: const EdgeInsets.only(left: 20.0),
+                        child: BlurbCountWidget(
+                          blurbCount: blurbCount,
+                        ),
+                      ),
+                    )
+                  ],
                 ),
               ),
               Expanded(
