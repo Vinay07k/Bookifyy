@@ -1,7 +1,9 @@
+import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:bookify/Providers/Authentication.dart';
 import 'package:bookify/Screens/ScreenController.dart';
 import 'package:bookify/Widgets/Scaffold/bottom_snackbar.dart';
 import 'package:bookify/Widgets/loading.dart';
+import 'package:bookify/Widgets/snapchat_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -179,7 +181,29 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         textInputAction: TextInputAction.done,
                       ),
                       // Spacer(),
-                      SizedBox(height: getRelativeHeight(0.32)),
+                      SizedBox(height: getRelativeHeight(0.23)),
+                      SnapchatButton(
+                        label: 'Sign Up with Snapchat',
+                        onPressed: () {
+                          AwesomeDialog(
+                            context: context,
+                            dialogType: DialogType.INFO,
+                            btnOkText: 'Okay',
+                            body: Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Text(
+                                'This feature is under development! Try normal Sign up.',
+                                style: KTextStyles.kButtonText.copyWith(
+                                  color: Theme.of(context).accentColor,
+                                  letterSpacing: 0.5,
+                                ),
+                              ),
+                            ),
+                          )..show();
+                        },
+                        buttonColor: SnapchatButtonColors.WHITE,
+                      ),
+                      const SizedBox(height: 10),
                       CustomElevatedButton(
                           child: Text(
                             'Create Account',

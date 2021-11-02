@@ -1,4 +1,6 @@
+import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:bookify/Widgets/loading.dart';
+import 'package:bookify/Widgets/snapchat_button.dart';
 import 'package:flutter/material.dart';
 import 'package:bookify/Widgets/Scaffold/bottom_snackbar.dart';
 
@@ -106,6 +108,28 @@ class _LoginScreenState extends State<LoginScreen> {
                         textInputAction: TextInputAction.done,
                       ),
                       Spacer(),
+                      SnapchatButton(
+                        label: 'Login with Snapchat',
+                        onPressed: () {
+                          AwesomeDialog(
+                            context: context,
+                            dialogType: DialogType.INFO,
+                            btnOkText: 'Okay',
+                            body: Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Text(
+                                'This feature is under development! Try normal login.',
+                                style: KTextStyles.kButtonText.copyWith(
+                                  color: Theme.of(context).accentColor,
+                                  letterSpacing: 0.5,
+                                ),
+                              ),
+                            ),
+                          )..show();
+                        },
+                        buttonColor: SnapchatButtonColors.WHITE,
+                      ),
+                      const SizedBox(height: 10),
                       CustomElevatedButton(
                         onPressedFunction: _onSubmit,
                         child: Text(
