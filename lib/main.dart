@@ -79,7 +79,7 @@ class MyApp extends StatelessWidget {
                 ScreenSize.intialize(context);
                 return AnimatedSplashScreen(
                   splashIconSize: double.infinity,
-                  splash: 'assets/splashscreenicon.png',
+                  splash: 'assets/ss.png',
                   nextScreen: StreamBuilder(
                     stream: FirebaseAuth.instance.authStateChanges(),
                     builder:
