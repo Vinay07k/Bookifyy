@@ -10,10 +10,10 @@ A new Flutter project.
     <td>Profile</td>
   </tr>
   <tr>
-    <td><img src="Login.jpg" width=300 height=400></td>
-    <td><img src="HomeScreen.jpg" width=300 height=400></td>
-    <td><img src="Drawer.jpg" width=300 height=400></td>
-    <td><img src="Profile.jpg" width=300 height=400></td>
+    <td><img src="Login.jpg" width=300 height=420></td>
+    <td><img src="HomeScreen.jpg" width=300 height=420></td>
+    <td><img src="Drawer.jpg" width=300 height=420></td>
+    <td><img src="Profile.jpg" width=300 height=420></td>
   </tr>
  </table>
 
